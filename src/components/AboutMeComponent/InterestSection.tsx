@@ -1,10 +1,9 @@
 export const InterestsSection = () => {
   const interests = [
-    "Sports Rehabilitation",
-    "Programming",
-    "Personal Growth",
-    "Meditation & Breathwork",
-    "Evidence-based Holistic Lifestyle",
+    "Rehabilitacja",
+    "Programowanie",
+    "Redukcja stresu",
+    "Przygotowanie motoryczne",
   ];
 
   return (
