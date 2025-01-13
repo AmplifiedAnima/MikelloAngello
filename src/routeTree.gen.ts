@@ -11,12 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ProjectsImport } from './routes/projects'
 import { Route as OfferImport } from './routes/offer'
 import { Route as ContactImport } from './routes/contact'
 import { Route as AboutmeImport } from './routes/about_me'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const ProjectsRoute = ProjectsImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const OfferRoute = OfferImport.update({
   id: '/offer',
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfferImport
       parentRoute: typeof rootRoute
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -84,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/about_me': typeof AboutmeRoute
   '/contact': typeof ContactRoute
   '/offer': typeof OfferRoute
+  '/projects': typeof ProjectsRoute
 }
 
 export interface FileRoutesByTo {
@@ -91,6 +106,7 @@ export interface FileRoutesByTo {
   '/about_me': typeof AboutmeRoute
   '/contact': typeof ContactRoute
   '/offer': typeof OfferRoute
+  '/projects': typeof ProjectsRoute
 }
 
 export interface FileRoutesById {
@@ -99,14 +115,15 @@ export interface FileRoutesById {
   '/about_me': typeof AboutmeRoute
   '/contact': typeof ContactRoute
   '/offer': typeof OfferRoute
+  '/projects': typeof ProjectsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about_me' | '/contact' | '/offer'
+  fullPaths: '/' | '/about_me' | '/contact' | '/offer' | '/projects'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about_me' | '/contact' | '/offer'
-  id: '__root__' | '/' | '/about_me' | '/contact' | '/offer'
+  to: '/' | '/about_me' | '/contact' | '/offer' | '/projects'
+  id: '__root__' | '/' | '/about_me' | '/contact' | '/offer' | '/projects'
   fileRoutesById: FileRoutesById
 }
 
@@ -115,6 +132,7 @@ export interface RootRouteChildren {
   AboutmeRoute: typeof AboutmeRoute
   ContactRoute: typeof ContactRoute
   OfferRoute: typeof OfferRoute
+  ProjectsRoute: typeof ProjectsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -122,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutmeRoute: AboutmeRoute,
   ContactRoute: ContactRoute,
   OfferRoute: OfferRoute,
+  ProjectsRoute: ProjectsRoute,
 }
 
 export const routeTree = rootRoute
@@ -137,7 +156,8 @@ export const routeTree = rootRoute
         "/",
         "/about_me",
         "/contact",
-        "/offer"
+        "/offer",
+        "/projects"
       ]
     },
     "/": {
@@ -151,6 +171,9 @@ export const routeTree = rootRoute
     },
     "/offer": {
       "filePath": "offer.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx"
     }
   }
 }

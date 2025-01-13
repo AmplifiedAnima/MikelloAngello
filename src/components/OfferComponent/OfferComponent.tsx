@@ -27,17 +27,18 @@ export const OfferComponent = () => {
           <span className="text-4xl mx-24 justify-center flex">
             #Stressrelief
           </span>
-          <div className="">
-            <p className="text-3xl pt-12 "> Wybierz plan Treningowy </p>
-            <ul className="mt-12 space-y-12 text-xl text-start ml-48">
-              <li className="flex flex-row">
+          <div className="justify-center place-items-center">
+            <p className="text-4xl pt-12 "> </p>
+            <ul className="mt-12 space-y-12 text-3xl text-start ">
+              <li className="flex flex-row ">
                 {" "}
-                <img src={heartIcon} width={40} className="mx-4" />
-                Wzmocni Twoje Serce{" "}
+                <img src={heartIcon} width={40} className="mx-4" /> Wpłynie na
+                twoje serce
               </li>
+
               <li className="flex flex-row  ">
                 <img src={lungIcon} width={40} className="mx-4" />
-                Poprawi Twoje Płuca
+                Wpłynie na Twoje Płuca
               </li>
               <li className="flex flex-row  ">
                 <img src={boneIcon} width={40} className="mx-4" /> Wzmocni twoje
@@ -47,10 +48,11 @@ export const OfferComponent = () => {
                 <img src={brainIcon} width={40} className="mx-4" /> Wpłynie
                 pozytywnie na Psychike
               </li>
-              <p className=" text-xl flex flex-row">
-                <img src={chartIcon} width={40} className="mx-4 " />
-                <Button className="mx-24">Stwórz pland dla Siebie ! </Button>
-              </p>
+
+              <Button className="mx-8 text-lg ">
+                <img src={chartIcon} width={40} className="-4" /> Stwórz plan
+                dla Siebie !{" "}
+              </Button>
             </ul>
           </div>
         </div>
@@ -68,39 +70,31 @@ export const OfferComponent = () => {
           />
         </div>
         <div>
-          <span className="text-4xl">
-            Przygotuj się atletycznie pod swój Cel!
-          </span>
-          <span className="text-4xl justify-center flex mt-4">#Strength</span>
           <div className="mt-8 text-xl">
-            <ul className="mt-12 space-y-8 ">
-              <li className="text-3xl">
+            <span className="text-3xl flex justify-center"> Wybierz Cel</span>
+            <ul className="mt-12 space-y-8 place-items-center">
+              <li className="text-3xl">I dostosuj plan dla Siebie</li>
+              <li> Zwiększ poziom masy mięśniowej</li>
+              <li> Zwiększ zakresy ruchu </li>
+              <li>Zwiększ Wydolność</li>
+              <li> Zwiększ Siłę</li>
+              <li> Zwiększ Moc </li>
+              <Button className="justify-center flex">
                 {" "}
-                Plan treningowy dostosowany do Ciebie
-              </li>
-              <li> Zwiększ Siłę (Wzmacniając kości i mięśnie)</li>
-              <li> Zwiększ Szybkość (Stymulując włókna szybkokurczliwe)</li>
-              <li> Zwiększ Moc (Stymulując włókna szybkokurczliwe)</li>
-              <li>
-                Zwiększ Wydolność (Wzmacniając układ krążeniowo-oddechowy)
-              </li>
-              <li>
-                {" "}
-                Zwiększ zakresy ruchu (Przy pomocy ćwiczeń mobilizacyjnych){" "}
-              </li>
+                <p>Stwórz swój plan </p>
+              </Button>
             </ul>
           </div>
-          <p className="mx-24 py-12 text-end">Stwórz swój plan </p>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-12">
         <div>
           <div className="mt-8 text-xl">
-            <ul className="mt-12 space-y-8 ">
-              <li>
-                <span className="text-8xl text-center">
+            <ul className="mt-12 space-y-8 flex items-center">
+              <li className="">
+                <span className="text-7xl ">
                   {" "}
-                  Niech doświadczenie zadba o jakość twojego Treningu
+                  Pozwól sobie na zdrowy wysiłek
                 </span>
               </li>
               <li className="pt-24">
@@ -108,9 +102,7 @@ export const OfferComponent = () => {
               </li>
             </ul>
           </div>
-          <p className="mx-24 py-12 text-end text-3xl  my-12">
-            Kontakt{" "}
-          </p>
+          <p className="mx-24 py-12 text-end text-3xl  my-12">Kontakt </p>
         </div>
       </div>
     </div>
