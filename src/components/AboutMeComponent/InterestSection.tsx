@@ -11,6 +11,7 @@ import mongodbIcon from "../../assets/techstack/mongodb.svg";
 import postgresqlIcon from "../../assets/techstack/postgresql.svg";
 import reduxIcon from "../../assets/techstack/redux.svg";
 import reactQueryIcon from "../../assets/techstack/reactquery.svg";
+import tailwindIcon from "../../assets/techstack/tailwind.svg";
 // @ts-expect-error js file
 import { gsapLoop } from "../../lib/gsapLoop.js";
 
@@ -24,6 +25,7 @@ export const StackSection = () => {
     { name: "TypeScript", icon: typescriptIcon },
     { name: "Python / Django", icon: djangoIcon },
     { name: "HTML5 / CSS3", icon: htmlIcon },
+    { name: "Tailwind", icon: tailwindIcon },
     { name: "MongoDB", icon: mongodbIcon },
     { name: "PostgreSQL", icon: postgresqlIcon },
     { name: "Redux", icon: reduxIcon },
@@ -48,22 +50,21 @@ export const StackSection = () => {
   return (
     <div className="py-12 bg-gray-900 overflow-hidden">
       <h2 className="text-2xl font-bold mb-8 text-white text-center">
-        Stack Technologiczny
+        Stack Technologiczny, w którym programuje
       </h2>
-      <div className="relative w-[200%] left-[-25%]">
+      <div className="relative w-[200%] left-[-35%]">
         {" "}
-
         <div ref={containerRef} className="flex items-center">
           {techStack.map((tech) => (
             <div
               key={tech.name}
               className="tech-item flex flex-col items-center mx-4 min-w-[144px]" // Dodajemy minimalną szerokość
             >
-              <div className="bg-zinc-200 p-4 rounded-lg w-20 h-20 flex items-center justify-center">
+              <div className="bg-zinc-300 p-4 rounded-lg w-20 h-20 flex items-center justify-center">
                 <img
                   src={tech.icon}
                   alt={tech.name}
-                  className="w-12 h-12 object-contain"
+                  className="w-20 h-20 object-contain"
                 />
               </div>
               <span className="text-gray-300 text-sm text-center mt-2 whitespace-nowrap">

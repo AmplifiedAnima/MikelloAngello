@@ -11,9 +11,9 @@ export const menuItems: { title: string; href: string; description: string }[] =
       href: "/about_me",
       description: "",
     },
-    {
-      title: "kontakt ",
-      href: "/contact",
-      description: "",
-    },
+    // {
+    //   title: "kontakt ",
+    //   href: "/contact",
+    //   description: "",
+    // },
   ];
