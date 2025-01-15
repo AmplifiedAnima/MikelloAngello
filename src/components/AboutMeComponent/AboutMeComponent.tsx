@@ -11,9 +11,6 @@ export const AboutMeComponent = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-start gap-12 mb-24">
           <div className="flex-1 space-y-6">
-            <h1 className="text-4xl font-bold mb-8 px-6 lg:px-24 py-8">
-              O mnie
-            </h1>
             <div className="space-y-16 ">
               <AboutMeSection />
             </div>

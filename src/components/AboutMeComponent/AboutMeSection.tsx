@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { BlockQuoteInstagram } from "./InstagramVideoComponent";
-
 export const AboutMeSection = () => {
   useEffect(() => {
     const script = document.createElement("script");
@@ -16,50 +15,27 @@ export const AboutMeSection = () => {
   return (
     <div className="space-y-12 text-3xl p-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 ">
-        <div className="space-y-12">
-          <ul className="space-y-48 w-full ">
-            <li> Trener przygotowania motorycznego </li>
+        <div className="space-y-24">
+          <ul className="space-y-72 w-full">
+            <li>Organizuję przygotowanie motoryczne dla sportowców</li>
 
-            <li>
-              Instruktor jogi (RYT 200h) , oraz mobilizacji tkanek miękkich
-            </li>
+            <li>Implementuję mobilizacje tkanek miękkich oraz jogę</li>
 
-            <li>
-              5 lat prowadzenia własnego studia treningowego i pracy z
-              zróżnicowanymi grupami podopiecznych (od początkujących po
-              zaawansowanych)
-            </li>
+            <li>Przeszedłem dwie rekonstrukcje ACL (ACLR)</li>
 
-            <li>
-              Specjalizacja w indywidualnym podejściu do treningu - tworzenie
-              spersonalizowanych planów treningowych dostosowanych do celów i
-              możliwości adepta
-            </li>
+            <li>Bardzo lubię ruch </li>
 
-            <li>
-              Aktywny tłumacz medyczny (EN-PL), tłumaczenie konsultacji:
-              <span className="mt-2">
-                <ul className="ml-6 mt-8space-y-4">
-                  <li> Kardiologia</li>
-                  <li>Ortopedia</li>
-                  <li>Fizjoterapia</li>
-                  <li>Terapia zajęciowa </li>
-                </ul>
-              </span>
-            </li>
+            <div className="lg:grid-cols-3 grid gap-0">
+              <BlockQuoteInstagram link="https://www.instagram.com/tv/CZcHNkqBZxM/?utm_source=ig_embed&amp;utm_campaign=loading" />
+              <div />
+              <div />
 
-            <li>Podwójna rehabilitacja po ACLR ( 2 razy)</li>
+              <BlockQuoteInstagram link="https://www.instagram.com/p/CRLgbrIjlpy/?utm_source=ig_embed&amp;utm_campaign=loading" />
+              <div />
+              <div />
 
-            <li>
-              Doświadczenie w prowadzeniu przygotowania motorycznego dla
-              sportowców amatorów (sporty walki, bieganie, budowanie bazy
-              atletycznej)
-            </li>
-
-            <li>
-              Prowadzenie zajęć z zakresu stretchingu, mobilizacji tkanek
-              miękkich ,oraz Jogi
-            </li>
+              <BlockQuoteInstagram link="https://www.instagram.com/tv/CZcHNkqBZxM/?utm_source=ig_embed&amp;utm_campaign=loading" />
+            </div>
           </ul>
         </div>
 
@@ -67,8 +43,6 @@ export const AboutMeSection = () => {
           <BlockQuoteInstagram link="https://www.instagram.com/p/CPDmj3Xnasp/" />
           <div className="my-12" />
           <BlockQuoteInstagram link="https://www.instagram.com/p/CShreo4n2Ds/" />
-          <div />
-          <BlockQuoteInstagram link="https://www.instagram.com/tv/CZcHNkqBZxM/?utm_source=ig_embed&amp;utm_campaign=loading" />
         </div>
       </div>
     </div>
