@@ -3,109 +3,95 @@ import heartIcon from "../../assets/heart-rate.png";
 import lungIcon from "../../assets/lungs.png";
 import boneIcon from "../../assets/bone.png";
 import brainIcon from "../../assets/brain.png";
-// import chartIcon from "../../assets/chart.png";
 import { Button } from "../ui/button";
-import { useEffect } from "react";
 import instagramIcon from "../../assets/social-media/instagram-icon.svg";
 import githubIcon from "../../assets/social-media/github-icon.svg";
 import linkedInIcon from "../../assets/social-media/linkedin-icon.svg";
 import { Footer as FooterOffer } from "./FooterOffer";
+
 export const OfferComponent = () => {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//www.instagram.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const buttonClassStyles =
-    "lg:text-2xl bg-transparent  lg:mx-32 rounded-full gap-4 px-6  lg:gap-10 border-r-48 py-8 md:p-12  lg:p-12  border-2 border-solid border-indigo-500 text-md  mx-24 mt-24";
-  const listItems = "flex flex-row items-center mx-8 md:mx-20 text-lg lg:text-3xl md:text-4xl lg:gap-8 ";
-  return ( 
-    <div className="px-12 lg:px-28 lg:py-12   text-white grid grid-cols-1   lg:pt-10 md:pt-32 ">
-      {/* First Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 sm:gap-4   place-items-center">
-        <div className="flex flex-col  mx-12">
-          <span className="text-4xl sm:text-sm lg:text-7xl  lg:mx-6 mx-12 md:mx-20   md:text-7xl md:text-start   whitespace-nowrap md:mb-12">
-            Zadbaj o #Trening
-          </span>
-          {/* <span className="text-2xl lg:text-4xl text-center lg:mx-24">
-            #Stressrelief
-          </span> */}
-          <div className="justify-center place-items-center ">
-            <ul className="mt-0 lg:mt-8 lg:space-y-12 space-y-12 text-sm sm:text-2xl lg:text-3xl text-start  md:text-4xl  whitespace-nowrap  ">
-              <li className={listItems}>
-                <img src={heartIcon} width={40} className="mx-6 " />
-                Wpłynie na twoje serce
+    "  w-[80vw] xl:w-[50vw] md:w-[90vw]  bg-transparent rounded-full border-2 border-solid border-indigo-500 px-12 py-10 sm:px-8 sm:py-6 lg:p-18 md:p-14  md:my-24  xl:p-14 xl:mt-10 xl:text-3xl sm:text-2xl md:text-4xl lg:text-4xl mt-8 sm:mt-12 lg:mt-16";
+
+  const listItemsFirstPart =
+    "flex flex-row place-items-center md:-12 gap-4 sm:gap-4 lg:gap-8 lg:text-4xl md:text-4xl xl:text-3xl xl:my-12 text-2xl  ";
+
+  const listItemSecondPart =
+    "text-center text-4xl sm:text-xl lg:text-6xl xl:text-8xl md:text-5xl ";
+  return (
+    <div className="px-4 sm:px-8 lg:px-28 py-6 sm:py-8 lg:py-12 text-white xl:mt-24 lg:mt-24 mt-4">
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 ">
+        {/* Left Content */}
+        <div className="place-items-center">
+          <div className="flex flex-col space-y-8 sm:space-y-8 place-items-start my-20 mt-24 xl:mt-0 lg:mt-0">
+            <span className="text-4xl lg:text-4xl xl:text-7xl   whitespace-nowrap text-center mt-2 mx-auto mb-12 xl:mb-6">
+              Zadbaj o #Trening
+            </span>
+
+            <ul className="space-y-16 sm:space-y-12 lg:space-y-12    xl:mx-24   ">
+              <li className={listItemsFirstPart}>
+                <img src={heartIcon} width={32} className=" lg:w-12" />
+                <span>Wpłynie na Twoje serce</span>
               </li>
-              <li className={listItems}>
-                <img src={lungIcon} width={40} className="mx-6" />
-                Wpłynie na Twoje Płuca
+              <li className={listItemsFirstPart}>
+                <img src={lungIcon} width={32} className="lg:w-12" />
+                <span>Wpłynie na Twoje Płuca</span>
               </li>
-              <li className={listItems}>
-                <img src={boneIcon} width={40} className="mx-6" />
-                Wzmocni twoje Mięśnie i kości
+              <li className={listItemsFirstPart}>
+                <img src={boneIcon} width={32} className="lg:w-12" />
+                <span>Wzmocni Twój Szkielet</span>
               </li>
-              <li className={listItems}>
-                <img src={brainIcon} width={40} className="mx-6" />
-                Wzmocni Twoją Psychikę
+              <li className={listItemsFirstPart}>
+                <img src={brainIcon} width={32} className=" lg:w-12" />
+                <span>Wzmocni Twoją Psychikę</span>
               </li>
-            <div className=""></div>
-              <Button className={buttonClassStyles}>
-                {`${"Stwórz Plan Dla Siebie"}`.toLocaleUpperCase()}
-                {/* <img src={chartIcon} width={40} /> */}
-              </Button>
             </ul>
           </div>
         </div>
-        <div className="flex items-center justify-center pt-8">
+
+        {/* Cat Image */}
+        <div className=" sm:mt-12 xl:mt-20 py-12 lg:mt-24 ">
           <img
             src={kot}
             alt="Training"
-            className="max-w-full h-auto  rounded-b-3xl pt-32"
+            className=" mx-auto rounded-b-3xl xl:my-40 xl:w-[500px] sm:w-[500px] my-0"
           />
         </div>
       </div>
-
+      <div className=" flex place-items-center justify-center my-4">
+        <Button className={`${buttonClassStyles} `}>
+          {`${"Stwórz Plan Dla Siebie"}`.toLocaleUpperCase()}
+        </Button>
+      </div>
       {/* Second Section */}
-      <div className="mt-8 lg:mt-24">
-        <div className="text-xl place-items-center">
-          <ul className="mt-12 place-items-center text-lg sm:text-3xl lg:text-4xl space-y-16 sm:space-y-24 lg:space-y-72">
-            <span className="l block text-center">
-              ZREALIZUJ PRZYGOTOWANIE MOTORYCZNE
-            </span>
-            <li className="text-center">Dostosuj plan dla Siebie</li>
-            <li className="text-center">Zwiększ poziom masy mięśniowej</li>
-            <li className="text-center">Zwiększ zakresy ruchu</li>
-            <li className="text-center">Zwiększ Wydolność</li>
-            <li className="text-center">Zwiększ Siłę</li>
-            <li className="text-center">Zwiększ Moc</li>
-            <Button className={buttonClassStyles}>
-              <p>PRZYGOTOWANIE MOTORYCZNE</p>
-            </Button>
-          </ul>
+      <div className="mt-16 sm:mt-24 lg:mt-48">
+        <ul className="space-y-[10vh] sm:space-y-16 lg:space-y-[80vh] md:space-y-[25vh]  ">
+          <li className={listItemSecondPart}>Dostosuj Plan do Siebie</li>
+          <li className={listItemSecondPart}>Zbuduj Wydolny Mięsień</li>
+          <li className={listItemSecondPart}>Zwiększ zakresy ruchu</li>
+          <li className={listItemSecondPart}>Zwiększ Wydolność</li>
+          <li className={listItemSecondPart}>Zwiększ Siłę</li>
+          <li className={listItemSecondPart}>Zwiększ Moc</li>
+        </ul>
+        <div className="flex justify-center xl:my-80 my-24">
+          <Button className={buttonClassStyles}>
+            ZREALIZUJ PRZYGOTOWANIE MOTORYCZNE
+          </Button>
         </div>
       </div>
 
       {/* Third Section */}
-      <div className="grid grid-cols-1 gap-4 lg:gap-12">
-        <div>
-          <div className="my-24 lg:my-8 text-xl">
-            <ul className="lg:mt-12 space-y-8">
-              <li>
-                <span className=" text-5xl sm:text-6xl lg:text-7xl block text-center lg:pt-32">
-                  Pozwól sobie na zdrowy #Load
-                </span>
-              </li>
-            </ul>
-          </div>
-          <p className="text-2xl lg:text-3xl text-center lg:text-end py-12 lg:py-12 lg:mt-12 lg:mx-12 mt-0">
-            Kontakt
-          </p>
+      <div className="mt-16 sm:mt-24 lg:mt-32 ">
+        <span className="block text-4xl sm:text-4xl lg:text-7xl text-center">
+          Pozwól sobie na zdrowy #Load
+        </span>
+
+        <p className="mt-12 sm:mt-12 lg:mt-16 text-2xl  sm:text-xl lg:text-2xl text-center lg:text-right">
+          Kontakt
+        </p>
+
+        <div className="mt-4 sm:mt-6 lg:mt-8">
           <FooterOffer
             instagramIcon={instagramIcon}
             githubIcon={githubIcon}
