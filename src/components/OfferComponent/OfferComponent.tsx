@@ -10,14 +10,14 @@ import linkedInIcon from "../../assets/social-media/linkedin-icon.svg";
 import { Footer as FooterOffer } from "./FooterOffer";
 
 export const OfferComponent = () => {
-  const buttonClassStyles =
-    "  w-[80vw] xl:w-[50vw] md:w-[90vw]  bg-transparent rounded-full border-2 border-solid border-indigo-500 px-12 py-10 sm:px-8 sm:py-6 lg:p-18 md:p-14  md:my-24  xl:p-14 xl:mt-10 xl:text-3xl sm:text-2xl md:text-4xl lg:text-4xl mt-8 sm:mt-12 lg:mt-16";
+
 
   const listItemsFirstPart =
-    "flex flex-row place-items-center md:-12 gap-4 sm:gap-4 lg:gap-8 lg:text-4xl md:text-4xl xl:text-3xl xl:my-12 text-2xl  ";
+    "flex flex-row place-items-center md:-12 gap-4 sm:gap-4 lg:gap-8 lg:text-2xl md:text-2xl xl:text-[27px] xl:my-12 text-2xl";
 
   const listItemSecondPart =
-    "text-center text-4xl sm:text-xl lg:text-6xl xl:text-8xl md:text-5xl ";
+    "text-center text-4xl sm:text-xl lg:text-6xl xl:text-8xl md:text-5xl";
+
   return (
     <div className="px-4 sm:px-8 lg:px-28 py-6 sm:py-8 lg:py-12 text-white xl:mt-24 lg:mt-24 mt-4">
       {/* Main Content Grid */}
@@ -60,7 +60,7 @@ export const OfferComponent = () => {
         </div>
       </div>
       <div className=" flex place-items-center justify-center my-4">
-        <Button className={`${buttonClassStyles} `}>
+        <Button className="xl:w-1/3">
           {`${"Stwórz Plan Dla Siebie"}`.toLocaleUpperCase()}
         </Button>
       </div>
@@ -75,7 +75,7 @@ export const OfferComponent = () => {
           <li className={listItemSecondPart}>Zwiększ Moc</li>
         </ul>
         <div className="flex justify-center xl:my-80 my-24">
-          <Button className={buttonClassStyles}>
+          <Button>
             ZREALIZUJ PRZYGOTOWANIE MOTORYCZNE
           </Button>
         </div>
