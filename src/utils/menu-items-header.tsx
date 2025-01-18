@@ -1,7 +1,7 @@
 export const menuItems: { title: string; href: string; description: string }[] =
   [
     {
-      title: "Trening - oferta ",
+      title: "Współpraca",
       href: "/offer",
       description: "",
     },

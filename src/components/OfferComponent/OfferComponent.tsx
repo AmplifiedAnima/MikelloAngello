@@ -4,10 +4,9 @@ import lungIcon from "../../assets/lungs.png";
 import boneIcon from "../../assets/bone.png";
 import brainIcon from "../../assets/brain.png";
 import { Button } from "../ui/button";
-import instagramIcon from "../../assets/social-media/instagram-icon.svg";
-import githubIcon from "../../assets/social-media/github-icon.svg";
-import linkedInIcon from "../../assets/social-media/linkedin-icon.svg";
-import { Footer as FooterOffer } from "./FooterOffer";
+
+import { Footer as FooterOffer } from "../Footer";
+import { TestimonalsComponent } from "./Testimonals";
 
 export const OfferComponent = () => {
   const listItemsFirstPart =
@@ -18,9 +17,7 @@ export const OfferComponent = () => {
 
   return (
     <div className="px-4 sm:px-8 lg:px-28 py-6 sm:py-8 lg:py-12 text-white xl:mt-24 lg:mt-24 mt-4">
-      {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 ">
-        {/* Left Content */}
         <div className="place-items-center">
           <div className="flex flex-col space-y-8 sm:space-y-8 place-items-start my-20 mt-24 xl:mt-0 lg:mt-0">
             <span className="text-4xl lg:text-4xl xl:text-7xl   whitespace-nowrap text-center mt-2 mx-auto mb-12 xl:mb-6">
@@ -48,7 +45,6 @@ export const OfferComponent = () => {
           </div>
         </div>
 
-        {/* Cat Image */}
         <div className=" sm:mt-12 xl:mt-20 py-12 lg:mt-24 ">
           <img
             src={kot}
@@ -62,24 +58,26 @@ export const OfferComponent = () => {
           {`${"Stwórz Plan Dla Siebie"}`.toLocaleUpperCase()}
         </Button>
       </div>
-      {/* Second Section */}
+
       <div className="mt-24 sm:mt-24 lg:mt-48">
         <ul className="space-y-[10vh] sm:space-y-16 lg:space-y-[80vh] md:space-y-[25vh]  ">
           <li className={listItemSecondPart}>Dostosuj Plan do Siebie</li>
+          <TestimonalsComponent />
           <li className={listItemSecondPart}>Zbuduj Wydolny Mięsień</li>
+          <TestimonalsComponent />
           <li className={listItemSecondPart}>Zwiększ zakresy ruchu</li>
+          <TestimonalsComponent />
           <li className={listItemSecondPart}>Zwiększ Wydolność</li>
+          <TestimonalsComponent />
           <li className={listItemSecondPart}>Zwiększ Siłę</li>
+          <TestimonalsComponent />
           <li className={listItemSecondPart}>Zwiększ Moc</li>
         </ul>
         <div className="flex justify-center xl:my-80 my-24  ">
-          <Button className="p-12 text-2xl">
-            Przygotuj Plan
-          </Button>
+          <Button className="p-12 text-2xl">Przygotuj Plan</Button>
         </div>
       </div>
 
-      {/* Third Section */}
       <div className="mt-16 sm:mt-24 lg:mt-32 ">
         <span className="block text-4xl sm:text-4xl lg:text-7xl text-center">
           Pozwól sobie na zdrowy #Load
@@ -90,11 +88,7 @@ export const OfferComponent = () => {
         </p>
 
         <div className="mt-4 sm:mt-6 lg:mt-8">
-          <FooterOffer
-            instagramIcon={instagramIcon}
-            githubIcon={githubIcon}
-            linkedInIcon={linkedInIcon}
-          />
+          <FooterOffer />
         </div>
       </div>
     </div>

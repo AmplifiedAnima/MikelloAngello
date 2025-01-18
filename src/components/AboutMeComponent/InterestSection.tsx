@@ -48,7 +48,7 @@ export const StackSection = () => {
   }, []);
 
   return (
-    <div className="py-12 bg-gray-900 overflow-hidden">
+    <div className="py-12 bg-gray-900 overflow-hidden rounded-2xl">
       <h2 className="text-2xl font-bold mb-8 text-white text-center">
         Stack Technologiczny, w którym programuje
       </h2>

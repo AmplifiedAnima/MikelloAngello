@@ -1,14 +1,9 @@
 import React from "react";
+import instagramIcon from "../assets/social-media/instagram-icon.svg";
+import githubIcon from "../assets/social-media/github-icon.svg";
+import linkedInIcon from "../assets/social-media/linkedin-icon.svg"
 
-export const Footer = ({
-  linkedInIcon,
-  githubIcon,
-  instagramIcon,
-}: {
-  linkedInIcon: string;
-  githubIcon: string;
-  instagramIcon: string;
-}) => {
+export const Footer = () => {
   // Common classes
   const sectionContainerClasses =
     "flex flex-col items-center lg:items-start xl:items-center gap-12 lg:gap-6 xl:gap-8";

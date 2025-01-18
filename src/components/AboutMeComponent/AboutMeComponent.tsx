@@ -3,6 +3,7 @@ import { BookSection } from "./BookSection";
 import { StackSection } from "./InterestSection";
 import { PodcastSection } from "./PodcastSection";
 import { AboutMeSection } from "./AboutMeSection";
+import Footer from "../Footer";
 // import { InstagramVideoComponent } from "./InstagramVideoComponent";
 
 export const AboutMeComponent = () => {
@@ -20,8 +21,13 @@ export const AboutMeComponent = () => {
         </div>
 
         <BookSection />
+        <div className="py-12" />
         <PodcastSection />
+        <div className="py-12" />
         <StackSection />
+        <div className="py-12 mt-12" >
+        <Footer />
+        </div>
       </div>
     </div>
   );
