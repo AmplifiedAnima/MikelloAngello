@@ -12,63 +12,60 @@ export const AboutMeSection = () => {
       document.body.removeChild(script);
     };
   }, []);
+  const spanTextStyling =
+    " text-center   tracking-wider xl:whitespace-nowrap whitespace-normal xl:text-[2.3rem] xl:px-12 lg:text-[2.1rem] mt-24";
 
   return (
     <div className="space-y-12 text-3xl flex ">
-      <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 lg:gap-24 ">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 lg:gap-24  ">
         <div className="space-y-24 place-items-center ">
-          <ul className="">
-            <li className="">
-              Organizuję przygotowanie motoryczne dla sportowców. W treningu
-              zawieram elementy mobilizacji tkanki miękkich,oraz Jogi. Posiadam
-              kilka lat doświadczenia jako trener, w pracy ze sportowcami
-              (głównie zawodnikami sportów walki, oraz z ludźmi ,którzy trenują
-              rekreacyjnie).
-              <div className="xl:mx-0  mx-0  gap-24 grid grid-cols-1 lg:grid-cols-4 items-center  justify-start my-12">
-                <BlockQuoteInstagram
-                  link="https://www.instagram.com/p/CWDuTtisA5r/"
-                  size="default"
-                />
-                <BlockQuoteInstagram
-                  link="https://www.instagram.com/p/CPDmj3Xnasp/"
-                  size="default"
-                />
-                <BlockQuoteInstagram
-                  link="https://www.instagram.com/p/CShreo4n2Ds/"
-                  size="default"
-                />
-                <BlockQuoteInstagram
-                  link="https://www.instagram.com/p/CONd0m4n9kz/?utm_source=ig_embed&amp;utm_campaign=loading"
-                  size="default"
-                />
-              </div>
-            </li>
-
-            <li className="justify-items-center place-items-center">
-              Interesuje mnie pozytywny wpływ wysiłku fizycznego na zdrowie
-              metaboliczne, zdrowia sercowo-naczyniowego, zdrowia szkieletu,oraz
-              zdrowia psychicznego.
-            </li>
-
-            <div className="flex  flex-row gap-12 w-full my-12">
+          <ul className=" grid grid-cols-1 lg:grid-cols-1 items-center  justify-start ">
+            <li className={spanTextStyling}>
+              <span>
+                Rozpisuje speriodyzowane plany treningowe dla sportowców
+              </span>
+              <div className="py-12" />
               <BlockQuoteInstagram
-                link="https://www.instagram.com/tv/CZcHNkqBZxM/?utm_source=ig_embed&amp;utm_campaign=loading"
+                link="https://www.instagram.com/p/CWDuTtisA5r/"
                 size="default"
               />
-              <div />
-              <div />
-
+            </li>
+            <li className={spanTextStyling}>
+              <span>
+                Posiadam kilka lat doświadczenia jako trener, w pracy ze
+                sportowcami
+              </span>
+              <div className="py-12" />
               <BlockQuoteInstagram
-                link="https://www.instagram.com/p/ClMgA-NNk7A/?utm_source=ig_embed&amp;utm_campaign=loading"
-                size="large"
+                link="https://www.instagram.com/p/CPDmj3Xnasp/"
+                size="default"
               />
+            </li>
+            <li className={spanTextStyling}>
+              <span>
+                Jestem zwolennikiem utrzymywania dyscypliny w realizacji celów
+              </span>
+              <div className="py-12" />
+              <BlockQuoteInstagram
+                link="https://www.instagram.com/p/CShreo4n2Ds/"
+                size="default"
+              />
+            </li>
+            <li className={spanTextStyling}>
+              <span>
+                Staram się zawierać elementy mobilizacji tkanek miękkich (stawy)
+              </span>
+              <div className="py-12" />
+              <BlockQuoteInstagram
+                link="https://www.instagram.com/p/CONd0m4n9kz/?utm_source=ig_embed&amp;utm_campaign=loading"
+                size="default"
+              />
+            </li>
 
-              <div />
-              <div />
-            </div>
+            <span className={spanTextStyling}></span>
           </ul>
 
-          <Button className="xl:w-[30vw]">Zaplanuj swój trening</Button>
+          <Button className="xl:w-[30vw] p-12 text-2xl">Zaplanuj swój trening</Button>
         </div>
       </div>
     </div>

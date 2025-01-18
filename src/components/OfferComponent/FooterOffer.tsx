@@ -11,20 +11,20 @@ export const Footer = ({
 }) => {
   // Common classes
   const sectionContainerClasses =
-    "flex flex-col items-center sm:items-start lg:items-center gap-4 sm:gap-6 lg:gap-8";
-  const headingClasses = "text-xl sm:text-2xl font-medium";
+    "flex flex-col items-center lg:items-start xl:items-center gap-12 lg:gap-6 xl:gap-8";
+  const headingClasses = "text-4xl lg:text-2xl font-medium";
   const textClasses =
-    "text-lg sm:text-xl opacity-90 hover:opacity-100 transition-opacity cursor-pointer";
+    "text-4xl lg:text-xl opacity-90 hover:opacity-100 transition-opacity cursor-pointer";
   const socialIconClasses = "transform hover:scale-110 transition-transform";
-  const socialImageClasses = "w-6 h-6 sm:w-8 sm:h-8 ";
+  const socialImageClasses = "w-6 h-6 lg:w-8 lg:h-8";
 
   return (
     <footer className="text-white border-t border-gray-800">
-      <div className="max-w-7xl mx-auto pt-8 sm:pt-10 lg:pt-12 px-4 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 lg:gap-16">
+      <div className="max-w-7xl  pt-8 lg:pt-10 xl:pt-12 px-4 lg:px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-4 gap-12 lg:gap-16 ">
           {/* Logo/Brand Section */}
-          <div className="flex items-center justify-center sm:justify-start lg:justify-center">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-wide">
+          <div className="flex items-center justify-center lg:justify-start xl:justify-center">
+            <h2 className="text-xl lg:text-2xl font-semibold tracking-wide">
               Michał Czupa
             </h2>
           </div>
@@ -38,15 +38,15 @@ export const Footer = ({
           {/* Email Section */}
           <div className={sectionContainerClasses}>
             <h3 className={headingClasses}>E-mail</h3>
-            <p className={`${textClasses} break-all sm:break-normal`}>
+            <p className={`${textClasses} break-all lg:break-normal`}>
               czupamichal@gmail.com
             </p>
           </div>
 
           {/* Social Media Section */}
-          <div className="flex flex-col items-center sm:col-span-2 lg:col-span-1 gap-8 sm:gap-6 lg:gap-8">
+          <div className="flex flex-col items-center gap-8 lg:gap-6 xl:gap-8">
             <h3 className={headingClasses}>Social Media</h3>
-            <div className="flex gap-4 bg-zinc-300/95 backdrop-blur-sm p-3 sm:p-4 rounded-xl sm:rounded-2xl">
+            <div className="flex gap-4 bg-zinc-300/95 backdrop-blur-sm p-3 lg:p-4 rounded-xl lg:rounded-2xl">
               <a href="#" className={socialIconClasses}>
                 <img
                   src={linkedInIcon}
@@ -75,3 +75,5 @@ export const Footer = ({
     </footer>
   );
 };
+
+export default Footer;
