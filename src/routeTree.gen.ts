@@ -11,7 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ProjectsImport } from './routes/projects'
+import { Route as PortfolioImport } from './routes/portfolio'
 import { Route as OfferImport } from './routes/offer'
 import { Route as ContactImport } from './routes/contact'
 import { Route as AboutmeImport } from './routes/about_me'
@@ -19,9 +19,9 @@ import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
-const ProjectsRoute = ProjectsImport.update({
-  id: '/projects',
-  path: '/projects',
+const PortfolioRoute = PortfolioImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,11 +81,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfferImport
       parentRoute: typeof rootRoute
     }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsImport
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioImport
       parentRoute: typeof rootRoute
     }
   }
@@ -98,7 +98,7 @@ export interface FileRoutesByFullPath {
   '/about_me': typeof AboutmeRoute
   '/contact': typeof ContactRoute
   '/offer': typeof OfferRoute
-  '/projects': typeof ProjectsRoute
+  '/portfolio': typeof PortfolioRoute
 }
 
 export interface FileRoutesByTo {
@@ -106,7 +106,7 @@ export interface FileRoutesByTo {
   '/about_me': typeof AboutmeRoute
   '/contact': typeof ContactRoute
   '/offer': typeof OfferRoute
-  '/projects': typeof ProjectsRoute
+  '/portfolio': typeof PortfolioRoute
 }
 
 export interface FileRoutesById {
@@ -115,15 +115,15 @@ export interface FileRoutesById {
   '/about_me': typeof AboutmeRoute
   '/contact': typeof ContactRoute
   '/offer': typeof OfferRoute
-  '/projects': typeof ProjectsRoute
+  '/portfolio': typeof PortfolioRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about_me' | '/contact' | '/offer' | '/projects'
+  fullPaths: '/' | '/about_me' | '/contact' | '/offer' | '/portfolio'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about_me' | '/contact' | '/offer' | '/projects'
-  id: '__root__' | '/' | '/about_me' | '/contact' | '/offer' | '/projects'
+  to: '/' | '/about_me' | '/contact' | '/offer' | '/portfolio'
+  id: '__root__' | '/' | '/about_me' | '/contact' | '/offer' | '/portfolio'
   fileRoutesById: FileRoutesById
 }
 
@@ -132,7 +132,7 @@ export interface RootRouteChildren {
   AboutmeRoute: typeof AboutmeRoute
   ContactRoute: typeof ContactRoute
   OfferRoute: typeof OfferRoute
-  ProjectsRoute: typeof ProjectsRoute
+  PortfolioRoute: typeof PortfolioRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -140,7 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutmeRoute: AboutmeRoute,
   ContactRoute: ContactRoute,
   OfferRoute: OfferRoute,
-  ProjectsRoute: ProjectsRoute,
+  PortfolioRoute: PortfolioRoute,
 }
 
 export const routeTree = rootRoute
@@ -157,7 +157,7 @@ export const routeTree = rootRoute
         "/about_me",
         "/contact",
         "/offer",
-        "/projects"
+        "/portfolio"
       ]
     },
     "/": {
@@ -172,8 +172,8 @@ export const routeTree = rootRoute
     "/offer": {
       "filePath": "offer.tsx"
     },
-    "/projects": {
-      "filePath": "projects.tsx"
+    "/portfolio": {
+      "filePath": "portfolio.tsx"
     }
   }
 }

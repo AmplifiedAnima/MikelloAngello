@@ -4,7 +4,6 @@ import lungIcon from "../../assets/lungs.png";
 import boneIcon from "../../assets/bone.png";
 import brainIcon from "../../assets/brain.png";
 import { Button } from "../ui/button";
-
 import { Footer as FooterOffer } from "../Footer";
 import { TestimonalsComponent } from "./Testimonals";
 
@@ -74,18 +73,14 @@ export const OfferComponent = () => {
           <li className={listItemSecondPart}>Zwiększ Moc</li>
         </ul>
         <div className="flex justify-center xl:my-80 my-24  ">
-          <Button className="p-12 text-2xl">Przygotuj Plan</Button>
+          <Button className="p-12 text-2xl xl:w-1/3">Przygotuj Plan</Button>
         </div>
       </div>
 
-      <div className="mt-16 sm:mt-24 lg:mt-32 ">
-        <span className="block text-4xl sm:text-4xl lg:text-7xl text-center">
+      <div className="mt-16 sm:mt-24 lg:mt-32  ">
+        <span className="block text-4xl sm:text-4xl lg:text-7xl text-center mb-28">
           Pozwól sobie na zdrowy #Load
         </span>
-
-        <p className="mt-12 sm:mt-12 lg:mt-16 text-2xl  sm:text-xl lg:text-2xl text-center lg:text-right">
-          Kontakt
-        </p>
 
         <div className="mt-4 sm:mt-6 lg:mt-8">
           <FooterOffer />
