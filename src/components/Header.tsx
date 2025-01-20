@@ -11,7 +11,7 @@ export const Header = () => {
               key={menuItem.title}
               title={menuItem.title}
               href={menuItem.href}
-              className="text-white lg:px-24  "
+              className="text-white xl:px-12  "
             >
               {menuItem.description}
             </ListItem>

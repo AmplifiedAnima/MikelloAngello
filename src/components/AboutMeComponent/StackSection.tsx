@@ -17,7 +17,7 @@ import reduxIcon from "../../assets/techstack/redux.svg";
 import reactQueryIcon from "../../assets/techstack/reactquery.svg";
 import reactRouterIcon from "../../assets/techstack/react-router.svg";
 import tailwindIcon from "../../assets/techstack/tailwind.svg";
-import sqlLiteIcon from "../../assets/techstack/sqlite.svg";
+// import sqlLiteIcon from "../../assets/techstack/sqlite.svg";
 import pythonIcon from "../../assets/techstack/python.svg";
 
 // All available tech stack
@@ -62,7 +62,6 @@ export const LexiconStack = [
   { name: "React/Router", icon: reactRouterIcon },
   { name: " Django", icon: djangoIcon },
   { name: "Python", icon: pythonIcon },
-  { name: "SQLite", icon: sqlLiteIcon },
 ];
 
 interface StackSectionProps {
@@ -95,7 +94,7 @@ export const StackSection = ({
       snap: false,
       repeat: -1,
       speed: speed,
-      paddingRight: 0,
+      paddingRight: 24,
     });
 
     return () => {
@@ -105,7 +104,7 @@ export const StackSection = ({
 
   return (
     <div
-      className={`${containerClassName} bg-gray-900 overflow-hidden rounded-2xl`}
+      className={`${containerClassName} bg-gray-900 overflow-hidden `}
     >
       <div className="relative w-[200%] left-[-35%]">
         <div ref={containerRef} className="flex items-center">
@@ -115,7 +114,7 @@ export const StackSection = ({
               className="tech-item flex flex-col items-center mx-4 min-w-[144px]"
             >
               <div
-                className={`bg-zinc-300 p-4 rounded-lg ${iconSize.container} flex items-center justify-center`}
+                className={`bg-slate-400 p-4 rounded-lg ${iconSize.container} flex items-center justify-center`}
               >
                 <img
                   src={tech.icon}

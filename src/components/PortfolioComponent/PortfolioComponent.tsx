@@ -11,6 +11,14 @@ import githubIcon from "../../assets/social-media/github-icon.svg";
 export const ProjectPortfolio = () => {
   const projects = [
     {
+      title: "Medical Lexicon Application",
+      embedId: "7715bb83565247639464cfab692b3ccc",
+      description:
+        "Leksykon dla tłumaczy medycznych umożliwiający naukę i zarządzanie słownictwem. Zawiera funkcje quizu, dodawania nowych terminów oraz sugerowania słów do bazy danych.",
+      stack: LexiconStack,
+      github: "https://github.com/AmplifiedAnima/InterpreterMapProject",
+    },
+    {
       title: "Medical Job Board",
       embedId: "2ee143c9b4b140b48b37a06bf4d16abe",
       description:
@@ -26,24 +34,21 @@ export const ProjectPortfolio = () => {
       stack: SchedulerStack,
       github: "https://github.com/AmplifiedAnima/ourbodyisload",
     },
-    {
-      title: "Medical Lexicon Application",
-      embedId: "7715bb83565247639464cfab692b3ccc",
-      description:
-        "Leksykon dla tłumaczy medycznych umożliwiający naukę i zarządzanie słownictwem. Zawiera funkcje quizu, dodawania nowych terminów oraz sugerowania słów do bazy danych.",
-      stack: LexiconStack,
-      github: "https://github.com/AmplifiedAnima/InterpreterMapProject",
-    },
   ];
 
   return (
     <>
-      <div className="container px-12 py-48">
-        <div className="space-y-12">
+      <div className="container px-2 py-32">
+        <div className="space-y-36 p-8">
           {projects.map((project, index) => (
-            <div key={index} className="flex flex-col gap-6 p-4">
-              <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
-                <div className="relative aspect-video w-full">
+            <div key={index} className="flex flex-col ">
+              <div className="flex items-center my-4">
+                <h3 className="xl:text-5xl font-semibold text-white">
+                  {project.title}
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 xl:grid-cols-[1fr_4fr] gap-4">
+                <div className="relative aspect-video w-[50vw] xl:my-10">
                   <iframe
                     src={`https://www.loom.com/embed/${project.embedId}`}
                     frameBorder="0"
@@ -51,54 +56,50 @@ export const ProjectPortfolio = () => {
                     className="absolute inset-0 w-full h-full rounded-lg"
                   />
                 </div>
-                <div className="bg-black/20 rounded-lg overflow-hidden grid grid-cols-1">
-                  <div className="bg-black/20 p-6 rounded-lg">
-                    <div className="mb-8">
-                      <div className="flex items-center gap-4 mb-4">
-                        <h3 className="text-2xl font-semibold text-white">
-                          {project.title}
-                        </h3>
-                      </div>
-                      <div className="flex gap-4 items-start">
-                        <div className="flex-grow h-23 overflow-hidden">
-                          Stack
+                <div className="bg-black/20 rounded-lg overflow-hidden grid xl:grid-cols-1">
+                  <div className="bg-black/20 px-10 rounded-lg">
+                    <div className="">
+                      <div className="flex items-center gap-4">
+                        <div className="grid grid-cols-1">
+                          <span className="xl:text-4xl mt-24 mb-8 text-2xl">Stack</span>
                           <StackSection
                             techStackProps={project.stack}
-                            containerClassName="py-4 px-4"
+                            containerClassName="py-1 px-4 rounded-2xl xl:w-[25.5vw] xl:h-[14vh] "
                             iconSize={{
                               container: "w-16 h-16",
-                              image: "w-16 h-16",
+                              image: "w-14 h-14",
                             }}
-                            textSize="text-md"
-                            speed={0.8}
+                            textSize="text-lg"
+                            speed={0.3}
                           />
                         </div>
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-white/10 hover:bg-white/20 transition-all rounded-lg p-4 flex items-center group self-end my-4  mx-8
+                          hover:text-xl "
+                        >
+                          <img
+                            src={githubIcon}
+                            alt="GitHub Repository"
+                            className="w-40 h-12 xl:w-12 xl:h-12  filter invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
+                          />
+                        </a>
                       </div>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-white/10 hover:bg-white/20  transition-all rounded-lg p-4 flex items-center group  hover:justify-end flex"
-                      >
-                        <img
-                          src={githubIcon}
-                          alt="GitHub Repository"
-                          className="w-10 h-10 filter invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
-                        />
-                      </a>
-                      <p className="text-xl text-gray-300 mt-6">
-                        {project.description}
-                      </p>
                     </div>
+                    <p className="text-[1.5rem] text-gray-300 my-12 ">
+                      {project.description}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        <div className="mt-24" />
+        <Footer />
       </div>
-      <Footer />
-      <div className="py-12" />
     </>
   );
 };
