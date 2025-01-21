@@ -5,7 +5,7 @@ import { gsapLoop } from "../../lib/gsapLoop.js";
 
 // Tech stack icons
 import reactIcon from "../../assets/techstack/react.svg";
-import nodeIcon from "../../assets/techstack/node.png";
+import nodeIcon from "../../assets/techstack/nodejs.svg";
 import expressIcon from "../../assets/techstack/express.svg";
 import nestIcon from "../../assets/techstack/nest.svg";
 import typescriptIcon from "../../assets/techstack/typescript.svg";
@@ -19,7 +19,10 @@ import reactRouterIcon from "../../assets/techstack/react-router.svg";
 import tailwindIcon from "../../assets/techstack/tailwind.svg";
 // import sqlLiteIcon from "../../assets/techstack/sqlite.svg";
 import pythonIcon from "../../assets/techstack/python.svg";
-
+import zodIcon from "../../assets/techstack/zod.svg";
+import RemixIcon from "../../assets/techstack/remix.svg";
+import supaBaseIcon from "../../assets/techstack/supabase.svg";
+import muiIcon from "../../assets/techstack/MUI.png";
 // All available tech stack
 export const techStack = [
   { name: "React.js", icon: reactIcon },
@@ -33,8 +36,12 @@ export const techStack = [
   { name: "MongoDB", icon: mongodbIcon },
   { name: "PostgreSQL", icon: postgresqlIcon },
   { name: "Redux", icon: reduxIcon },
+  { name: "Zod", icon: zodIcon },
   { name: "React Query", icon: reactQueryIcon },
   { name: "React/Router", icon: reactRouterIcon },
+  { name: "Remix", icon: RemixIcon },
+  { name: "Supabase", icon: supaBaseIcon },
+  { name: "MUI", icon: muiIcon },
 ];
 
 // Project-specific tech stacks
@@ -44,6 +51,8 @@ export const MedicalJobBoardStack = [
   { name: "React/Router", icon: reactRouterIcon },
   { name: "Nest.js", icon: nestIcon },
   { name: "PostgreSQL", icon: postgresqlIcon },
+  { name: "MUI", icon: muiIcon },
+  { name: "Node.js", icon: nodeIcon },
 ];
 
 export const SchedulerStack = [
@@ -53,6 +62,7 @@ export const SchedulerStack = [
   { name: "Redux", icon: reduxIcon },
   { name: "Nest.js", icon: nestIcon },
   { name: "MongoDB", icon: mongodbIcon },
+  { name: "MUI", icon: muiIcon },
 ];
 
 export const LexiconStack = [
@@ -61,7 +71,9 @@ export const LexiconStack = [
   { name: "Redux", icon: reduxIcon },
   { name: "React/Router", icon: reactRouterIcon },
   { name: " Django", icon: djangoIcon },
-  { name: "Python", icon: pythonIcon },
+  { name: "Tailwind", icon: tailwindIcon },
+  // { name: "Python", icon: pythonIcon },
+  { name: "Zod", icon: zodIcon },
 ];
 
 interface StackSectionProps {
@@ -94,7 +106,8 @@ export const StackSection = ({
       snap: false,
       repeat: -1,
       speed: speed,
-      paddingRight: 24,
+      paddingRight:14
+
     });
 
     return () => {
@@ -103,9 +116,7 @@ export const StackSection = ({
   }, [speed]);
 
   return (
-    <div
-      className={`${containerClassName} bg-gray-900 overflow-hidden `}
-    >
+    <div className={`${containerClassName} bg-transparent overflow-hidden `}>
       <div className="relative w-[200%] left-[-35%]">
         <div ref={containerRef} className="flex items-center">
           {techStackProps.map((tech) => (
@@ -114,7 +125,7 @@ export const StackSection = ({
               className="tech-item flex flex-col items-center mx-4 min-w-[144px]"
             >
               <div
-                className={`bg-slate-400 p-4 rounded-lg ${iconSize.container} flex items-center justify-center`}
+                className={`bg-white p-4 rounded-lg ${iconSize.container} flex items-center justify-center`}
               >
                 <img
                   src={tech.icon}

@@ -7,8 +7,10 @@ import PathwayToSurrender from "../../assets/pathway_of_surrender_audiobook.jpg"
 export const BookSection = () => (
   <div className="flex flex-col lg:flex-row items-start gap-12 py-12">
     <div className="flex-1">
-      <h2 className="text-2xl font-bold mb-6">Ulubione książki</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <h2 className="xl:text-6xl text-4xl font-bold mb-24 text-center">
+        Audiobooki , które warto posłuchać : ) {" "}
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-32 p-12">
         {[
           { src: bookOfFiveRings, title: "Book of Five Rings" },
           { src: HeartSutra, title: "Heart Sutra" },

@@ -15,20 +15,21 @@ export const AboutMeSection = () => {
   }, []);
 
   const listStyling =
-    "text-center tracking-wide whitespace-normal xl:text-7xl xl:px-12";
+    "text-center xl:tracking-wide lg:tracking-widest  whitespace-normal xl:text-7xl xl:px-12 lg:text-5xl";
   const divStylingBox =
-    "grid grid-cols-1 lg:grid-cols-2  gap-0 xl:my-[45vh] lg:my-32 my-24 text-left"; // Added responsive grid
-  const spanStyling = "xl:text-7xl text-5xl ";
+    "grid grid-cols-1 lg:grid-cols-2  gap-0 xl:my-[45vh] xl:my-32 my-24 text-left xl:px-12"; // Added responsive grid
+  const h2Span = "text-6xl";
+  const spanStyling = "xl:text-4xl  px-2 lg:text-3xl text-3xl";
 
   return (
     <div className="">
       <div className="place-items-center">
         <ul className=" items-center justify-start px-4">
           <li className={`${listStyling} xl:mt-48`}>
-            <span className={spanStyling}>#Siła</span>
+            <span className={h2Span}>#Siła</span>
             <div className={divStylingBox}>
               <div>
-                <span className=" xl:text-4xl text-left px-2 text-xl">
+                <span className={spanStyling}>
                   Oferuję formę przygotowania motorycznego, w której z
                   podopiecznym skupiam się, na podniesieniu jego stopnia
                   atletyzmu, głównie przy pomocy treningu o odpowiednio dobranej
@@ -40,24 +41,24 @@ export const AboutMeSection = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 xl:gap-[7.5rem] gap-[5rem] my-48">
+              <div className="grid grid-cols-1 xl:gap-[7.5rem] gap-[5rem] xl:my-48 my-12 xl:p-24 lg:p-2">
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CWDuTtisA5r/"
-                  size="default"
+                  size={`${"default"}`}
                 />
                 {/* <BlockQuoteInstagram
-                  link="https://www.instagram.com/tv/CbvGLmggXwe/?utm_source=ig_embed&amp;utm_campaign=loading"
+                  link="https://www.instagram.com/p/B9Mqm9IJrE6/?utm_source=ig_embed&amp;utm_campaign=loading"
                   size="large"
                 />{" "} */}
               </div>
             </div>
           </li>
- 
+
           <li className={`${listStyling}`}>
-            <span className={spanStyling}>#Hipertrofia</span>
+            <span className={h2Span}>#Hipertrofia</span>
             <div className={divStylingBox}>
               <div>
-                <span className=" text-3xl text-left  ">
+                <span className={spanStyling}>
                   Trening, który będziesz realizował pod moją opieką, będzie
                   dobrany odpowiednio do twojego stopnia zaawansowania, Twojej
                   indywidualnej genetyki, oraz Twojego celu. Celem realizacji
@@ -69,7 +70,7 @@ export const AboutMeSection = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 xl:gap-[4.5rem] gap-[2rem] my-10">
+              <div className="grid grid-cols-1 xl:gap-[4.5rem] gap-[8rem] my-10">
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CPDmj3Xnasp/"
                   size="default"
@@ -83,11 +84,11 @@ export const AboutMeSection = () => {
           </li>
 
           <li className={`${listStyling} xl:m-0 xl:my-0 `}>
-            <div className="xl:mb-48">
-              <span className={spanStyling}>#Moc</span>
+            <div className="xl:my-32 my-24">
+              <span className={h2Span}>#Moc</span>
             </div>
-            <div className="xl:mb-48 ">
-              <span className=" xl:text-4xl  px-2 text-xl tracking-[0.2rem] ">
+            <div className={`${divStylingBox} w-full xl:grid-cols-1`}>
+              <span className={spanStyling}>
                 W zależności od twojej dyspozycji, wybierzemy wspólnie
                 najnsesowniejszą drogę, by wykonać pracę, która zbliży Ciebie do
                 celu, który próbujesz osiągnąć. Czy to zrzucenie zbędnych
@@ -99,7 +100,7 @@ export const AboutMeSection = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-2 xl:gap-[8.5rem] gap-[5rem] ">
+            <div className="grid xl:grid-cols-2 xl:gap-[8.5rem] gap-[5rem] ">
               <BlockQuoteInstagram
                 link="https://www.instagram.com/p/CShreo4n2Ds/"
                 size="default"
@@ -111,12 +112,12 @@ export const AboutMeSection = () => {
             </div>
           </li>
 
-          <li className={`${listStyling} xl:my-48`}>
-            <span>Zrealizuj Cel</span>
+          <li className={`${listStyling} my-48 `}>
+            <span className={h2Span}>Zrealizuj Cel</span>
           </li>
         </ul>
 
-        <Button className="xl:w-[30vw] p-12 text-2xl xl:my-48">
+        <Button className="xl:w-[30vw] p-18 lg:text-3xl xl:text-4xl text-4xl p-12 my-48 lg:w-[40vw] w-[95vw]">
           Zaplanuj swój trening
         </Button>
       </div>

@@ -38,7 +38,7 @@ export const ProjectPortfolio = () => {
 
   return (
     <>
-      <div className="container px-2 py-32">
+      <div className="container px-6 py-24">
         <div className="space-y-36 p-8">
           {projects.map((project, index) => (
             <div key={index} className="flex flex-col ">
@@ -48,7 +48,7 @@ export const ProjectPortfolio = () => {
                 </h3>
               </div>
               <div className="grid grid-cols-1 xl:grid-cols-[1fr_4fr] gap-4">
-                <div className="relative aspect-video w-[50vw] xl:my-10">
+                <div className="relative aspect-video xl:w-[50vw] xl:my-10">
                   <iframe
                     src={`https://www.loom.com/embed/${project.embedId}`}
                     frameBorder="0"
@@ -60,11 +60,14 @@ export const ProjectPortfolio = () => {
                   <div className="bg-black/20 px-10 rounded-lg">
                     <div className="">
                       <div className="flex items-center gap-4">
-                        <div className="grid grid-cols-1">
-                          <span className="xl:text-4xl mt-24 mb-8 text-2xl">Stack</span>
+                        <div className="grid grid-cols-1 overflow-hidden w-[30vw]">
+                          <span className="xl:text-4xl mt-24 mb-8 text-2xl">
+                            Stack
+                          </span>
+
                           <StackSection
                             techStackProps={project.stack}
-                            containerClassName="py-1 px-4 rounded-2xl xl:w-[25.5vw] xl:h-[14vh] "
+                            containerClassName="py-1 px-4 rounded-2xl xl:w-[100vw] xl:h-[14vh] "
                             iconSize={{
                               container: "w-16 h-16",
                               image: "w-14 h-14",
@@ -83,12 +86,12 @@ export const ProjectPortfolio = () => {
                           <img
                             src={githubIcon}
                             alt="GitHub Repository"
-                            className="w-40 h-12 xl:w-12 xl:h-12  filter invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
+                            className="w-20 h-20 xl:w-12 xl:h-12  filter invert opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
                           />
                         </a>
                       </div>
                     </div>
-                    <p className="text-[1.5rem] text-gray-300 my-12 ">
+                    <p className="xl:text-[1.7rem] w-[25vw] md:text-5xl text-xl mt-24 text-gray-300 xl:my-12 ">
                       {project.description}
                     </p>
                   </div>
@@ -97,6 +100,7 @@ export const ProjectPortfolio = () => {
             </div>
           ))}
         </div>
+
         <div className="mt-24" />
         <Footer />
       </div>

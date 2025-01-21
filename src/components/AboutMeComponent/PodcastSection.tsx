@@ -17,8 +17,8 @@ export const PodcastSection = () => {
 
   return (
     <div className="py-12">
-      <h2 className="text-2xl font-bold mb-6">Ulubione podcasty</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <h2 className="xl:text-6xl text-4xl font-bold mb-6 text-center">Podcasty ,których zdarza mi się słuchać</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 p-24">
         {podcasts.map((podcast) => (
           <div
             key={podcast.embedId}

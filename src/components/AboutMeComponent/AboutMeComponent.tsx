@@ -21,11 +21,16 @@ export const AboutMeComponent = () => {
         <h2 className="text-2xl font-bold mb-8 text-white text-center">
           Stack Technologiczny, w którym programuje
         </h2>
-        <StackSection techStackProps={techStack} />
+ 
+          <StackSection techStackProps={techStack} />
+     
         <div className="grid grid-cols-1 py-24 place-items-center ">
-          <Button className="xl:p-14 xl:w-1/4  p-14 text-3xl">
-            <Link to="/portfolio">Portfolio</Link>
-          </Button>
+          <Link
+            to="/portfolio"
+            className="xl:p-12 xl:w-1/4  p-14 text-3xl flex"
+          >
+            <Button className="">Portfolio</Button>
+          </Link>
         </div>
 
         <Footer />
