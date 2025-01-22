@@ -6,6 +6,7 @@ import brainIcon from "../../assets/brain.png";
 import { Button } from "../ui/button";
 import { Footer as FooterOffer } from "../Footer";
 import { TestimonalsComponent } from "./Testimonals";
+import { Link } from "@tanstack/react-router";
 
 export const OfferComponent = () => {
   const listItemsFirstPart =
@@ -54,7 +55,9 @@ export const OfferComponent = () => {
       </div>
       <div className=" flex place-items-center justify-center my-4">
         <Button className="2xl:w-1/3 xl:w-[40vw] p-12 text-xl">
-          {`${"Stwórz Plan Dla Siebie"}`.toLocaleUpperCase()}
+          <Link to="/contact/basic-plan">
+            {`${"Stwórz Plan Dla Siebie"}`.toLocaleUpperCase()}
+          </Link>
         </Button>
       </div>
 
@@ -73,7 +76,9 @@ export const OfferComponent = () => {
           <li className={listItemSecondPart}>Zwiększ Moc</li>
         </ul>
         <div className="flex justify-center xl:my-80 my-24  ">
-          <Button className="p-12 text-2xl xl:w-1/3">Przygotuj Plan</Button>
+          <Button className="p-12 text-2xl xl:w-1/3">
+            <Link to="/contact/athlete-plan">Przygotowanie Atletyczne</Link>
+          </Button>
         </div>
       </div>
 
