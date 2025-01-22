@@ -23,11 +23,14 @@ import zodIcon from "../../assets/techstack/zod.svg";
 import RemixIcon from "../../assets/techstack/remix.svg";
 import supaBaseIcon from "../../assets/techstack/supabase.svg";
 import muiIcon from "../../assets/techstack/MUI.png";
+import googleMapsApiIcon from "../../assets/techstack/google-maps.svg";
+import gsapIcon from "../../assets/techstack/gsap_icon.svg";
 // All available tech stack
+
 export const techStack = [
-  { name: "React.js", icon: reactIcon },
-  { name: "Node.js", icon: nodeIcon },
-  { name: "Express.js", icon: expressIcon },
+  { name: "React", icon: reactIcon },
+  { name: "Node", icon: nodeIcon },
+  { name: "Express", icon: expressIcon },
   { name: "Nest.js", icon: nestIcon },
   { name: "TypeScript", icon: typescriptIcon },
   { name: "Python / Django", icon: djangoIcon },
@@ -42,22 +45,26 @@ export const techStack = [
   { name: "Remix", icon: RemixIcon },
   { name: "Supabase", icon: supaBaseIcon },
   { name: "MUI", icon: muiIcon },
+  { name: "Google Maps API", icon: googleMapsApiIcon },
+  { name: "Python", icon: pythonIcon },
+  { name: "GSAP", icon: gsapIcon },
 ];
 
 // Project-specific tech stacks
 export const MedicalJobBoardStack = [
-  { name: "TypeScript", icon: typescriptIcon },
-  { name: "React.js", icon: reactIcon },
+  { name: "React", icon: reactIcon },
   { name: "React/Router", icon: reactRouterIcon },
   { name: "Nest.js", icon: nestIcon },
   { name: "PostgreSQL", icon: postgresqlIcon },
   { name: "MUI", icon: muiIcon },
-  { name: "Node.js", icon: nodeIcon },
+  { name: "Node", icon: nodeIcon },
+
+  { name: "TypeScript", icon: typescriptIcon },
 ];
 
 export const SchedulerStack = [
   { name: "TypeScript", icon: typescriptIcon },
-  { name: "React.js", icon: reactIcon },
+  { name: "React", icon: reactIcon },
   { name: "React/Router", icon: reactRouterIcon },
   { name: "Redux", icon: reduxIcon },
   { name: "Nest.js", icon: nestIcon },
@@ -72,7 +79,7 @@ export const LexiconStack = [
   { name: "React/Router", icon: reactRouterIcon },
   { name: " Django", icon: djangoIcon },
   { name: "Tailwind", icon: tailwindIcon },
-  // { name: "Python", icon: pythonIcon },
+
   { name: "Zod", icon: zodIcon },
 ];
 
@@ -104,10 +111,9 @@ export const StackSection = ({
     const loop = gsapLoop(boxes, {
       paused: false,
       snap: false,
-      repeat: -1,
+      repeat: -8,
       speed: speed,
-      paddingRight:14
-
+      paddingRight: 24,
     });
 
     return () => {
@@ -122,7 +128,7 @@ export const StackSection = ({
           {techStackProps.map((tech) => (
             <div
               key={tech.name}
-              className="tech-item flex flex-col items-center mx-4 min-w-[144px]"
+              className="tech-item flex flex-col items-center mx-4 min-w-[10vw] w-full"
             >
               <div
                 className={`bg-white p-4 rounded-lg ${iconSize.container} flex items-center justify-center`}

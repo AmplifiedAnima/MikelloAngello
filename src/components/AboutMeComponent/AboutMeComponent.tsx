@@ -18,7 +18,7 @@ export const AboutMeComponent = () => {
         <div className="py-12" />
         <PodcastSection />
         <div className="py-12" />
-        <h2 className="text-2xl font-bold mb-8 text-white text-center">
+        <h2 className="text-2xl font-bold mb-24 text-white text-center">
           Stack Technologiczny, w którym programuje
         </h2>
  
