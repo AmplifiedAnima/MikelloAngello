@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FieldValues,
   UseFormRegister,
@@ -6,7 +7,7 @@ import {
 } from "react-hook-form";
 
 interface FormFieldProps<T extends FieldValues> {
-  name: Path<T>; // używamy Path zamiast string/keyof
+  name: Path<T>;
   register: UseFormRegister<T>;
   error?: FieldError;
   className?: string;
@@ -19,20 +20,18 @@ export const InputField = <T extends FieldValues>({
   type = "text",
   placeholder,
   className = "",
-}: FormFieldProps<T> & {
-  type?: string;
-  placeholder?: string;
-}) => (
+}: FormFieldProps<T> & { type?: string; placeholder?: string }) => (
   <div>
     <input
       {...register(name)}
       type={type}
       placeholder={placeholder}
-      className={`mt-1 block w-full rounded-lg ${className}`}
+      className={`mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4 ${className}`}
     />
-    {error && <p className="text-red-500">{error.message}</p>}
+    {error && <p className="text-red-500 text-sm">{error.message}</p>}
   </div>
 );
+
 interface TextAreaFieldProps<T extends FieldValues> extends FormFieldProps<T> {
   placeholder?: string;
   rows?: number;

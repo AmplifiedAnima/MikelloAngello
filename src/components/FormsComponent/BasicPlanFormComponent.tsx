@@ -119,7 +119,7 @@ export const BasicPlanFormComponent = () => {
         <CheckboxGroup
           name="goals"
           register={register}
-          error={errors.goals}
+          error={errors.goals as undefined}
           options={trainingGoals}
         />
       </div>
