@@ -3,7 +3,43 @@ import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
+import {
+  InputField,
+  TextAreaField,
+  SelectField,
+  CheckboxGroup,
+} from "./FormComponents";
 
+const trainingGoals = [
+  { value: "Redukcja wagi", label: "Redukcja wagi" },
+  { value: "Budowa masy", label: "Budowa masy" },
+  { value: "Poprawa kondycji", label: "Poprawa kondycji" },
+  { value: "Poprawa zdrowia", label: "Poprawa zdrowia" },
+  { value: "Redukcja stresu", label: "Redukcja stresu" },
+];
+
+const experienceLevels = [
+  { value: "none", label: "Brak doświadczenia" },
+  { value: "beginner", label: "Początkujący" },
+  { value: "intermediate", label: "Średniozaawansowany" },
+  { value: "advanced", label: "Zaawansowany" },
+];
+
+const weeklyActivities = [
+  { value: "sedentary", label: "Siedzący tryb życia (brak aktywności)" },
+  { value: "light", label: "Lekka aktywność (1-2 razy w tygodniu)" },
+  { value: "moderate", label: "Umiarkowana aktywność (3-4 razy w tygodniu)" },
+  { value: "very_active", label: "Bardzo aktywny (5+ razy w tygodniu)" },
+];
+
+const weeklyHours = [
+  { value: "1-2", label: "1-2 godziny tygodniowo" },
+  { value: "2-3", label: "2-3 godziny tygodniowo" },
+  { value: "3-4", label: "3-4 godziny tygodniowo" },
+  { value: "4+", label: "4+ godziny tygodniowo" },
+];
+
+// Schema remains the same
 const BasicPlanFormSchema = z.object({
   name: z.string().min(2, "Imię jest wymagane"),
   email: z.string().email("Niepoprawny format email"),
@@ -19,20 +55,11 @@ const BasicPlanFormSchema = z.object({
 
 type BasicPlanFormValues = z.infer<typeof BasicPlanFormSchema>;
 
-const trainingGoals = [
-  "Redukcja wagi",
-  "Budowa masy",
-  "Poprawa kondycji",
-  "Poprawa zdrowia",
-  "Redukcja stresu",
-];
-
 export const BasicPlanFormComponent = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    // watch,
   } = useForm<BasicPlanFormValues>({
     resolver: zodResolver(BasicPlanFormSchema),
     defaultValues: {
@@ -54,131 +81,81 @@ export const BasicPlanFormComponent = () => {
     >
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-blue-400">Dane podstawowe</h3>
-
         <div className="space-y-4">
-          <div>
-            <input
-              {...register("name")}
-              className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-              placeholder="Imię"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <input
-              {...register("email")}
-              className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-              placeholder="Email"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-
+          <InputField
+            name="name"
+            register={register}
+            error={errors.name}
+            placeholder="Imię"
+          />
+          <InputField
+            name="email"
+            register={register}
+            error={errors.email}
+            type="email"
+            placeholder="Email"
+          />
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <input
-                type="number"
-                {...register("weight")}
-                className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-                placeholder="Waga (kg)"
-              />
-              {errors.weight && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.weight.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="number"
-                {...register("height")}
-                className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-                placeholder="Wzrost (cm)"
-              />
-              {errors.height && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.height.message}
-                </p>
-              )}
-            </div>
+            <InputField
+              name="weight"
+              register={register}
+              error={errors.weight}
+              type="number"
+              placeholder="Waga (kg)"
+            />
+            <InputField
+              name="height"
+              register={register}
+              error={errors.height}
+              type="number"
+              placeholder="Wzrost (cm)"
+            />
           </div>
         </div>
       </div>
 
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-blue-400">Cele treningowe</h3>
-        <div className="space-y-2">
-          {trainingGoals.map((goal) => (
-            <label key={goal} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                value={goal}
-                {...register("goals")}
-                className="rounded border-gray-700 text-blue-500 focus:ring-blue-500 bg-gray-800"
-              />
-              <span className="text-gray-200">{goal}</span>
-            </label>
-          ))}
-        </div>
-        {errors.goals && (
-          <p className="text-red-500 text-sm">{errors.goals.message}</p>
-        )}
+        <CheckboxGroup
+          name="goals"
+          register={register}
+          error={errors.goals}
+          options={trainingGoals}
+        />
       </div>
 
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-blue-400">Doświadczenie</h3>
-        <select
-          {...register("experienceLevel")}
-          className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-        >
-          <option value="none">Brak doświadczenia</option>
-          <option value="beginner">Początkujący</option>
-          <option value="intermediate">Średniozaawansowany</option>
-          <option value="advanced">Zaawansowany</option>
-        </select>
+        <SelectField
+          name="experienceLevel"
+          register={register}
+          error={errors.experienceLevel}
+          options={experienceLevels}
+        />
       </div>
 
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-blue-400">
           Aktywność fizyczna
         </h3>
-        <select
-          {...register("weeklyActivity")}
-          className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-        >
-          <option value="sedentary">
-            Siedzący tryb życia (brak aktywności)
-          </option>
-          <option value="light">Lekka aktywność (1-2 razy w tygodniu)</option>
-          <option value="moderate">
-            Umiarkowana aktywność (3-4 razy w tygodniu)
-          </option>
-          <option value="very_active">
-            Bardzo aktywny (5+ razy w tygodniu)
-          </option>
-        </select>
+        <SelectField
+          name="weeklyActivity"
+          register={register}
+          error={errors.weeklyActivity}
+          options={weeklyActivities}
+        />
       </div>
 
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-blue-400">
           Dostępność czasowa
         </h3>
-        <select
-          {...register("weeklyHours")}
-          className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
-        >
-          <option value="1-2">1-2 godziny tygodniowo</option>
-          <option value="2-3">2-3 godziny tygodniowo</option>
-          <option value="3-4">3-4 godziny tygodniowo</option>
-          <option value="4+">4+ godziny tygodniowo</option>
-        </select>
+        <SelectField
+          name="weeklyHours"
+          register={register}
+          error={errors.weeklyHours}
+          options={weeklyHours}
+        />
       </div>
 
       <div className="space-y-6">
@@ -188,15 +165,20 @@ export const BasicPlanFormComponent = () => {
           </div>
         </h3>
 
-        <textarea
-          {...register("healthIssues")}
-          className="mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4"
+        <TextAreaField
+          name="healthIssues"
+          register={register}
+          error={errors.healthIssues}
           placeholder="Opisz swoje ograniczenia lub problemy zdrowotne..."
           rows={4}
         />
 
         <div className="grid justify-center">
-          <Button type="submit" disabled={isSubmitting} className="w-64 p-8 text-xl xl:w-[250px]">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-64 p-8 text-xl xl:w-[250px]"
+          >
             {isSubmitting ? "Wysyłanie..." : "Wyślij"}
           </Button>
         </div>

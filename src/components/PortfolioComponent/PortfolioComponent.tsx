@@ -34,7 +34,7 @@ export const ProjectPortfolio = () => {
                 <div className="bg-black/20 rounded-lg overflow-hidden grid grid-cols-1">
                   <div className="bg-black/20 px-6 md:px-8 xl:px-12 rounded-lg">
                     <div className="flex flex-col gap-8 md:gap-12 xl:gap-16">
-                      <span className="text-2xl md:text-3xl xl:text-4xl mt-12 md:mt-16 xl:mt-24 mb-8">
+                      <span className="text-2xl md:text-3xl xl:text-4xl mt-12 md:mt-16 xl:mt-24 mb-2">
                         Stack
                       </span>
 

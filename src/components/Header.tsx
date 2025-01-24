@@ -8,13 +8,13 @@ export const Header = () => {
   const handleLanguageSwitchMock = () => {
     setFlag((prevFlag) => !prevFlag);
   };
-
+  const textSize = "xl:text-xl  text-md px-4 hover:text-gray-300";
   return (
     <header className="fixed top-0 w-full bg-black text-white z-50">
       <div className="container mx-auto py-3 px-4">
-        <ul className="flex items-center justify-end gap-20 mx-32 my-2">
+        <ul className="flex items-center justify-end xl:gap-12 xl:mx-32 mx-12 my-2 xl:w-[80vw] w-[70vw] " >
           {/* Language Switcher */}
-          <li>
+          <li className="">
             <img
               src={flag ? polishFlag : americanFlag}
               alt="Language Flag"
@@ -25,10 +25,10 @@ export const Header = () => {
             />
           </li>
           {/* Menu Items */}
-          <li className="text-lg px-4 hover:text-gray-300">
+          <li className={textSize}>
             <a href="/offer">Współpraca</a>
           </li>
-          <li className="text-lg px-4 hover:text-gray-300">
+          <li className={textSize}>
             <a href="/about_me">O mnie</a>
           </li>
         </ul>
