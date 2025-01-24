@@ -1,55 +1,51 @@
 import {
+  FieldValues,
   UseFormRegister,
   FieldError,
-  FieldValues,
-  Merge,
+  Path,
 } from "react-hook-form";
 
-interface InputFieldProps {
-  name: string;
-  register: UseFormRegister<FieldValues>;
+interface FormFieldProps<T extends FieldValues> {
+  name: Path<T>; // używamy Path zamiast string/keyof
+  register: UseFormRegister<T>;
   error?: FieldError;
-  type?: string;
-  placeholder?: string;
   className?: string;
 }
 
-export const InputField = ({
+export const InputField = <T extends FieldValues>({
   name,
   register,
   error,
   type = "text",
   placeholder,
   className = "",
-}: InputFieldProps) => (
+}: FormFieldProps<T> & {
+  type?: string;
+  placeholder?: string;
+}) => (
   <div>
     <input
-      type={type}
       {...register(name)}
+      type={type}
       placeholder={placeholder}
-      className={`mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-200 placeholder-gray-400 py-3 px-4 ${className}`}
+      className={`mt-1 block w-full rounded-lg ${className}`}
     />
-    {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
+    {error && <p className="text-red-500">{error.message}</p>}
   </div>
 );
-
-interface TextAreaFieldProps {
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  error?: FieldError;
+interface TextAreaFieldProps<T extends FieldValues> extends FormFieldProps<T> {
   placeholder?: string;
   rows?: number;
-  className?: string;
 }
 
-export const TextAreaField = ({
+export const TextAreaField = <T extends FieldValues>({
   name,
   register,
   error,
   placeholder,
   rows = 4,
   className = "",
-}: TextAreaFieldProps) => (
+}: TextAreaFieldProps<T>) => (
   <div>
     <textarea
       {...register(name)}
@@ -66,21 +62,17 @@ interface Option {
   label: string;
 }
 
-interface SelectFieldProps {
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  error?: FieldError;
+interface SelectFieldProps<T extends FieldValues> extends FormFieldProps<T> {
   options: Option[];
-  className?: string;
 }
 
-export const SelectField = ({
+export const SelectField = <T extends FieldValues>({
   name,
   register,
   error,
   options,
   className = "",
-}: SelectFieldProps) => (
+}: SelectFieldProps<T>) => (
   <div>
     <select
       {...register(name)}
@@ -95,21 +87,18 @@ export const SelectField = ({
     {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
   </div>
 );
-interface CheckboxGroupProps {
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  error?: FieldError | Merge<FieldError, (FieldError | undefined)[]>;
+
+interface CheckboxGroupProps<T extends FieldValues> extends FormFieldProps<T> {
   options: Option[];
-  className?: string;
 }
 
-export const CheckboxGroup = ({
+export const CheckboxGroup = <T extends FieldValues>({
   name,
   register,
   error,
   options,
   className = "",
-}: CheckboxGroupProps) => (
+}: CheckboxGroupProps<T>) => (
   <div className={`space-y-2 ${className}`}>
     {options.map((option) => (
       <label key={option.value} className="flex items-center space-x-2">
