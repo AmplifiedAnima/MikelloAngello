@@ -1,6 +1,6 @@
 import React from "react";
 import { BookSection } from "./BookSection";
-import { StackSection, techStack } from "./StackSection";
+import { StackSection, techStack } from "../StackSection";
 import { PodcastSection } from "./PodcastSection";
 import { AboutMeSection } from "./AboutMeSection";
 import Footer from "../Footer";

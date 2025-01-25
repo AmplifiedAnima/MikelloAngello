@@ -1,30 +1,31 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 //@ts-expect-error js file
-import { gsapLoop } from "../../lib/gsapLoop.js";
+import { gsapLoop } from "../lib/gsapLoop.js";
 
 // Tech stack icons
-import reactIcon from "../../assets/techstack/react.svg";
-import nodeIcon from "../../assets/techstack/nodejs.svg";
-import expressIcon from "../../assets/techstack/express.svg";
-import nestIcon from "../../assets/techstack/nest.svg";
-import typescriptIcon from "../../assets/techstack/typescript.svg";
-import djangoIcon from "../../assets/techstack/django.svg";
-import htmlIcon from "../../assets/techstack/html.svg";
-import mongodbIcon from "../../assets/techstack/mongodb.svg";
-import postgresqlIcon from "../../assets/techstack/postgresql.svg";
-import reduxIcon from "../../assets/techstack/redux.svg";
-import reactQueryIcon from "../../assets/techstack/reactquery.svg";
-import reactRouterIcon from "../../assets/techstack/react-router.svg";
-import tailwindIcon from "../../assets/techstack/tailwind.svg";
+import reactIcon from "../assets/techstack/react.svg";
+import nodeIcon from "../assets/techstack/nodejs.svg";
+import expressIcon from "../assets/techstack/express.svg";
+import nestIcon from "../assets/techstack/nest.svg";
+import typescriptIcon from "../assets/techstack/typescript.svg";
+import djangoIcon from "../assets/techstack/django.svg";
+import htmlIcon from "../assets/techstack/html.svg";
+import mongodbIcon from "../assets/techstack/mongodb.svg";
+import postgresqlIcon from "../assets/techstack/postgresql.svg";
+import reduxIcon from "../assets/techstack/redux.svg";
+import reactQueryIcon from "../assets/techstack/reactquery.svg";
+import reactRouterIcon from "../assets/techstack/react-router.svg";
+import tailwindIcon from "../assets/techstack/tailwind.svg";
 // import sqlLiteIcon from "../../assets/techstack/sqlite.svg";
-import pythonIcon from "../../assets/techstack/python.svg";
-import zodIcon from "../../assets/techstack/zod.svg";
-import RemixIcon from "../../assets/techstack/remix.svg";
-import supaBaseIcon from "../../assets/techstack/supabase.svg";
-import muiIcon from "../../assets/techstack/MUI.png";
-import googleMapsApiIcon from "../../assets/techstack/google-maps.svg";
-import gsapIcon from "../../assets/techstack/gsap_icon.svg";
+import pythonIcon from "../assets/techstack/python.svg";
+import zodIcon from "../assets/techstack/zod.svg";
+import RemixIcon from "../assets/techstack/remix.svg";
+import supaBaseIcon from "../assets/techstack/supabase.svg";
+import muiIcon from "../assets/techstack/MUI.png";
+import googleMapsApiIcon from "../assets/techstack/google-maps.svg";
+import gsapIcon from "../assets/techstack/gsap_icon.svg";
+import awsIcon from "../assets/techstack/aws-s3.svg";
 // All available tech stack
 
 export const techStack = [
@@ -48,6 +49,7 @@ export const techStack = [
   { name: "Google Maps API", icon: googleMapsApiIcon },
   { name: "Python", icon: pythonIcon },
   { name: "GSAP", icon: gsapIcon },
+  { name: "AWS S3", icon: awsIcon },
 ];
 
 // Project-specific tech stacks

@@ -2,7 +2,7 @@ import {
   LexiconStack,
   MedicalJobBoardStack,
   SchedulerStack,
-} from "../components/AboutMeComponent/StackSection";
+} from "../components/StackSection";
 
 export const portfolioProjects = [
   {

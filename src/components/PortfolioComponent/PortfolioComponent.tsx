@@ -1,5 +1,5 @@
 import React from "react";
-import { StackSection } from "../AboutMeComponent/StackSection.js";
+import { StackSection } from "../StackSection.js";
 import Footer from "../Footer.js";
 import githubIcon from "../../assets/social-media/github-icon.svg";
 import { portfolioProjects } from "../../utils/portfolio-projects.js";
