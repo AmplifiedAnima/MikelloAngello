@@ -101,7 +101,7 @@ export const AboutMeSection = () => {
           <li className={textStyles.list}>
             <span className={textStyles.h2Span}>#Moc</span>
             <div className={textStyles.contentWrapper}>
-              <div className={`${textStyles.divStylingBox} lg:grid-cols-1`}>
+              <div className={`${textStyles.divStylingBox} lg:grid-cols-1 xl:text-center`}>
                 <span className={`${textStyles.span} xl:tracking-[4px]`}>
                   W zależności od twojej dyspozycji, wybierzemy wspólnie
                   najnsesowniejszą drogę, by wykonać pracę, która zbliży Ciebie
