@@ -17,7 +17,7 @@ const textStyles = {
          mx-auto
          mb-12 lg:mb-0`,
   divStylingBox:
-    "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-center xl:text-left xl:px-12",
+    "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12",
   contentWrapper: "flex flex-col gap-12 lg:gap-24",
 };
 
@@ -49,11 +49,11 @@ export const AboutMeSection = () => {
                 własnych urazów (2x ACLR) zwracam szczególną uwagę na
                 bezpieczeństwo, jak i jakość wykonywanej pracy na siłowni.
               </span>
-              <div className="xl:mt-32">
+              <div className="xl:mt-12">
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CWDuTtisA5r/"
-                  size={isMobile ? "sm" : "default"}
-             
+                  size={isMobile ? "sm" : "large"}
+                  className="right-8"
                 />
               </div>
             </div>
@@ -75,6 +75,7 @@ export const AboutMeSection = () => {
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CPDmj3Xnasp/"
                     size={isMobile ? "sm" : "default"}
+                    className="xl:right-0 right-8"
                   />
                 </div>
               </div>
@@ -89,6 +90,7 @@ export const AboutMeSection = () => {
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CONd0m4n9kz/"
                     size={isMobile ? "sm" : "default"}
+                    className="xl:right-0 right-8"
                   />
                 </div>
               </div>
@@ -114,12 +116,14 @@ export const AboutMeSection = () => {
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CShreo4n2Ds/"
                     size={isMobile ? "sm" : "default"}
+                    className="xl:right-0 right-8"
                   />
                 </div>
                 <div>
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CWqI-OgMOGJ/"
                     size={isMobile ? "sm" : "default"}
+                    className="xl:right-0 right-8"
                   />
                 </div>
               </div>
