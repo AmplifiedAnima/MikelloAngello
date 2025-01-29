@@ -1,4 +1,4 @@
-import kot from "../../assets/04E3760D-5109-43D0-B530-1A2D76B34FEC.jpeg";
+// import kot from "../../assets/04E3760D-5109-43D0-B530-1A2D76B34FEC.jpeg";
 import heartIcon from "../../assets/heart-rate.png";
 import lungIcon from "../../assets/lungs.png";
 import boneIcon from "../../assets/bone.png";
@@ -7,6 +7,8 @@ import { Button } from "../ui/button";
 import { Footer as FooterOffer } from "../Footer";
 import { TestimonalsComponent } from "./Testimonals";
 import { Link } from "@tanstack/react-router";
+import { BlockQuoteInstagram } from "../AboutMeComponent/InstagramVideoComponent";
+import { useEffect, useState } from "react";
 
 const offerStyles = {
   container:
@@ -23,7 +25,7 @@ const offerStyles = {
   listItemSecond:
     "text-center text-2xl lg:text-6xl xl:text-8xl md:text-6xl px-4",
   icon: "lg:w-12",
-  imageContainer: "sm:mt-12 xl:mt-20 py-12 lg:mt-24",
+  imageContainer: "sm:mt-12 xl:mt-40 py-12 lg:mt-24",
   image: "mx-auto rounded-b-3xl xl:my-40 xl:w-[500px] sm:w-[500px] my-0",
   buttonContainer: "flex place-items-center justify-center my-4",
   mainButton: "2xl:w-1/3 xl:w-[40vw] p-12 text-xl",
@@ -39,6 +41,22 @@ const offerStyles = {
 };
 
 export const OfferComponent = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     <div className={offerStyles.container}>
       <div className={offerStyles.mainGrid}>
@@ -76,7 +94,11 @@ export const OfferComponent = () => {
         </div>
 
         <div className={offerStyles.imageContainer}>
-          <img src={kot} alt="Training" className={offerStyles.image} />
+          <BlockQuoteInstagram
+            link="https://www.instagram.com/p/ClMgA-NNk7A/?utm_source=ig_embed&amp;utm_campaign=loading"
+            size={isMobile ? "default" : "large"}
+          />
+          {/* <img src={kot} alt="Training" className={offerStyles.image} /> */}
         </div>
       </div>
       <div className={offerStyles.buttonContainer}>
