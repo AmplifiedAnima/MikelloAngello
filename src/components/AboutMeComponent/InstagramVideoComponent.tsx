@@ -1,16 +1,20 @@
 import { cn } from "../../lib/utils";
-
 export const BlockQuoteInstagram = ({
   link,
   className,
-  size = "default"
+  size = "default",
 }: {
   link: string;
   className?: string;
-  size?: "default" | "large" | "xl";
+  size?: "default" | "large" | "xl" | "sm";
 }) => {
-  // Base styles that ensure consistent sizing
   const sizeStyles = {
+    sm: {
+      width: "280px",
+      minWidth: "280px",
+      maxWidth: "280px",
+      height: "400px",
+    },
     default: {
       width: "328px",
       minWidth: "328px",
@@ -34,22 +38,24 @@ export const BlockQuoteInstagram = ({
   const selectedSize = sizeStyles[size];
 
   return (
-    <div className={cn(
-      "instagram-embed-container",
-      "relative overflow-hidden",
-      className
-    )}
-    style={{
-      ...selectedSize,
-      margin: '0 auto'
-    }}>
+    <div
+      className={cn(
+        "instagram-embed-container",
+        "relative overflow-hidden",
+        className
+      )}
+      style={{
+        ...selectedSize,
+        margin: "0 auto",
+      }}
+    >
       <blockquote
         className="instagram-media"
         data-instgrm-permalink={link}
         data-instgrm-version="14"
         style={{
           ...selectedSize,
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
           border: 0,
