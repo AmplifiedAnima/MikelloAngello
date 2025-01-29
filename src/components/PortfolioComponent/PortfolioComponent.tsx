@@ -7,7 +7,7 @@ export const ProjectPortfolio = () => {
   return (
     <>
       <div className="container px-6 py-24">
-        <div className="space-y-36 p-8">
+        <div className="space-y-36 xl:p-8">
           {portfolioProjects.map((project, index) => (
             <div key={index} className="flex flex-col">
               {/* Title Section */}

@@ -53,7 +53,7 @@ export const AboutMeSection = () => {
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CWDuTtisA5r/"
                   size={isMobile ? "sm" : "large"}
-                  className="right-8"
+                  className="xl:right-0 right-3"
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ export const AboutMeSection = () => {
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CPDmj3Xnasp/"
                     size={isMobile ? "sm" : "default"}
-                    className="xl:right-0 right-8"
+                    className="xl:right-0 right-3"
                   />
                 </div>
               </div>
@@ -90,7 +90,7 @@ export const AboutMeSection = () => {
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CONd0m4n9kz/"
                     size={isMobile ? "sm" : "default"}
-                    className="xl:right-0 right-8"
+                    className="xl:right-0 right-3"
                   />
                 </div>
               </div>
@@ -116,14 +116,14 @@ export const AboutMeSection = () => {
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CShreo4n2Ds/"
                     size={isMobile ? "sm" : "default"}
-                    className="xl:right-0 right-8"
+                    className="xl:right-0 right-3"
                   />
                 </div>
                 <div>
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CWqI-OgMOGJ/"
                     size={isMobile ? "sm" : "default"}
-                    className="xl:right-0 right-8"
+                    className="xl:right-0 right-3"
                   />
                 </div>
               </div>
