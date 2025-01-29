@@ -19,19 +19,19 @@ const offerStyles = {
     "flex flex-col space-y-8 sm:space-y-8 place-items-start my-20 mt-24 xl:mt-0 lg:mt-0",
   mainHeading:
     "text-4xl lg:text-4xl xl:text-7xl whitespace-nowrap text-center mt-2 mx-auto mb-12 xl:mb-6",
-  iconList: "space-y-16 sm:space-y-12 lg:space-y-12 xl:mx-24",
+  iconList: "space-y-16 sm:space-y-12 lg:space-y-12 xl:mx-24 mx-auto",
   listItemFirst:
     "flex flex-row place-items-center gap-4 sm:gap-4 lg:gap-8 xl:text-4xl lg:text-2xl md:text-4xl md:p-2 xl:text-[27px] xl:my-12 text-2xl",
   listItemSecond:
-    "text-center text-2xl lg:text-6xl xl:text-8xl md:text-6xl px-4",
+    "text-center text-3xl lg:text-6xl xl:text-8xl md:text-6xl px-4",
   icon: "lg:w-12",
   imageContainer: "sm:mt-12 xl:mt-40 py-12 lg:mt-24",
   image: "mx-auto rounded-b-3xl xl:my-40 xl:w-[500px] sm:w-[500px] my-0",
   buttonContainer: "flex place-items-center justify-center my-4",
   mainButton: "2xl:w-1/3 xl:w-[40vw] p-12 text-xl",
-  contentSection: "mt-24 sm:mt-24 lg:mt-48",
+  contentSection: "mt-48 sm:mt-24 lg:mt-48",
   testimonialsList:
-    "space-y-[10vh] sm:space-y-16 lg:space-y-[80vh] md:space-y-[25vh]",
+    "space-y-[50vh] sm:space-y-16 lg:space-y-[80vh] md:space-y-[25vh]",
   athleteButtonContainer: "flex justify-center xl:my-80 my-24",
   athleteButton: "p-12 text-2xl xl:w-[32vw] lg:w-[45vw]",
   bottomSection: "mt-16 sm:mt-24 lg:mt-32",
@@ -64,7 +64,7 @@ export const OfferComponent = () => {
           <div className={offerStyles.flexContainer}>
             <span className={offerStyles.mainHeading}>Zadbaj o #Trening</span>
 
-            <ul className={offerStyles.iconList}>
+            <ul className={offerStyles.iconList} >
               <li className={offerStyles.listItemFirst}>
                 <img src={heartIcon} width={32} className={offerStyles.icon} />
                 <span className={offerStyles.spanText}>
