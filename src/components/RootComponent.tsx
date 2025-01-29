@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Header } from "./Header";
 import { Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+// import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 export const RootComponent = () => {
   useEffect(() => {
@@ -19,7 +19,7 @@ export const RootComponent = () => {
       <Header />
       <hr />
       <Outlet />
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </>
   );
 };
