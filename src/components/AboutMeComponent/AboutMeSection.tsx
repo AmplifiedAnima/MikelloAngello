@@ -3,22 +3,21 @@ import { Button } from "../ui/button";
 import { Link } from "@tanstack/react-router";
 
 const textStyles = {
-  list: "text-center xl:tracking-wide lg:tracking-widest  whitespace-normal xl:text-7xl xl:px-12 lg:text-5xl",
+  list: "text-center  whitespace-normal xl:text-7xl xl:px-12 lg:text-5xl",
   h2Span: "text-6xl",
-  span: "xl:text-4xl  px-2 lg:text-3xl text-3xl",
+  span: "xl:text-4xl px-2 lg:text-3xl text-3xl xl:leading-relaxed", // Added tracking classes
+  divStylingBox:
+    "grid grid-cols-1 lg:grid-cols-2 gap-0 xl:my-[45vh] xl:my-32 my-24 text-left xl:px-12",
 };
 
 export const AboutMeSection = () => {
-  const divStylingBox =
-    "grid grid-cols-1 lg:grid-cols-2  gap-0 xl:my-[45vh] xl:my-32 my-24 text-left xl:px-12";
-
   return (
     <div>
       <div className="place-items-center">
         <ul className="items-center justify-start px-4">
           <li className={`${textStyles.list} xl:mt-48`}>
             <span className={textStyles.h2Span}>#Siła</span>
-            <div className={divStylingBox}>
+            <div className={textStyles.divStylingBox}>
               <div>
                 <span className={textStyles.span}>
                   Oferuję formę przygotowania motorycznego, w której z
@@ -43,7 +42,7 @@ export const AboutMeSection = () => {
 
           <li className={`${textStyles.list}`}>
             <span className={textStyles.h2Span}>#Hipertrofia</span>
-            <div className={divStylingBox}>
+            <div className={textStyles.divStylingBox}>
               <div>
                 <span className={textStyles.span}>
                   Trening, który będziesz realizował pod moją opieką, będzie
@@ -74,8 +73,10 @@ export const AboutMeSection = () => {
             <div className="xl:my-32 my-24">
               <span className={textStyles.h2Span}>#Moc</span>
             </div>
-            <div className={`${divStylingBox} w-full xl:grid-cols-1`}>
-              <span className={textStyles.span}>
+            <div
+              className={`${textStyles.divStylingBox} w-full xl:grid-cols-1 `}
+            >
+              <span className={`${textStyles.span} xl:tracking-[4px] `}>
                 W zależności od twojej dyspozycji, wybierzemy wspólnie
                 najnsesowniejszą drogę, by wykonać pracę, która zbliży Ciebie do
                 celu, który próbujesz osiągnąć. Czy to zrzucenie zbędnych

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Header } from "../Header";
+import { Header } from "./Header";
 import { Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
