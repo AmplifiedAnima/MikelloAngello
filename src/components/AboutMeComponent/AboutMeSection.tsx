@@ -4,8 +4,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const textStyles = {
-  list: "text-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24",
-  h2Span: "text-6xl block mb-24",
+  list: "text-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24 ",
+  h2Span: "text-6xl block mb-72",
   span: `xl:text-4xl lg:text-3xl text-2xl
          w-full 
          leading-relaxed
