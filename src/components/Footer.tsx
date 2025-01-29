@@ -41,7 +41,7 @@ export const Footer = () => {
         <div className={footerStyles.socialContainer}>
           <h3 className={footerStyles.heading}>Social Media</h3>
           <div className="py-[1px] " />
-          <div className={`${footerStyles.socialIconsWrapper} ml-8`}>
+          <div className={`${footerStyles.socialIconsWrapper} xl:ml-8`}>
             <a
               href="https://www.linkedin.com/in/michal-czupa-89800b115/"
               target="_blank"

@@ -10,13 +10,14 @@ const textStyles = {
          w-full 
          leading-relaxed
          text-pretty
+         xl:text-left
          whitespace-normal
          break-words
          block
          mx-auto
          mb-12 lg:mb-0`,
   divStylingBox:
-    "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12",
+    "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-center xl:text-left xl:px-12",
   contentWrapper: "flex flex-col gap-12 lg:gap-24",
 };
 
@@ -30,6 +31,7 @@ export const AboutMeSection = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4">
       <div className="flex flex-col">
@@ -47,10 +49,11 @@ export const AboutMeSection = () => {
                 własnych urazów (2x ACLR) zwracam szczególną uwagę na
                 bezpieczeństwo, jak i jakość wykonywanej pracy na siłowni.
               </span>
-              <div className="flex justify-left ">
+              <div className="xl:mt-32">
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CWDuTtisA5r/"
-         
+                  size={isMobile ? "sm" : "default"}
+             
                 />
               </div>
             </div>
@@ -68,11 +71,10 @@ export const AboutMeSection = () => {
                   motoryki jest osiągnięcie rezultatów, przy jak najmniejszym
                   nakładzie pracy.
                 </span>
-                <div className="flex justify-center">
+                <div>
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CPDmj3Xnasp/"
                     size={isMobile ? "sm" : "default"}
-                    className="mx-auto"
                   />
                 </div>
               </div>
@@ -83,11 +85,10 @@ export const AboutMeSection = () => {
                   Sprawimy, by Twój szkielet bezpieczne zaadaptował się do
                   większych obciążeń.
                 </span>
-                <div className="flex justify-center">
+                <div>
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CONd0m4n9kz/"
                     size={isMobile ? "sm" : "default"}
-                    className="mx-auto"
                   />
                 </div>
               </div>
@@ -109,18 +110,16 @@ export const AboutMeSection = () => {
                 </span>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-                <div className="flex justify-center">
+                <div>
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CShreo4n2Ds/"
                     size={isMobile ? "sm" : "default"}
-                    className="mx-auto"
                   />
                 </div>
-                <div className="flex justify-center">
+                <div>
                   <BlockQuoteInstagram
                     link="https://www.instagram.com/p/CWqI-OgMOGJ/"
                     size={isMobile ? "sm" : "default"}
-                    className="mx-auto"
                   />
                 </div>
               </div>
@@ -133,7 +132,7 @@ export const AboutMeSection = () => {
         </ul>
 
         <div className="flex justify-center my-24">
-          <Button className="w-full lg:w-[40vw] xl:w-[30vw] p-10 text-3xl lg:text-3xl xl:text-4xl">
+          <Button className="w-full lg:w-[40vw] xl:w-[30vw] p-10 text-3xl lg:text-3xl xl:text-4xl ">
             <Link to="/contact">Kontakt</Link>
           </Button>
         </div>

@@ -96,7 +96,7 @@ export const OfferComponent = () => {
         <div className={offerStyles.imageContainer}>
           <BlockQuoteInstagram
             link="https://www.instagram.com/p/ClMgA-NNk7A/?utm_source=ig_embed&amp;utm_campaign=loading"
-            size={isMobile ? "default" : "large"}
+            size={isMobile ? "sm" : "default"}
           />
           {/* <img src={kot} alt="Training" className={offerStyles.image} /> */}
         </div>

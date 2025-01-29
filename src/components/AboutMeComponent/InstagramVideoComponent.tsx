@@ -1,5 +1,4 @@
 import { cn } from "../../lib/utils";
-
 export const BlockQuoteInstagram = ({
   link,
   className,
@@ -9,23 +8,30 @@ export const BlockQuoteInstagram = ({
   className?: string;
   size?: "default" | "large" | "xl" | "sm";
 }) => {
-  // Here you can modify the sizes for each variant
   const sizeStyles = {
     sm: {
-      width: "250px",    // smaller for mobile
-      height: "350px",
+      width: "84vw",
+      height: "56vh",
+      maxHeight: "100%",
+      maxWidth: "120%",
     },
     default: {
-      width: "320px",    // default size
-      height: "420px",
+      width: "328px",
+      minWidth: "328px",
+      maxWidth: "328px",
+      height: "58.5vh",
     },
     large: {
-      width: "400px",    // larger variant
-      height: "500px",
+      width: "400px",
+      minWidth: "400px",
+      maxWidth: "400px",
+      height: "550px",
     },
     xl: {
-      width: "480px",    // extra large variant
-      height: "580px",
+      width: "480px",
+      minWidth: "480px",
+      maxWidth: "480px",
+      height: "650px",
     },
   };
 
