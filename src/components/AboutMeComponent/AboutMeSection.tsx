@@ -4,8 +4,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const textStyles = {
-  list: "text-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-48",
-  h2Span: "text-6xl block mb-48",
+  list: "text-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24",
+  h2Span: "text-6xl block mb-24",
   span: `xl:text-4xl lg:text-3xl text-2xl
          w-full 
          leading-relaxed
@@ -19,6 +19,7 @@ const textStyles = {
     "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12",
   contentWrapper: "flex flex-col gap-12 lg:gap-24",
 };
+
 export const AboutMeSection = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -26,16 +27,9 @@ export const AboutMeSection = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
-    // Add event listener
     window.addEventListener("resize", handleResize);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []); // Empty dependency array means this effect runs once on mount
-
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div className="max-w-7xl mx-auto px-4">
       <div className="flex flex-col">
@@ -53,11 +47,10 @@ export const AboutMeSection = () => {
                 własnych urazów (2x ACLR) zwracam szczególną uwagę na
                 bezpieczeństwo, jak i jakość wykonywanej pracy na siłowni.
               </span>
-              <div className="flex justify-center">
+              <div className="flex justify-left ">
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CWDuTtisA5r/"
-                  size={isMobile ? "sm" : "default"}
-                  className="mx-auto"
+         
                 />
               </div>
             </div>
