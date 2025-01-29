@@ -34,7 +34,7 @@ export const techStack = [
   { name: "Express", icon: expressIcon },
   { name: "Nest.js", icon: nestIcon },
   { name: "TypeScript", icon: typescriptIcon },
-  { name: "Python / Django", icon: djangoIcon },
+  { name: "Django", icon: djangoIcon },
   { name: "HTML5 / CSS3", icon: htmlIcon },
   { name: "Tailwind", icon: tailwindIcon },
   { name: "MongoDB", icon: mongodbIcon },
@@ -79,7 +79,7 @@ export const LexiconStack = [
   { name: "React.js", icon: reactIcon },
   { name: "Redux", icon: reduxIcon },
   { name: "React/Router", icon: reactRouterIcon },
-  { name: " Django", icon: djangoIcon },
+  { name: "Django", icon: djangoIcon },
   { name: "Tailwind", icon: tailwindIcon },
 
   { name: "Zod", icon: zodIcon },
