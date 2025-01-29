@@ -1,4 +1,3 @@
-import React from "react";
 import { BookSection } from "./BookSection";
 import { StackSection, techStack } from "../StackSection";
 import { PodcastSection } from "./PodcastSection";

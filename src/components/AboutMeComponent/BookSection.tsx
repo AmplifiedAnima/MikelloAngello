@@ -1,5 +1,3 @@
-import React from "react";
-
 import bookOfFiveRings from "../../assets/Book_of_five_rings_audiobook.jpg";
 import HeartSutra from "../../assets/Heart_sutra_audiobook.jpg";
 import PathwayToSurrender from "../../assets/pathway_of_surrender_audiobook.jpg";

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 //@ts-expect-error js file
 import { gsapLoop } from "../lib/gsapLoop.js";

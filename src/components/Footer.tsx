@@ -1,4 +1,3 @@
-import React from "react";
 import instagramIcon from "../assets/social-media/instagram-icon.svg";
 import githubIcon from "../assets/social-media/github-icon.svg";
 import linkedInIcon from "../assets/social-media/linkedin-icon.svg";
