@@ -7,7 +7,7 @@ const textStyles = {
   h2Span: "text-6xl",
   span: `xl:text-4xl lg:text-3xl text-2xl
          w-full sm:w-full  // dodane - pełna szerokość
-         px-2 sm:px-4 md:px-6 
+         
          leading-relaxed
          text-pretty  // dodane - lepsze łamanie tekstu
          whitespace-normal  // dodane - normalne łamanie linii
@@ -39,7 +39,7 @@ export const AboutMeSection = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 xl:gap-[7.5rem] gap-[5rem] xl:my-48 my-12 xl:p-24 lg:p-2">
+              <div className="grid grid-cols-1 xl:gap-[7.5rem] gap-[5rem] xl:my-20 my-12  lg:p-2">
                 <BlockQuoteInstagram
                   link="https://www.instagram.com/p/CWDuTtisA5r/"
                   size="default"
@@ -110,10 +110,11 @@ export const AboutMeSection = () => {
             <span className={textStyles.h2Span}>Zrealizuj Cel</span>
           </li>
         </ul>
-
-        <Button className="xl:w-[30vw] p-18 lg:text-3xl xl:text-4xl text-3xl p-10 my-48 lg:w-[40vw] w-[60vw]">
-          <Link to="/contact">Kontakt</Link>
-        </Button>
+        <div className="place-items-center">
+          <Button className="xl:w-[30vw] p-18 lg:text-3xl xl:text-4xl text-3xl p-10 my-48 lg:w-[40vw] w-[60vw] place-items-center">
+            <Link to="/contact">Kontakt</Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
