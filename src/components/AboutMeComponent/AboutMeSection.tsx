@@ -4,8 +4,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const textStyles = {
-  list: "text-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24 ",
-  h2Span: "text-6xl block mb-72",
+  list: "place-items-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24 ",
+  h2Span: "text-6xl block my-[80vh]",
   span: `xl:text-4xl lg:text-3xl text-2xl
          w-full 
          leading-relaxed
@@ -18,7 +18,7 @@ const textStyles = {
          mb-12 lg:mb-0`,
   divStylingBox:
     "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12",
-  contentWrapper: "flex flex-col gap-12 lg:gap-24",
+  contentWrapper: "flex flex-col gap-12 lg:gap-24 xl:w-[80vw] ",
 };
 
 export const AboutMeSection = () => {
@@ -101,8 +101,8 @@ export const AboutMeSection = () => {
           <li className={textStyles.list}>
             <span className={textStyles.h2Span}>#Moc</span>
             <div className={textStyles.contentWrapper}>
-              <div className={`${textStyles.divStylingBox} lg:grid-cols-1 xl:text-center`}>
-                <span className={`${textStyles.span} xl:tracking-[4px]`}>
+              <div className={`${textStyles.divStylingBox}  xl:flex flex-center  `}>
+                <span className={`${textStyles.span} xl:tracking-[4px]  `}>
                   W zależności od twojej dyspozycji, wybierzemy wspólnie
                   najnsesowniejszą drogę, by wykonać pracę, która zbliży Ciebie
                   do celu, który próbujesz osiągnąć. Czy to zrzucenie zbędnych
