@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const textStyles = {
   list: "place-items-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24 ",
-  h2Span: "xl:text-6xl text-5xl block my-[80vh]",
+  h2Span: "xl:text-6xl text-5xl block my-[80vh]     text-center",
   span: `xl:text-4xl lg:text-3xl text-2xl
          w-full 
          leading-relaxed
