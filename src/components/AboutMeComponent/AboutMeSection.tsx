@@ -5,16 +5,17 @@ import { useEffect, useState } from "react";
 
 const textStyles = {
   list: "place-items-center xl:text-7xl xl:px-12 lg:text-5xl px-4 my-24 ",
-  h2Span: "text-6xl block my-[80vh]",
+  h2Span: "xl:text-6xl text-5xl block my-[80vh]",
   span: `xl:text-4xl lg:text-3xl text-2xl
          w-full 
          leading-relaxed
          text-pretty
          xl:text-left
+         text-center
          whitespace-normal
          break-words
          block
-         mx-auto
+      
          mb-12 lg:mb-0`,
   divStylingBox:
     "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12",
