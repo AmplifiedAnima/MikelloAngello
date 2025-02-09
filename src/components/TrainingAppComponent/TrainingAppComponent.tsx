@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ExerciseCard } from "../exercise-card";
 import { ExerciseList } from "../exercise-list";
-import { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
+import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
 import { exercises } from "./exercises";
 import { ScrollBarComponent } from "../ScrollbarComponent";
 import { Button } from "../ui/button";
