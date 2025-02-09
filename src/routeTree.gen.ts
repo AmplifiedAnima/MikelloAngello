@@ -15,6 +15,7 @@ import { Route as PortfolioImport } from './routes/portfolio'
 import { Route as OfferImport } from './routes/offer'
 import { Route as AboutmeImport } from './routes/about_me'
 import { Route as IndexImport } from './routes/index'
+import { Route as TrainingAppIndexImport } from './routes/training-app/index'
 import { Route as ContactIndexImport } from './routes/contact/index'
 import { Route as ContactBasicPlanImport } from './routes/contact/basic-plan'
 import { Route as ContactAthletePlanImport } from './routes/contact/athlete-plan'
@@ -42,6 +43,12 @@ const AboutmeRoute = AboutmeImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TrainingAppIndexRoute = TrainingAppIndexImport.update({
+  id: '/training-app/',
+  path: '/training-app/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -116,6 +123,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactIndexImport
       parentRoute: typeof rootRoute
     }
+    '/training-app/': {
+      id: '/training-app/'
+      path: '/training-app'
+      fullPath: '/training-app'
+      preLoaderRoute: typeof TrainingAppIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -129,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/contact/athlete-plan': typeof ContactAthletePlanRoute
   '/contact/basic-plan': typeof ContactBasicPlanRoute
   '/contact': typeof ContactIndexRoute
+  '/training-app': typeof TrainingAppIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -139,6 +154,7 @@ export interface FileRoutesByTo {
   '/contact/athlete-plan': typeof ContactAthletePlanRoute
   '/contact/basic-plan': typeof ContactBasicPlanRoute
   '/contact': typeof ContactIndexRoute
+  '/training-app': typeof TrainingAppIndexRoute
 }
 
 export interface FileRoutesById {
@@ -150,6 +166,7 @@ export interface FileRoutesById {
   '/contact/athlete-plan': typeof ContactAthletePlanRoute
   '/contact/basic-plan': typeof ContactBasicPlanRoute
   '/contact/': typeof ContactIndexRoute
+  '/training-app/': typeof TrainingAppIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -162,6 +179,7 @@ export interface FileRouteTypes {
     | '/contact/athlete-plan'
     | '/contact/basic-plan'
     | '/contact'
+    | '/training-app'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,6 +189,7 @@ export interface FileRouteTypes {
     | '/contact/athlete-plan'
     | '/contact/basic-plan'
     | '/contact'
+    | '/training-app'
   id:
     | '__root__'
     | '/'
@@ -180,6 +199,7 @@ export interface FileRouteTypes {
     | '/contact/athlete-plan'
     | '/contact/basic-plan'
     | '/contact/'
+    | '/training-app/'
   fileRoutesById: FileRoutesById
 }
 
@@ -191,6 +211,7 @@ export interface RootRouteChildren {
   ContactAthletePlanRoute: typeof ContactAthletePlanRoute
   ContactBasicPlanRoute: typeof ContactBasicPlanRoute
   ContactIndexRoute: typeof ContactIndexRoute
+  TrainingAppIndexRoute: typeof TrainingAppIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -201,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactAthletePlanRoute: ContactAthletePlanRoute,
   ContactBasicPlanRoute: ContactBasicPlanRoute,
   ContactIndexRoute: ContactIndexRoute,
+  TrainingAppIndexRoute: TrainingAppIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -219,7 +241,8 @@ export const routeTree = rootRoute
         "/portfolio",
         "/contact/athlete-plan",
         "/contact/basic-plan",
-        "/contact/"
+        "/contact/",
+        "/training-app/"
       ]
     },
     "/": {
@@ -242,6 +265,9 @@ export const routeTree = rootRoute
     },
     "/contact/": {
       "filePath": "contact/index.tsx"
+    },
+    "/training-app/": {
+      "filePath": "training-app/index.tsx"
     }
   }
 }

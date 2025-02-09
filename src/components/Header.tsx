@@ -1,15 +1,15 @@
 // import polishFlag from "../assets/polish_flag.png";
 // import americanFlag from "../assets/american_flag.png";
 // import { useState } from "react";
-import shiIMage from '../assets/death.jpg'
+import shiIMage from '../assets/samurai.jpg'
 export const Header = () => {
   // const [flag, setFlag] = useState(false);
 
   // const handleLanguageSwitchMock = () => {
   //   setFlag((prevFlag) => !prevFlag);
   // };
-  const textSize =
-    "xl:text-xl  text-md whitespace-nowrap px-4 hover:text-gray-300";
+  // const textSize =
+    // "xl:text-xl  text-md whitespace-nowrap px-4 hover:text-gray-300";
   return (
     <header className="fixed top-0 w-full bg-black text-white z-50">
       <div className="container mx-auto py-3 px-4">
@@ -27,12 +27,12 @@ export const Header = () => {
           </li> */}
           {/* Menu Items */}
           <img src={shiIMage} width={60}/>
-          <li className={textSize}>
+          {/* <li className={textSize}>
             <a href="/offer">Współpraca</a>
           </li>
           <li className={textSize}>
             <a href="/about_me">O mnie</a>
-          </li>
+          </li> */}
         </ul>
       </div>
     </header>
