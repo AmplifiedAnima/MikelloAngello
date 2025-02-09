@@ -1,4 +1,4 @@
-import { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
+import { ExerciseBlueprintsInterface } from "./interfaces/exercise.";
 
 const trainingPlanArray = {
   exercises: <ExerciseBlueprintsInterface[]>[],

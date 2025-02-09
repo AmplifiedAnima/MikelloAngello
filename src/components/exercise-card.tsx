@@ -1,4 +1,4 @@
-import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.interface";
+import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.";
 import { ScrollBarComponent } from "./ScrollbarComponent";
 import { Button } from "./ui/button";
 import { VideoTemplate } from "./video-template-modal";

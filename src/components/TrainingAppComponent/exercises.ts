@@ -1,5 +1,5 @@
 
-export interface ExerciseBlueprintsInterface {
+ interface ExerciseBlueprintsInterface {
   _id: string;
   name: string;
   sets: string;
@@ -15,6 +15,7 @@ export interface ExerciseBlueprintsInterface {
   primeMovers:string;
   videoUrl:string
 }
+
 export const exercises: ExerciseBlueprintsInterface[] = [
   {
     _id: "1",

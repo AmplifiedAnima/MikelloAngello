@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.interface";
+import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.";
 import warningFeatherIcon from "../assets/feather-icons/alert-triangle.svg";
 
 export const ExerciseList = ({
