@@ -18,7 +18,7 @@ const textStyles = {
       
          mb-12 lg:mb-0`,
   divStylingBox:
-    "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12",
+    "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 my-12 text-left xl:px-12 ",
   contentWrapper: "flex flex-col gap-12 lg:gap-24 xl:w-[80vw] ",
 };
 

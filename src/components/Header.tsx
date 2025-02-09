@@ -1,7 +1,7 @@
 // import polishFlag from "../assets/polish_flag.png";
 // import americanFlag from "../assets/american_flag.png";
 // import { useState } from "react";
-
+import shiIMage from '../assets/death.jpg'
 export const Header = () => {
   // const [flag, setFlag] = useState(false);
 
@@ -26,6 +26,7 @@ export const Header = () => {
             />
           </li> */}
           {/* Menu Items */}
+          <img src={shiIMage} width={60}/>
           <li className={textSize}>
             <a href="/offer">Współpraca</a>
           </li>
