@@ -4,23 +4,9 @@ import { ExerciseList } from "../exercise-list";
 import { exercises } from "./exercises";
 import { ScrollBarComponent } from "../ScrollbarComponent";
 import { Button } from "../ui/button";
+import type  { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
 
-export interface ExerciseBlueprintsInterface {
-  _id: string;
-  name: string;
-  sets: string;
-  reps: string;
-  intensity: string;
-  movementPattern: string;
-  plane: string;
-  type: string;
-  toolsUsedInExercise: string;
-  tempo: string;
-  videoStatus: string;
-  primaryMusclesWorked: string;
-  primeMovers: string;
-  videoUrl: string;
-}
+
 
 const TrainingAppComponent = () => {
   const [selectedExercise, setSelectedExercise] =
@@ -50,10 +36,10 @@ const TrainingAppComponent = () => {
   };
 
   return (
-    <div className="mt-24 p-6">
+    <div className="mt-4 p-24">
       {/* Desktop Layout */}
       <div
-        className={`${isMobile ? "hidden" : "grid"} h-[80vh] grid-cols-[1.5fr_3fr] gap-6`}
+        className={`${isMobile ? "hidden" : "grid"} h-[70vh] grid-cols-[1.5fr_3fr] gap-6`}
       >
         <ScrollBarComponent>
           <ExerciseList
