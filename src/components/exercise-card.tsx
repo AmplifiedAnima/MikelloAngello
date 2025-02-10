@@ -1,9 +1,11 @@
 import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.interface";
-import { ScrollBarComponent } from "./ScrollbarComponent";
+import { ScrollBarComponent } from "./ui/scrollbar-component";
 import { Button } from "./ui/button";
-import { VideoTemplate } from "./video-template-modal";
+import { VideoTemplate } from "./TrainingAppComponent/video-template-modal";
 import { useState } from "react";
 import closeIcon from "../assets/feather-icons/x-square.svg";
+import { buttonStylesForTrainingModule } from "./ui/styles/button-styles-training-module";
+
 const CardTextComponent = ({
   exerciseFeature,
   text,
@@ -19,9 +21,6 @@ const CardTextComponent = ({
   </div>
 );
 
-const buttonStyles =
-  "bg-black xl:my-[1rem] xl:w-[15vw] xl:p-6 xl:text-lg xl:rounded-2xl border-zinc-800 m-0 sm:m-0  w-[40vw] mx-auto lg:my-2 lg:w-[20vw] lg:text-lg lg:p-6";
-
 export const ExerciseCard = ({
   exercise,
 }: {
@@ -35,7 +34,7 @@ export const ExerciseCard = ({
     );
   };
   return (
-    <ScrollBarComponent>
+    <ScrollBarComponent className="xl:mx-4 ">
       <div
         className=" "
         style={{
@@ -43,23 +42,25 @@ export const ExerciseCard = ({
         }}
       >
         {hasTemplateBecameOpened && (
-          <div className="grid grid-cols-2">
-            <div className="xl:w-[45vw] w-[50vw]  m-[3.2vw]">
+          <div className="xl:mt-4 grid grid-cols-2">
+            {" "}
+            <span className="xl:text-2xl text-lg xl:mx-4 mx-2">{exercise.name}</span>
+            <Button
+              className={`${buttonStylesForTrainingModule}  xl:mt-0 xl:p-0 xl:w-[3vw]  xl:mx-[20vw] xl:rounded-lg w-[15vw] mx-[25vw] mt-32`}
+              onClick={handleTemplateBecameOpened}
+              aria-label="Close video"
+            >
+              <img src={closeIcon} width={25} />
+            </Button>
+            <div className="xl:w-[40vw] w-[60vw]   xl:mx-[1vw] xl:mt-2 mt-[20vh] md:w-[50vw] ">
               <VideoTemplate videoUrl={exercise.videoUrl} />
             </div>
-            <Button
-              className={`${buttonStyles}  xl:mt-0 xl:p-0 xl:w-[4vw]  xl:mx-[22vw] xl:rounded-lg w-[11vw] mx-[18vw]`}
-              onClick={handleTemplateBecameOpened}
-            >
-              <img src={closeIcon} width={20} />
-            </Button>
           </div>
         )}
         {!hasTemplateBecameOpened && (
           <>
             {" "}
-         
-            <div className="grid grid-cols-1 gap-x-4 gap-y-0 sm:grid-cols-2 xl:grid-cols-2">
+            <div className="grid grid-cols-1 xl:gap-x-48 gap-x-12 mx-6 gap-y-0 sm:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 ">
               <div className="xl:w-[28vw]">
                 <CardTextComponent
                   exerciseFeature={exercise.name}
@@ -87,12 +88,16 @@ export const ExerciseCard = ({
                   text="Prime Movers"
                 />
               </div>
-              <div className="flex flex-col gap-4 mx-8 mt-12">
-                <Button className={buttonStyles}>Pick as main exercise</Button>
-                <Button className={buttonStyles}>Pick as accessory</Button>
+              <div className="flex flex-col xl:mt-[15vh] lg:mt-[25vh] sm:mt-24 md:mt-0 mt-6 gap-[22.5px] sm:gap-8 xl:gap-0 lg:gap-8 ">
+                <Button className={buttonStylesForTrainingModule}>
+                  Pick as main exercise
+                </Button>
+                <Button className={buttonStylesForTrainingModule}>
+                  Pick as accessory
+                </Button>
                 <Button
                   onClick={handleTemplateBecameOpened}
-                  className={buttonStyles}
+                  className={buttonStylesForTrainingModule}
                 >
                   show video
                 </Button>

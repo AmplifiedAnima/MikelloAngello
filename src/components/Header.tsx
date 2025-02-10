@@ -14,7 +14,7 @@ export const Header = () => {
   return (
     <header className="fixed top-0 w-full bg-black text-white z-50">
       <div className="container mx-auto py-3 px-4">
-        <ul className="flex items-center justify-end xl:gap-20 gap-4 xl:mx-32 mx-auto my-2 xl:w-[80vw] w-[55vw] ">
+        <ul className="flex items-center justify-end xl:gap-2 gap-4  mx-auto my-2 xl:w-[90vw] w-[55vw] ">
           {/* Language Switcher */}
           {/* <li className="">
             <img
@@ -28,8 +28,8 @@ export const Header = () => {
           </li> */}
           {/* Menu Items */}
           <li>
-            <Link to="/training-app">
-              <img src={shiIMage} width={60} />
+            <Link to="/">
+              <img src={shiIMage} width={55} />
             </Link>
           </li>
 

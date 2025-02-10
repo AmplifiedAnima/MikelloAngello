@@ -10,7 +10,7 @@ export const ScrollBarComponent = ({
   return (
     <div
       className={`${className} overflow-auto
-        [&::-webkit-scrollbar]:w-2
+        [&::-webkit-scrollbar]:w-[11px]
         [&::-webkit-scrollbar]:h-2
         [&::-webkit-scrollbar-track]:rounded-full
         [&::-webkit-scrollbar-track]:bg-zinc-800
