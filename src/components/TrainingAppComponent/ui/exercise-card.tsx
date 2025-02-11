@@ -1,10 +1,10 @@
-import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.interface";
-import { ScrollBarComponent } from "./ui/scrollbar-component";
-import { Button } from "./ui/button";
-import { VideoTemplate } from "./TrainingAppComponent/video-template-modal";
+import { type ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
+import { ScrollBarComponent } from "../../ui/scrollbar-component";
+import { Button } from "../../ui/button";
+import { VideoTemplate } from "./video-template-modal";
 import { useState } from "react";
-import closeIcon from "../assets/feather-icons/x-square.svg";
-import { buttonStylesForTrainingModule } from "./ui/styles/button-styles-training-module";
+import closeIcon from "../../../assets/feather-icons/x-square.svg";
+import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 
 const CardTextComponent = ({
   exerciseFeature,

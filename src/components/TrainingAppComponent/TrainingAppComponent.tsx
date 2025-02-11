@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
 
 import { SearchExerciseInput } from "../ui/search-bar";
-import { useTrainingPlan } from "./TrainingAppLogic";
-import { StepButtons } from "./ButtonsForSteps";
-import { ExerciseSelector } from "./ExerciseSelector";
-import { LoadSelector } from "./LoadSelector";
-import { TrainingDaysSelector } from "./TrainingDaysSelector";
+import { useTrainingPlan } from "./utils/TrainingAppLogic";
+import { StepButtons } from "./ui/ButtonsForSteps";
+import { ExerciseSelector } from "./selectors/ExerciseSelector";
+import { LoadSelector } from "./selectors/LoadSelector";
+import { TrainingDaysSelector } from "./selectors/TrainingDaysSelector";
 
 const TrainingAppComponent = () => {
   const { step, goToNextStep, goToPreviousStep } = useTrainingPlan();
@@ -38,7 +38,7 @@ const TrainingAppComponent = () => {
   };
 
   return (
-    <div className="xl:py-32  xl:mx-24">
+    <div className="xl:pt-20   xl:mx-24">
       {/* Desktop Layout */}
       <div className="flex flex-row">
         <div className="xl:py-4 w-[20vw] mx-16">

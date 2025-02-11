@@ -1,4 +1,4 @@
-import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
+import type { ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
 
 function generateRandomId(length: number = 24): string {
   const chars = "abcdef0123456789"; // Using hex characters for MongoDB-style IDs

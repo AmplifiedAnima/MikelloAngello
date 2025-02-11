@@ -1,6 +1,6 @@
 // UserMainPanelHook.ts
 import { useState } from "react";
-import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
+import type { ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
 
 export type TrainingAppStep = "FREQUENCY" | "EXERCISES" | "LOAD" | "SAVE";
 

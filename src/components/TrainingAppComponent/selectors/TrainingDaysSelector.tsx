@@ -1,60 +1,23 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
-import { buttonStylesForTrainingModule } from "../ui/styles/button-styles-training-module";
+import { Button } from "../../ui/button";
+import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
+import {
+  difficultyLevels,
+  preferences,
+} from "../utils/TrainingDaysSelectorUtils";
 
-interface TrainingPreference {
-  id: string;
-  label: string;
-  description: string;
-}
 export const TrainingDaysSelector = () => {
   const [selectedDays, setSelectedDays] = useState<number>(0);
-  const [trainingPreference, setTrainingPreference] = useState<string>("");
+  const [primaryGoal, setPrimaryGoal] = useState<string>("");
+  const [secondaryGoal, setSecondaryGoal] = useState<string>("");
   const [difficultyLevel, setDifficultyLevel] = useState<string>("");
 
   const trainingDays = [2, 3];
 
-  const preferences: TrainingPreference[] = [
-    {
-      id: "hypertrophy",
-      label: "Muscle Growth",
-      description:
-        "Focus on muscle size and volume with moderate weights and higher reps",
-    },
-    {
-      id: "strength",
-      label: "Strength",
-      description: "Build raw strength with heavy weights and lower reps",
-    },
-    {
-      id: "endurance",
-      label: "Endurance",
-      description:
-        "Improve muscular endurance with lighter weights and high reps",
-    },
-  ];
-
-  const difficultyLevels = [
-    {
-      id: "beginner",
-      label: "Beginner",
-      description: "New to training, focusing on form and building foundations",
-      icon: "🌱",
-    },
-    {
-      id: "shinobi",
-      label: "Shinobi",
-      description: "Ready for advanced techniques and higher intensity",
-      icon: "⚔️",
-    },
-    {
-      id: "samurai",
-      label: "Samurai",
-      description:
-        "Prepared for maximum intensity and complex training patterns",
-      icon: "🔥",
-    },
-  ];
+  const handleSecondaryGoalClick = (prefId: string) => {
+    if (prefId === primaryGoal) return; // Prevent selecting same goal as primary
+    setSecondaryGoal(prefId);
+  };
 
   return (
     <div className="space-y-12">
@@ -78,18 +41,21 @@ export const TrainingDaysSelector = () => {
         </div>
       </div>
 
-      {/* Training Preference Selection */}
+      {/* Primary Goal Selection */}
       {selectedDays > 0 && (
         <div className="space-y-4">
-          <h2 className="text-2xl font-medium">What's your main goal?</h2>
+          <h2 className="text-2xl font-medium">What's your primary goal?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {preferences.map((pref) => (
               <div
                 key={pref.id}
-                onClick={() => setTrainingPreference(pref.id)}
+                onClick={() => {
+                  setPrimaryGoal(pref.id);
+                  if (pref.id === secondaryGoal) setSecondaryGoal("");
+                }}
                 className={`
                     p-4 rounded-lg cursor-pointer transition-all
-                    ${trainingPreference === pref.id ? "bg-red-700/20 border-red-700" : "bg-zinc-800/50 border-zinc-700"}
+                    ${primaryGoal === pref.id ? "bg-red-700/20 border-red-700" : "bg-zinc-800/50 border-zinc-700"}
                     border-2 hover:border-red-600
                   `}
               >
@@ -101,8 +67,35 @@ export const TrainingDaysSelector = () => {
         </div>
       )}
 
+      {/* Secondary Goal Selection */}
+      {selectedDays > 0 && primaryGoal && (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-medium">
+            Select a secondary focus (optional)
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {preferences.map((pref) => (
+              <div
+                key={pref.id}
+                onClick={() => handleSecondaryGoalClick(pref.id)}
+                className={`
+                    p-4 rounded-lg transition-all
+                    ${primaryGoal === pref.id ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+                    ${secondaryGoal === pref.id ? "bg-red-700/20 border-red-700" : "bg-zinc-800/50 border-zinc-700"}
+                    border-2 
+                    ${primaryGoal !== pref.id && "hover:border-red-600"}
+                  `}
+              >
+                <h3 className="text-lg font-medium mb-2">{pref.label}</h3>
+                <p className="text-sm text-zinc-400">{pref.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Difficulty Level Selection */}
-      {selectedDays > 0 && trainingPreference && (
+      {selectedDays > 0 && primaryGoal && (
         <div className="space-y-4">
           <h2 className="text-2xl font-medium">How hard can you try?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -128,14 +121,20 @@ export const TrainingDaysSelector = () => {
       )}
 
       {/* Summary & Next Step */}
-      {selectedDays > 0 && trainingPreference && difficultyLevel && (
+      {selectedDays > 0 && primaryGoal && difficultyLevel && (
         <div className="pt-6 border-t border-zinc-800">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <p className="text-sm text-zinc-400">Your Plan</p>
               <p className="text-lg">
                 {selectedDays} days per week -{" "}
-                {preferences.find((p) => p.id === trainingPreference)?.label}
+                {preferences.find((p) => p.id === primaryGoal)?.label}
+                {secondaryGoal && (
+                  <span className="text-zinc-400">
+                    {" "}
+                    & {preferences.find((p) => p.id === secondaryGoal)?.label}
+                  </span>
+                )}
                 <span className="ml-2 text-red-500">
                   {difficultyLevels.find((l) => l.id === difficultyLevel)?.icon}
                 </span>
@@ -146,7 +145,8 @@ export const TrainingDaysSelector = () => {
               onClick={() => {
                 console.log({
                   selectedDays,
-                  trainingPreference,
+                  primaryGoal,
+                  secondaryGoal,
                   difficultyLevel,
                 });
               }}

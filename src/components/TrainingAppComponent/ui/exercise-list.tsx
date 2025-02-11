@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { type ExerciseBlueprintsInterface } from "./TrainingAppComponent/interfaces/exercise.interface";
-import warningFeatherIcon from "../assets/feather-icons/alert-triangle.svg";
-import { ScrollBarComponent } from "./ui/scrollbar-component";
+import { type ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
+import warningFeatherIcon from "../../../assets/feather-icons/alert-triangle.svg";
+import { ScrollBarComponent } from "../../ui/scrollbar-component";
 // import { SearchExerciseInput } from "./ui/search-bar";
-import heartIcon from "../assets/feather-icons/heart.svg";
+import heartIcon from "../../../assets/feather-icons/heart.svg";
 
 export const ExerciseList = ({
   exercises,

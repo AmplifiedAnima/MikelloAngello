@@ -1,9 +1,9 @@
-import { ExerciseCard } from "../exercise-card";
-import { ExerciseList } from "../exercise-list";
-import { Button } from "../ui/button";
-import { buttonStylesForTrainingModule } from "../ui/styles/button-styles-training-module";
-import { exercises } from "./exercises";
-import { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
+import { ExerciseCard } from "../ui/exercise-card";
+import { ExerciseList } from "../ui/exercise-list";
+import { Button } from "../../ui/button";
+import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
+import { exercises } from "../mock_data/exercises.mock_data";
+import { ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
 
 interface ExerciseSelectorProps {
   isMobile: boolean;

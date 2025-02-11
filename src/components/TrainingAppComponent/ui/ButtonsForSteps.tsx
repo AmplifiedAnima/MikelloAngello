@@ -1,7 +1,7 @@
 // StepButtons.tsx
-import { Button } from "../ui/button";
-import { buttonStylesForTrainingModule } from "../ui/styles/button-styles-training-module";
-import type { TrainingAppStep } from "./TrainingAppLogic";
+import { Button } from "../../ui/button";
+import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
+import type { TrainingAppStep } from "../utils/TrainingAppLogic";
 
 interface StepButtonsProps {
   step: TrainingAppStep;
