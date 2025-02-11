@@ -26,9 +26,6 @@ const TrainingAppComponent = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    console.log(step, `step`);
-  }, [step]);
   const handleExerciseClick = (exercise: ExerciseBlueprintsInterface) => {
     setSelectedExercise(exercise);
     if (isMobile) {
@@ -41,7 +38,7 @@ const TrainingAppComponent = () => {
   };
 
   return (
-    <div className="xl:my-32  xl:mx-24">
+    <div className="xl:py-32  xl:mx-24">
       {/* Desktop Layout */}
       <div className="flex flex-row">
         <div className="xl:py-4 w-[20vw] mx-16">

@@ -19,7 +19,6 @@ export const RootComponent = () => {
       <Header />
       <hr />
       <Outlet />
-      {/* <TanStackRouterDevtools /> */}
     </>
   );
 };

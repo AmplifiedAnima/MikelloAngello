@@ -30,6 +30,7 @@ export const StepButtons = ({
     } else if (currentIndex < currentStepIndex) {
       goToPreviousStep();
     }
+    console.log(`buttons for steps clicked step `, clickedStep);
   };
 
   return (
