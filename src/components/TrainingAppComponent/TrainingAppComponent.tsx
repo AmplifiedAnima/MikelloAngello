@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-import { ExerciseCard } from "../exercise-card";
-import { ExerciseList } from "../exercise-list";
-import { exercises } from "./exercises";
 
-import { Button } from "../ui/button";
 import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
-import { buttonStylesForTrainingModule } from "../ui/styles/button-styles-training-module";
+
 import { SearchExerciseInput } from "../ui/search-bar";
+import { useTrainingPlan } from "./TrainingAppLogic";
+import { StepButtons } from "./ButtonsForSteps";
+import { ExerciseSelector } from "./ExerciseSelector";
+import { LoadSelector } from "./LoadSelector";
+import { TrainingDaysSelector } from "./TrainingDaysSelector";
 
 const TrainingAppComponent = () => {
+  const { step, goToNextStep, goToPreviousStep } = useTrainingPlan();
   const [selectedExercise, setSelectedExercise] =
     useState<ExerciseBlueprintsInterface | null>(null);
   const [showList, setShowList] = useState(true);
@@ -24,6 +26,9 @@ const TrainingAppComponent = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    console.log(step, `step`);
+  }, [step]);
   const handleExerciseClick = (exercise: ExerciseBlueprintsInterface) => {
     setSelectedExercise(exercise);
     if (isMobile) {
@@ -40,8 +45,9 @@ const TrainingAppComponent = () => {
       {/* Desktop Layout */}
       <div className="flex flex-row">
         <div className="xl:py-4 w-[20vw] mx-16">
-          <SearchExerciseInput
-            className="
+          {step === "EXERCISES" || step === "LOAD" ? (
+            <SearchExerciseInput
+              className="
                   rounded-lg
                   bg-black 
                   border-zinc-800 
@@ -50,73 +56,31 @@ const TrainingAppComponent = () => {
                   focus:ring-white/20
       
                 "
-            placeholder="Search exercises..."
-          />
-        </div>{" "}
-        <div className="xl:mx-12">
-          <Button className={`${buttonStylesForTrainingModule} xl:mx-2`}>
-            {" "}
-            Frequency
-          </Button>
-          <Button className={`${buttonStylesForTrainingModule} xl:mx-2`}>
-            Load
-          </Button>
-          <Button className={`${buttonStylesForTrainingModule} xl:mx-2`}>
-            {" "}
-            SAVE
-          </Button>
-        </div>
-      </div>
-      <div
-        className={`${isMobile ? "hidden" : "grid"} xl:h-[70vh]  grid-cols-[1.8fr_3fr] gap-6`}
-      >
-        <ExerciseList
-          exercises={exercises}
-          handleExerciseClick={handleExerciseClick}
-          selectedExercise={selectedExercise}
-        />
-
-        {selectedExercise ? (
-          <ExerciseCard exercise={selectedExercise} />
-        ) : (
-          <p className="p-12 text-xl text-PinkyPurple">
-            Click on exercise to view its specificity
-          </p>
-        )}
-      </div>
-      {/* Mobile Layout */}
-      {isMobile && (
-        <div className="relative min-h-[80vh]">
-          <div
-            className={`transition-opacity duration-300 ${showList ? "opacity-100" : "hidden opacity-0"}`}
-          >
-            <ExerciseList
-              exercises={exercises}
-              handleExerciseClick={handleExerciseClick}
-              selectedExercise={selectedExercise}
+              placeholder="Search exercises..."
             />
-          </div>
-
-          <div
-            className={`transition-opacity duration-300 ${!showList ? "opacity-100" : "hidden opacity-0"}`}
-          >
-            {selectedExercise ? (
-              <ExerciseCard exercise={selectedExercise} />
-            ) : (
-              <p className="p-12 text-xl text-PinkyPurple">
-                Click on exercise to view its specificity
-              </p>
-            )}
-          </div>
-
-          <Button
-            onClick={toggleView}
-            className={`${buttonStylesForTrainingModule} fixed bottom-14 left-1/2 w-1/2 -translate-x-1/2 transform rounded-full`}
-          >
-            {showList ? "View Exercise Details" : "Back to List"}
-          </Button>
+          ) : (
+            ""
+          )}
+        </div>{" "}
+        <div className="xl:mx-12 flex gap-4">
+          <StepButtons
+            step={step}
+            goToNextStep={goToNextStep}
+            goToPreviousStep={goToPreviousStep}
+          />
         </div>
+      </div>
+      {step === "EXERCISES" && (
+        <ExerciseSelector
+          isMobile={isMobile}
+          selectedExercise={selectedExercise}
+          handleExerciseClick={handleExerciseClick}
+          showList={showList}
+          toggleView={toggleView}
+        />
       )}
+      {step === "FREQUENCY" && <TrainingDaysSelector />}
+      {step === "LOAD" && <LoadSelector />}
     </div>
   );
 };

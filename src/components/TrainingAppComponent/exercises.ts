@@ -1,6 +1,49 @@
 import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
 
-export const exercises: ExerciseBlueprintsInterface[] = [
+function generateRandomId(length: number = 24): string {
+  const chars = "abcdef0123456789"; // Using hex characters for MongoDB-style IDs
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+// Function to remove duplicates and assign unique IDs to exercises
+function uniquifyExerciseIds(
+  exercises: ExerciseBlueprintsInterface[]
+): ExerciseBlueprintsInterface[] {
+  // Remove duplicate exercises by comparing all properties except _id
+  const uniqueExercises = exercises.reduce(
+    (acc: ExerciseBlueprintsInterface[], current) => {
+      const isDuplicate = acc.some(
+        (exercise) =>
+          exercise.name === current.name &&
+          exercise.sets === current.sets &&
+          exercise.reps === current.reps &&
+          exercise.intensity === current.intensity &&
+          exercise.movementPattern === current.movementPattern &&
+          exercise.plane === current.plane &&
+          exercise.type === current.type &&
+          exercise.toolsUsedInExercise === current.toolsUsedInExercise
+      );
+
+      if (!isDuplicate) {
+        acc.push(current);
+      }
+      return acc;
+    },
+    []
+  );
+
+  // Assign new random IDs to each unique exercise
+  return uniqueExercises.map((exercise) => ({
+    ...exercise,
+    _id: generateRandomId(),
+  }));
+}
+
+export const exercisesWithIdsThatSuck: ExerciseBlueprintsInterface[] = [
   {
     _id: "1",
     name: "Barbell Back Squat",
@@ -488,3 +531,5 @@ export const exercises: ExerciseBlueprintsInterface[] = [
     videoUrl: "https://youtube.com/shorts/45845gtPqEU?feature=share",
   },
 ];
+
+export const exercises = uniquifyExerciseIds(exercisesWithIdsThatSuck);

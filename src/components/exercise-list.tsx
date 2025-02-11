@@ -63,7 +63,9 @@ export const ExerciseList = ({
                       </span>
                     </div>
                   )}
-                {selectedExercise && <img src={heartIcon} width={20} />}
+                {selectedExercise?._id === exercise._id && (
+                  <img src={heartIcon} width={20} />
+                )}
               </li>
             ))}
           </ul>
