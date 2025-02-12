@@ -1,11 +1,16 @@
-import { exercises } from "../mock_data/exercises.mock_data";
+import { UseTrainingPlanInterface } from "../utils/TrainingAppLogicHook";
 
-export const LoadSelector = () => {
+export interface LoadSelectorProps {
+  useTrainingPlanHook: UseTrainingPlanInterface;
+}
+export const LoadSelector: React.FC<LoadSelectorProps> = ({
+  useTrainingPlanHook,
+}) => {
   return (
-    <div className="xl:m-24">
+    <div className="xl:my-24 xl:mx-32 m-4">
       <span className="text-2xl">Load your load </span>
       <ul>
-        {exercises.map((exercise) => {
+        {useTrainingPlanHook.exercisesBlueprints.map((exercise) => {
           return <li>{exercise.name}</li>;
         })}
       </ul>

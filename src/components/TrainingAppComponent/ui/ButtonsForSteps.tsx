@@ -1,20 +1,21 @@
 // StepButtons.tsx
 import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
-import type { TrainingAppStep } from "../utils/TrainingAppLogic";
+import type { TrainingAppStep } from "../utils/TrainingAppLogicHook";
 
 interface StepButtonsProps {
   step: TrainingAppStep;
   goToNextStep: () => void;
   goToPreviousStep: () => void;
 }
+
 export const StepButtons = ({
   step,
   goToNextStep,
   goToPreviousStep,
 }: StepButtonsProps) => {
   const steps: { id: TrainingAppStep; label: string }[] = [
-    { id: "FREQUENCY", label: "Training Days" },
+    { id: "FREQUENCY", label: "Objectives" },
     { id: "EXERCISES", label: "Exercises" },
     { id: "LOAD", label: "Load" },
     { id: "SAVE", label: "Save Plan" },
@@ -34,15 +35,17 @@ export const StepButtons = ({
   };
 
   return (
-    <div className="flex items-center scale-75 -ml-8 ">
+    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0 xl:mt-0 mt-24">
       {steps.map((stepItem, index) => (
-        <div key={stepItem.id} className="flex items-center">
+        <div key={stepItem.id} className="flex items-center w-full md:w-auto">
           <Button
             className={`
               ${buttonStylesForTrainingModule}
               px-2 py-1 text-xs
               ${step === stepItem.id ? "bg-red-700" : "bg-zinc-800 opacity-60"}
               relative
+              flex-1 md:flex-none
+              min-w-[120px] md:min-w-0
             `}
             onClick={() => handleStepClick(stepItem.id, index)}
             disabled={false}
@@ -61,7 +64,15 @@ export const StepButtons = ({
           {index < steps.length - 1 && (
             <div
               className={`
-                h-[1px] w-3
+                hidden md:block h-[1px] w-3
+                ${step === stepItem.id || step === steps[index + 1].id ? "bg-red-700" : "bg-zinc-800"}
+              `}
+            />
+          )}
+          {index < steps.length - 1 && (
+            <div
+              className={`
+                md:hidden w-[1px] h-3 mx-auto
                 ${step === stepItem.id || step === steps[index + 1].id ? "bg-red-700" : "bg-zinc-800"}
               `}
             />

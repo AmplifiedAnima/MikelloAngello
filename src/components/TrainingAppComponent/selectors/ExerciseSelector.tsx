@@ -2,21 +2,19 @@ import { ExerciseCard } from "../ui/exercise-card";
 import { ExerciseList } from "../ui/exercise-list";
 import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
-import { exercises } from "../mock_data/exercises.mock_data";
-import { ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
+import arrowIconBack from "../../../assets/feather-icons/arrow-left-circle.svg";
+import { UseTrainingPlanInterface } from "../utils/TrainingAppLogicHook";
 
 interface ExerciseSelectorProps {
   isMobile: boolean;
-  selectedExercise: ExerciseBlueprintsInterface | null;
-  handleExerciseClick: (exercise: ExerciseBlueprintsInterface) => void;
+  useTrainingPlanHook: UseTrainingPlanInterface;
   showList: boolean;
   toggleView: () => void;
 }
 
 export const ExerciseSelector = ({
   isMobile,
-  selectedExercise,
-  handleExerciseClick,
+  useTrainingPlanHook,
   showList,
   toggleView,
 }: ExerciseSelectorProps) => {
@@ -24,15 +22,11 @@ export const ExerciseSelector = ({
     <>
       {/* Desktop Layout */}
       <div
-        className={`${isMobile ? "hidden" : "grid"} xl:h-[70vh] grid-cols-[1.8fr_3fr] gap-6`}
+        className={`${isMobile ? "hidden" : "grid"} xl:h-[65vh] grid-cols-[1.8fr_3fr] gap-6`}
       >
-        <ExerciseList
-          exercises={exercises}
-          handleExerciseClick={handleExerciseClick}
-          selectedExercise={selectedExercise}
-        />
-        {selectedExercise ? (
-          <ExerciseCard exercise={selectedExercise} />
+        <ExerciseList useTrainingPlanHook={useTrainingPlanHook} />
+        {useTrainingPlanHook.selectedExercise ? (
+          <ExerciseCard exercise={useTrainingPlanHook.selectedExercise} />
         ) : (
           <p className="p-12 text-xl text-PinkyPurple">
             Click on exercise to view its specificity
@@ -46,18 +40,14 @@ export const ExerciseSelector = ({
           <div
             className={`transition-opacity duration-300 ${showList ? "opacity-100" : "hidden opacity-0"}`}
           >
-            <ExerciseList
-              exercises={exercises}
-              handleExerciseClick={handleExerciseClick}
-              selectedExercise={selectedExercise}
-            />
+            <ExerciseList useTrainingPlanHook={useTrainingPlanHook} />
           </div>
 
           <div
             className={`transition-opacity duration-300 ${!showList ? "opacity-100" : "hidden opacity-0"}`}
           >
-            {selectedExercise ? (
-              <ExerciseCard exercise={selectedExercise} />
+            {useTrainingPlanHook.selectedExercise ? (
+              <ExerciseCard exercise={useTrainingPlanHook.selectedExercise} />
             ) : (
               <p className="p-12 text-xl text-PinkyPurple">
                 Click on exercise to view its specificity
@@ -67,9 +57,13 @@ export const ExerciseSelector = ({
 
           <Button
             onClick={toggleView}
-            className={`${buttonStylesForTrainingModule} fixed bottom-14 left-1/2 w-1/2 -translate-x-1/2 transform rounded-full`}
+            className={`${buttonStylesForTrainingModule} fixed top-[10vh] left-1/4 w-[30vw] -translate-x-1/2 transform rounded-full p-2`}
           >
-            {showList ? "View Exercise Details" : "Back to List"}
+            {showList ? (
+              <span> exercise details</span>
+            ) : (
+              <img src={arrowIconBack} width={20} />
+            )}
           </Button>
         </div>
       )}

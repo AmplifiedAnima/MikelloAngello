@@ -532,4 +532,4 @@ export const exercisesWithIdsThatSuck: ExerciseBlueprintsInterface[] = [
   },
 ];
 
-export const exercises = uniquifyExerciseIds(exercisesWithIdsThatSuck);
+export const mockExercises = uniquifyExerciseIds(exercisesWithIdsThatSuck);

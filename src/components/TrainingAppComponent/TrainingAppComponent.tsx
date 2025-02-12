@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
-
-import type { ExerciseBlueprintsInterface } from "./interfaces/exercise.interface";
-
 import { SearchExerciseInput } from "../ui/search-bar";
-import { useTrainingPlan } from "./utils/TrainingAppLogic";
+import { useTrainingPlanHook } from "./utils/TrainingAppLogicHook";
 import { StepButtons } from "./ui/ButtonsForSteps";
 import { ExerciseSelector } from "./selectors/ExerciseSelector";
 import { LoadSelector } from "./selectors/LoadSelector";
-import { TrainingDaysSelector } from "./selectors/TrainingDaysSelector";
+import { ObjectivesSelector } from "./selectors/ObjectivesSelector";
+import { Spacer } from "../ui/Spacer";
 
 const TrainingAppComponent = () => {
-  const { step, goToNextStep, goToPreviousStep } = useTrainingPlan();
-  const [selectedExercise, setSelectedExercise] =
-    useState<ExerciseBlueprintsInterface | null>(null);
+  const { step, goToNextStep, goToPreviousStep } = useTrainingPlanHook();
+  const trainingPlanHook = useTrainingPlanHook();
+
   const [showList, setShowList] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -25,23 +23,15 @@ const TrainingAppComponent = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const handleExerciseClick = (exercise: ExerciseBlueprintsInterface) => {
-    setSelectedExercise(exercise);
-    if (isMobile) {
-      setShowList(false);
-    }
-  };
-
   const toggleView = () => {
     setShowList(!showList);
   };
 
   return (
-    <div className="xl:pt-20   xl:mx-24">
+    <div className="xl:pt-24  xl:mx-24">
       {/* Desktop Layout */}
       <div className="flex flex-row">
-        <div className="xl:py-4 w-[20vw] mx-16">
+        <div className="xl:py-4 w-[20vw] mx-16 ">
           {step === "EXERCISES" || step === "LOAD" ? (
             <SearchExerciseInput
               className="
@@ -59,25 +49,27 @@ const TrainingAppComponent = () => {
             ""
           )}
         </div>{" "}
-        <div className="xl:mx-12 flex gap-4">
-          <StepButtons
-            step={step}
-            goToNextStep={goToNextStep}
-            goToPreviousStep={goToPreviousStep}
-          />
-        </div>
-      </div>
-      {step === "EXERCISES" && (
-        <ExerciseSelector
-          isMobile={isMobile}
-          selectedExercise={selectedExercise}
-          handleExerciseClick={handleExerciseClick}
-          showList={showList}
-          toggleView={toggleView}
+        <StepButtons
+          step={step}
+          goToNextStep={goToNextStep}
+          goToPreviousStep={goToPreviousStep}
         />
+      </div>
+      <Spacer size="xs" />
+      {step === "EXERCISES" && (
+        <>
+          <ExerciseSelector
+            isMobile={isMobile}
+            useTrainingPlanHook={trainingPlanHook}
+            showList={showList}
+            toggleView={toggleView}
+          />
+        </>
       )}
-      {step === "FREQUENCY" && <TrainingDaysSelector />}
-      {step === "LOAD" && <LoadSelector />}
+      {step === "FREQUENCY" && <ObjectivesSelector />}
+      {step === "LOAD" && (
+        <LoadSelector useTrainingPlanHook={trainingPlanHook} />
+      )}
     </div>
   );
 };

@@ -4,15 +4,12 @@ import warningFeatherIcon from "../../../assets/feather-icons/alert-triangle.svg
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 // import { SearchExerciseInput } from "./ui/search-bar";
 import heartIcon from "../../../assets/feather-icons/heart.svg";
+import { UseTrainingPlanInterface } from "../utils/TrainingAppLogicHook";
 
 export const ExerciseList = ({
-  exercises,
-  selectedExercise,
-  handleExerciseClick,
+  useTrainingPlanHook,
 }: {
-  exercises: ExerciseBlueprintsInterface[];
-  selectedExercise: ExerciseBlueprintsInterface | null;
-  handleExerciseClick: (exercise: ExerciseBlueprintsInterface) => void;
+  useTrainingPlanHook: UseTrainingPlanInterface;
 }) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -29,11 +26,13 @@ export const ExerciseList = ({
       <ScrollBarComponent className="xl:h-full md:h-[80vh] xl:px-12 px-4">
         <div className="rounded-lg bg-black">
           <ul className="divide-y divide-zinc-900">
-            {exercises.map((exercise) => (
+            {useTrainingPlanHook.exercisesBlueprints.map((exercise) => (
               <li
                 key={exercise._id}
                 className="group relative flex cursor-pointer items-center justify-between px-8 py-6 transition-all"
-                onClick={() => handleExerciseClick(exercise)}
+                onClick={() =>
+                  useTrainingPlanHook.handleExerciseClick(exercise)
+                }
                 onMouseEnter={() => setHoveredId(exercise._id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
@@ -63,7 +62,7 @@ export const ExerciseList = ({
                       </span>
                     </div>
                   )}
-                {selectedExercise?._id === exercise._id && (
+                {useTrainingPlanHook.selectedExercise?._id === exercise._id && (
                   <img src={heartIcon} width={20} />
                 )}
               </li>
