@@ -1,19 +1,15 @@
-// StepButtons.tsx
 import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
-import type { TrainingAppStep } from "../utils/TrainingAppLogicHook";
+import {
+  UseTrainingPlanInterface,
+  TrainingAppStep,
+} from "../utils/TraininAppLogic.interface";
 
 interface StepButtonsProps {
-  step: TrainingAppStep;
-  goToNextStep: () => void;
-  goToPreviousStep: () => void;
+  useTrainingPlanHook: UseTrainingPlanInterface;
 }
 
-export const StepButtons = ({
-  step,
-  goToNextStep,
-  goToPreviousStep,
-}: StepButtonsProps) => {
+export const StepButtons = ({ useTrainingPlanHook }: StepButtonsProps) => {
   const steps: { id: TrainingAppStep; label: string }[] = [
     { id: "FREQUENCY", label: "Objectives" },
     { id: "EXERCISES", label: "Exercises" },
@@ -25,13 +21,30 @@ export const StepButtons = ({
     clickedStep: TrainingAppStep,
     currentIndex: number
   ) => {
-    const currentStepIndex = steps.findIndex((s) => s.id === step);
+    const currentStepIndex = steps.findIndex(
+      (s) => s.id === useTrainingPlanHook.step
+    );
     if (currentIndex > currentStepIndex) {
-      goToNextStep();
+      useTrainingPlanHook.goToNextStep();
     } else if (currentIndex < currentStepIndex) {
-      goToPreviousStep();
+      useTrainingPlanHook.goToPreviousStep();
     }
-    console.log(`buttons for steps clicked step `, clickedStep);
+  };
+
+  const currentStepIndex = steps.findIndex(
+    (s) => s.id === useTrainingPlanHook.step
+  );
+
+  const getButtonStyles = (index: number) => {
+    const distance = Math.abs(index - currentStepIndex);
+
+    if (useTrainingPlanHook.step === steps[index].id) {
+      return "bg-red-700 opacity-100"; // Current step - fully visible
+    }
+    if (distance > 1) {
+      return "bg-zinc-800 opacity-30 hover:opacity-70"; // Far steps - very dim, more visible on hover
+    }
+    return "bg-zinc-800 opacity-60 hover:opacity-90"; // Adjacent steps - partially visible, nearly full on hover
   };
 
   return (
@@ -42,20 +55,21 @@ export const StepButtons = ({
             className={`
               ${buttonStylesForTrainingModule}
               px-2 py-1 text-xs
-              ${step === stepItem.id ? "bg-red-700" : "bg-zinc-800 opacity-60"}
+              ${getButtonStyles(index)}
               relative
               flex-1 md:flex-none
               min-w-[120px] md:min-w-0
+              transition-opacity duration-200
             `}
             onClick={() => handleStepClick(stepItem.id, index)}
-            disabled={false}
           >
             <span className="relative z-10">{stepItem.label}</span>
             <span
               className={`
                 absolute -left-1.5 -top-1.5 h-4 w-4 rounded-full
                 flex items-center justify-center text-[10px]
-                ${step === stepItem.id ? "bg-red-600" : "bg-zinc-700"}
+                ${useTrainingPlanHook.step === stepItem.id ? "bg-red-600" : "bg-zinc-700"}
+                transition-colors duration-200
               `}
             >
               {index + 1}
@@ -65,7 +79,14 @@ export const StepButtons = ({
             <div
               className={`
                 hidden md:block h-[1px] w-3
-                ${step === stepItem.id || step === steps[index + 1].id ? "bg-red-700" : "bg-zinc-800"}
+                ${
+                  useTrainingPlanHook.step === stepItem.id ||
+                  useTrainingPlanHook.step === steps[index + 1].id
+                    ? "bg-red-700"
+                    : "bg-zinc-800"
+                }
+                ${Math.abs(index - currentStepIndex) > 1 ? "opacity-30" : "opacity-60"}
+                transition-opacity duration-200
               `}
             />
           )}
@@ -73,7 +94,14 @@ export const StepButtons = ({
             <div
               className={`
                 md:hidden w-[1px] h-3 mx-auto
-                ${step === stepItem.id || step === steps[index + 1].id ? "bg-red-700" : "bg-zinc-800"}
+                ${
+                  useTrainingPlanHook.step === stepItem.id ||
+                  useTrainingPlanHook.step === steps[index + 1].id
+                    ? "bg-red-700"
+                    : "bg-zinc-800"
+                }
+                ${Math.abs(index - currentStepIndex) > 1 ? "opacity-30" : "opacity-60"}
+                transition-opacity duration-200
               `}
             />
           )}

@@ -4,7 +4,7 @@ import warningFeatherIcon from "../../../assets/feather-icons/alert-triangle.svg
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 // import { SearchExerciseInput } from "./ui/search-bar";
 import heartIcon from "../../../assets/feather-icons/heart.svg";
-import { UseTrainingPlanInterface } from "../utils/TrainingAppLogicHook";
+import { UseTrainingPlanInterface } from "../utils/TraininAppLogic.interface";
 
 export const ExerciseList = ({
   useTrainingPlanHook,

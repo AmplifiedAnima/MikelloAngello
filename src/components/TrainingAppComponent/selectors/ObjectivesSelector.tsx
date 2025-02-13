@@ -1,154 +1,93 @@
-import { useState } from "react";
 import { Button } from "../../ui/button";
-import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import {
   difficultyLevels,
   preferences,
   trainingPaths,
 } from "../utils/TrainingDaysSelectorUtils";
+import { UseTrainingPlanInterface } from "../utils/TraininAppLogic.interface";
+import { ExpandableCard } from "./Objective_selector_ui_components/expendable-card";
+import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
+import { ScrollBarComponent } from "../../ui/scrollbar-component";
+import React from "react";
+import arrowLeft from "../../../assets/feather-icons/arrow-left.svg";
+import arrowRight from "../../../assets/feather-icons/arrow-right.svg";
 
-const ExpandableCard = ({
-  id,
-  title,
-  description,
-  isSelected,
-  onClick,
-  isDisabled = false,
-  customPrefix = "",
-  expandedCard,
-  priority = 0, // Add priority to show hierarchy
-}: {
-  id: string;
-  title: string;
-  description: string;
-  isSelected: boolean;
-  onClick: () => void;
-  isDisabled?: boolean;
-  customPrefix?: string;
-  expandedCard: string;
-  priority?: number;
-}) => (
-  <div
-    onClick={onClick}
-    className={`
-      p-3 rounded-lg transition-all relative
-      ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
-      ${isSelected ? "bg-red-700/20 border-red-700" : "bg-zinc-800/50 border-zinc-700"}
-      border
-      ${!isDisabled && "hover:border-red-600"}
-      ${priority > 0 ? "ml-4" : ""} 
-    `}
-  >
-    {priority > 0 && (
-      <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-3 h-px bg-zinc-600" />
-    )}
-    <h3 className="text-base font-medium flex items-center justify-between">
-      {title}
-      {priority > 0 && (
-        <span className="text-xs text-zinc-400">Secondary Option</span>
-      )}
-    </h3>
-    <div
-      className={`
-        overflow-hidden transition-all duration-300
-        ${expandedCard === (customPrefix ? `${customPrefix}-${id}` : id) ? "max-h-40" : "max-h-0"}
-      `}
-    >
-      <p className="text-sm text-zinc-400 mt-2">{description}</p>
-    </div>
+export const SectionHeader = ({ children }: { children: React.ReactNode }) => (
+  <div className="relative py-4">
+    <h2 className="text-2xl font-medium tracking-wide">{children}</h2>
   </div>
 );
-
-export const ObjectivesSelector = () => {
-  const [selectedPath, setSelectedPath] = useState<string>("");
-  const [selectedDays, setSelectedDays] = useState<number>(0);
-  const [primaryGoal, setPrimaryGoal] = useState<string>("");
-  const [secondaryGoal, setSecondaryGoal] = useState<string>("");
-  const [difficultyLevel, setDifficultyLevel] = useState<string>("");
-  const [expandedCard, setExpandedCard] = useState<string>("");
-
+export const ObjectivesSelector = ({
+  useTrainingPlanHook,
+}: {
+  useTrainingPlanHook: UseTrainingPlanInterface;
+}) => {
   const trainingDays = [2, 3];
 
-  const handleSecondaryGoalClick = (prefId: string) => {
-    if (prefId === primaryGoal) return;
-    setSecondaryGoal(prefId);
-  };
-
-  const handleCardClick = (id: string) => {
-    setExpandedCard(expandedCard === id ? "" : id);
-  };
-
-  // Get available secondary goals based on primary goal
-  const getAvailableSecondaryGoals = () => {
-    const primaryIndex = preferences.findIndex((p) => p.id === primaryGoal);
-    return preferences.slice(primaryIndex + 1);
-  };
-
   const PathSelection = (
-    <div className="space-y-3">
-      <h2 className="text-xl font-medium">Choose your training path</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <section className="max-w-3xl mx-auto space-y-2">
+      <SectionHeader>Choose your training path</SectionHeader>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {trainingPaths.map((path) => (
           <ExpandableCard
             key={path.id}
             id={path.id}
             title={path.label}
             description={path.description}
-            isSelected={selectedPath === path.id}
-            expandedCard={expandedCard}
+            isSelected={useTrainingPlanHook.objectives.selectedPath === path.id}
+            expandedCard={useTrainingPlanHook.objectives.expandedCard}
             onClick={() => {
-              setSelectedPath(path.id);
-              setSelectedDays(0);
-              setPrimaryGoal("");
-              setSecondaryGoal("");
-              setDifficultyLevel("");
-              handleCardClick(path.id);
+              useTrainingPlanHook.setSelectedPath(path.id);
+              useTrainingPlanHook.handleCardClick(path.id);
             }}
           />
         ))}
       </div>
-    </div>
+    </section>
   );
-
+  
   const TrainingDays = (
-    <div className="space-y-3">
-      <h2 className="text-xl font-medium">Training days per week</h2>
-      <div className="flex flex-wrap gap-3">
+    <section className="max-w-3xl mx-auto space-y-3">
+      <SectionHeader>Training days per week</SectionHeader>
+      <div className="flex gap-3 flex-wrap">
         {trainingDays.map((days) => (
           <Button
             key={days}
-            onClick={() => setSelectedDays(days)}
-            className={`
-              ${buttonStylesForTrainingModule}
-              px-6 py-2 text-base
-              ${selectedDays === days ? "bg-red-700" : "bg-zinc-800 opacity-60"}
-            `}
+            onClick={() => {
+              // First, set the selected days in objectives
+              useTrainingPlanHook.setSelectedDays(days);
+
+              // Then, initialize training units
+              useTrainingPlanHook.setTrainingFrequency(days);
+            }}
+            className={buttonStylesForTrainingModule}
           >
             {days} days
           </Button>
         ))}
       </div>
-    </div>
+    </section>
   );
 
   const GoalsSelection = (
-    <div className="space-y-6">
+    <section className="max-w-5xl mx-auto space-y-6">
       {/* Primary Goals */}
       <div className="space-y-3">
-        <h2 className="text-xl font-medium">Select your goals</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <SectionHeader>Select your goals</SectionHeader>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           {preferences.map((pref) => (
             <ExpandableCard
               key={pref.id}
               id={pref.id}
               title={pref.label}
               description={pref.description}
-              isSelected={primaryGoal === pref.id}
-              expandedCard={expandedCard}
+              isSelected={
+                useTrainingPlanHook.objectives.primaryGoal === pref.id
+              }
+              expandedCard={useTrainingPlanHook.objectives.expandedCard}
               onClick={() => {
-                setPrimaryGoal(pref.id);
-                setSecondaryGoal("");
-                handleCardClick(pref.id);
+                useTrainingPlanHook.setPrimaryGoal(pref.id);
+                useTrainingPlanHook.handleCardClick(pref.id);
               }}
             />
           ))}
@@ -156,139 +95,306 @@ export const ObjectivesSelector = () => {
       </div>
 
       {/* Secondary Goals */}
-      {primaryGoal && (
-        <div className="space-y-3 pl-4 border-l-2 border-zinc-800">
-          <h3 className="text-lg font-medium text-zinc-300">
-            Optional secondary focus
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {getAvailableSecondaryGoals().map((pref) => (
+      {useTrainingPlanHook.objectives.primaryGoal && (
+        <div className="space-y-3 pl-4 border-l border-zinc-800">
+          <SectionHeader>Optional secondary focus</SectionHeader>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {useTrainingPlanHook.getAvailableSecondaryGoals().map((pref) => (
               <ExpandableCard
                 key={pref.id}
                 id={pref.id}
                 title={pref.label}
                 description={pref.description}
-                isSelected={secondaryGoal === pref.id}
-                expandedCard={expandedCard}
+                isSelected={
+                  useTrainingPlanHook.objectives.secondaryGoal === pref.id
+                }
+                expandedCard={useTrainingPlanHook.objectives.expandedCard}
                 customPrefix="secondary"
                 priority={1}
                 onClick={() => {
-                  handleSecondaryGoalClick(pref.id);
-                  handleCardClick(`secondary-${pref.id}`);
+                  useTrainingPlanHook.handleSecondaryGoalClick(pref.id);
+                  useTrainingPlanHook.handleCardClick(`secondary-${pref.id}`);
                 }}
               />
             ))}
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 
   const DifficultyLevel = (
-    <div className="space-y-3">
-      <h2 className="text-xl font-medium">Difficulty level</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <section className="max-w-5xl mx-auto space-y-3">
+      <SectionHeader>Difficulty level</SectionHeader>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {difficultyLevels.map((level) => (
           <ExpandableCard
             key={level.id}
             id={level.id}
             title={level.label}
             description={level.description}
-            isSelected={difficultyLevel === level.id}
-            expandedCard={expandedCard}
+            isSelected={
+              useTrainingPlanHook.objectives.difficultyLevel === level.id
+            }
+            expandedCard={useTrainingPlanHook.objectives.expandedCard}
             customPrefix="difficulty"
             onClick={() => {
-              setDifficultyLevel(level.id);
-              handleCardClick(`difficulty-${level.id}`);
+              useTrainingPlanHook.setDifficultyLevel(level.id);
+              useTrainingPlanHook.handleCardClick(`difficulty-${level.id}`);
             }}
           />
         ))}
       </div>
-    </div>
+    </section>
+  );
+  const ExerciseCount = (
+    <section className="max-w-5xl mx-auto space-y-3">
+      <SectionHeader>
+        {useTrainingPlanHook.objectives.selectedPath === "longevity"
+          ? "Choose your experience level"
+          : "How many exercises per training day?"}
+      </SectionHeader>
+
+      {useTrainingPlanHook.objectives.selectedPath === "longevity" ? (
+        // Opcje dla ścieżki zdrowotnej
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+          {difficultyLevels.map((level) => (
+            <ExpandableCard
+              key={level.id}
+              id={level.id}
+              title={level.label}
+              description={level.description}
+              isSelected={
+                useTrainingPlanHook.objectives.difficultyLevel === level.id
+              }
+              expandedCard={useTrainingPlanHook.objectives.expandedCard}
+              customPrefix="difficulty"
+              onClick={() => {
+                useTrainingPlanHook.setDifficultyLevel(level.id);
+                useTrainingPlanHook.handleCardClick(`difficulty-${level.id}`);
+                // Automatycznie ustaw liczbę ćwiczeń na podstawie poziomu
+                const exerciseCounts = {
+                  beginner: { main: 2, accessory: 1 },
+                  shinobi: { main: 3, accessory: 2 },
+                  samurai: { main: 4, accessory: 3 },
+                }[level.id] || { main: 2, accessory: 1 };
+
+                useTrainingPlanHook.setMainExerciseCount(exerciseCounts.main);
+                useTrainingPlanHook.setAccessoryExerciseCount(
+                  exerciseCounts.accessory
+                );
+              }}
+            />
+          ))}
+        </div>
+      ) : (
+        // Prosty wybór liczby ćwiczeń dla ścieżki custom
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-medium">Main exercises</h3>
+                <p className="text-sm text-zinc-400">
+                  Key exercises for your goals
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Button
+                  onClick={() => {
+                    if (useTrainingPlanHook.objectives.mainExerciseCount > 1) {
+                      useTrainingPlanHook.setMainExerciseCount(
+                        useTrainingPlanHook.objectives.mainExerciseCount - 1
+                      );
+                    }
+                  }}
+                  className={`${buttonStylesForTrainingModule}  xl:p-1 xl:w-8 xl:h-8 p-1 w-8 h-8`}
+                  disabled={
+                    useTrainingPlanHook.objectives.mainExerciseCount <= 1
+                  }
+                >
+                  <img src={arrowLeft} />
+                </Button>
+                <span className="w-8 text-center">
+                  {useTrainingPlanHook.objectives.mainExerciseCount || 1}
+                </span>
+                <Button
+                  onClick={() => {
+                    if (useTrainingPlanHook.objectives.mainExerciseCount < 3) {
+                      useTrainingPlanHook.setMainExerciseCount(
+                        useTrainingPlanHook.objectives.mainExerciseCount + 1
+                      );
+                    }
+                  }}
+                  className={`${buttonStylesForTrainingModule}  xl:p-1 xl:w-8 xl:h-8 p-1 w-8 h-8`}
+                  disabled={
+                    useTrainingPlanHook.objectives.mainExerciseCount >= 5
+                  }
+                >
+                  <img src={arrowRight} />
+                </Button>
+              </div>
+            </div>
+            <div className="text-xs text-zinc-500">
+              Recommended: 2-4 main exercises per training day
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-medium">Accessory exercises</h3>
+                <p className="text-sm text-zinc-400">Supporting exercises</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Button
+                  onClick={() => {
+                    if (
+                      useTrainingPlanHook.objectives.accessoryExerciseCount > 0
+                    ) {
+                      useTrainingPlanHook.setAccessoryExerciseCount(
+                        useTrainingPlanHook.objectives.accessoryExerciseCount -
+                          1
+                      );
+                    }
+                  }}
+                  className={`${buttonStylesForTrainingModule}  xl:p-1 xl:w-8 xl:h-8 p-1 w-8 h-8`}
+                  disabled={
+                    useTrainingPlanHook.objectives.accessoryExerciseCount <= 0
+                  }
+                >
+                  <img src={arrowLeft} />
+                </Button>
+                <span className="w-8 text-center">
+                  {useTrainingPlanHook.objectives.accessoryExerciseCount || 0}
+                </span>
+                <Button
+                  onClick={() => {
+                    if (
+                      useTrainingPlanHook.objectives.accessoryExerciseCount < 6
+                    ) {
+                      useTrainingPlanHook.setAccessoryExerciseCount(
+                        useTrainingPlanHook.objectives.accessoryExerciseCount +
+                          1
+                      );
+                    }
+                  }}
+                  className={`${buttonStylesForTrainingModule}  xl:p-1 xl:w-8 xl:h-8 p-1 w-8 h-8`}
+                  disabled={
+                    useTrainingPlanHook.objectives.accessoryExerciseCount >= 6
+                  }
+                >
+                  <img src={arrowRight} />
+                </Button>
+              </div>
+            </div>
+            <div className="text-xs text-zinc-500">
+              Recommended: 1-3 accessory exercises per training day
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   );
   const Summary = (
-    <div className="pt-4 border-t border-zinc-800">
+    <section className="max-w-5xl mx-auto pt-4 border-t border-zinc-800">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <p className="text-sm text-zinc-400">Your Plan</p>
-          <div className="space-y-1">
-            <p className="text-base">
-              {selectedDays} days per week -{" "}
-              {selectedPath === "custom" ? (
-                <>
-                  {preferences.find((p) => p.id === primaryGoal)?.label}
-                  {secondaryGoal && (
-                    <span className="text-zinc-400">
-                      {" "}
-                      & {preferences.find((p) => p.id === secondaryGoal)?.label}
+          <p className="text-base">
+            {useTrainingPlanHook.objectives.selectedDays} days per week -{" "}
+            {useTrainingPlanHook.objectives.selectedPath === "custom" ? (
+              <span className="space-x-2">
+                <span>
+                  {
+                    preferences.find(
+                      (p) => p.id === useTrainingPlanHook.objectives.primaryGoal
+                    )?.label
+                  }
+                </span>
+                {useTrainingPlanHook.objectives.secondaryGoal && (
+                  <span className="text-zinc-400">
+                    &{" "}
+                    {
+                      preferences.find(
+                        (p) =>
+                          p.id === useTrainingPlanHook.objectives.secondaryGoal
+                      )?.label
+                    }
+                  </span>
+                )}
+                {useTrainingPlanHook.objectives.difficultyLevel && (
+                  <span className="ml-4">
+                    Level:{" "}
+                    <span
+                      className={`font-medium ${
+                        useTrainingPlanHook.objectives.difficultyLevel ===
+                        "beginner"
+                          ? "text-green-400"
+                          : useTrainingPlanHook.objectives.difficultyLevel ===
+                              "shinobi"
+                            ? "text-yellow-400"
+                            : "text-red-400"
+                      }`}
+                    >
+                      {
+                        difficultyLevels.find(
+                          (level) =>
+                            level.id ===
+                            useTrainingPlanHook.objectives.difficultyLevel
+                        )?.label
+                      }
                     </span>
-                  )}
-                  {difficultyLevel && (
-                    <a className="mx-4">
-                      Level:{" "}
-                      <span
-                        className={`font-medium ${
-                          difficultyLevel === "beginner"
-                            ? "text-green-400"
-                            : difficultyLevel === "shinobi"
-                              ? "text-yellow-400"
-                              : "text-red-400"
-                        }`}
-                      >
-                        {
-                          difficultyLevels.find(
-                            (level) => level.id === difficultyLevel
-                          )?.label
-                        }
-                      </span>
-                    </a>
-                  )}
-                </>
-              ) : (
-                "Longevity Foundation Training"
-              )}
-            </p>
-          </div>
+                  </span>
+                )}
+              </span>
+            ) : (
+              "Longevity Foundation Training"
+            )}
+          </p>
         </div>
         <Button
-          className={`${buttonStylesForTrainingModule} px-6 w-full sm:w-auto`}
-          onClick={() => {
-            console.log({
-              selectedPath,
-              selectedDays,
-              ...(selectedPath === "custom" && {
-                primaryGoal,
-                secondaryGoal,
-                difficultyLevel,
-              }),
-            });
-          }}
+          className={buttonStylesForTrainingModule}
+          onClick={useTrainingPlanHook.goToNextStep}
         >
           Continue
         </Button>
       </div>
-    </div>
+    </section>
   );
-  const showSummary =
-    (selectedPath === "longevity" && selectedDays > 0) ||
-    (selectedPath === "custom" &&
-      selectedDays > 0 &&
-      primaryGoal &&
-      difficultyLevel);
 
+  const showSummary =
+    (useTrainingPlanHook.objectives.selectedPath === "longevity" &&
+      useTrainingPlanHook.objectives.selectedDays > 0 &&
+      useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
+      useTrainingPlanHook.objectives.accessoryExerciseCount > 0) ||
+    (useTrainingPlanHook.objectives.selectedPath === "custom" &&
+      useTrainingPlanHook.objectives.selectedDays > 0 &&
+      useTrainingPlanHook.objectives.primaryGoal &&
+      useTrainingPlanHook.objectives.difficultyLevel &&
+      useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
+      useTrainingPlanHook.objectives.accessoryExerciseCount > 0);
+
+  // Zmodyfikuj return:
   return (
-    <div className="space-y-8 p-4 md:p-8">
+    <ScrollBarComponent className="xl:h-[60vh] px-8 space-y-24">
       {PathSelection}
-      {selectedPath && TrainingDays}
-      {selectedPath === "custom" && selectedDays > 0 && (
+      {useTrainingPlanHook.objectives.selectedPath && (
         <>
-          {GoalsSelection}
-          {primaryGoal && DifficultyLevel}
+          {TrainingDays}
+          {useTrainingPlanHook.objectives.selectedDays > 0 && ExerciseCount}
         </>
       )}
+      {useTrainingPlanHook.objectives.selectedPath === "custom" &&
+        useTrainingPlanHook.objectives.selectedDays > 0 &&
+        useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
+        useTrainingPlanHook.objectives.accessoryExerciseCount > 0 && (
+          <>
+            {GoalsSelection}
+            {useTrainingPlanHook.objectives.primaryGoal && DifficultyLevel}
+          </>
+        )}
       {showSummary && Summary}
-    </div>
+    </ScrollBarComponent>
   );
 };
-
 export default ObjectivesSelector;

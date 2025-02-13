@@ -3,7 +3,7 @@ import { ExerciseList } from "../ui/exercise-list";
 import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import arrowIconBack from "../../../assets/feather-icons/arrow-left-circle.svg";
-import { UseTrainingPlanInterface } from "../utils/TrainingAppLogicHook";
+import { UseTrainingPlanInterface } from "../utils/TraininAppLogic.interface";
 
 interface ExerciseSelectorProps {
   isMobile: boolean;
@@ -21,12 +21,13 @@ export const ExerciseSelector = ({
   return (
     <>
       {/* Desktop Layout */}
+
       <div
-        className={`${isMobile ? "hidden" : "grid"} xl:h-[65vh] grid-cols-[1.8fr_3fr] gap-6`}
+        className={`${isMobile ? "hidden" : "grid"} xl:h-[60vh] grid-cols-[1.8fr_3fr] gap-6`}
       >
         <ExerciseList useTrainingPlanHook={useTrainingPlanHook} />
         {useTrainingPlanHook.selectedExercise ? (
-          <ExerciseCard exercise={useTrainingPlanHook.selectedExercise} />
+          <ExerciseCard useTrainingPlanHook={useTrainingPlanHook} />
         ) : (
           <p className="p-12 text-xl text-PinkyPurple">
             Click on exercise to view its specificity
@@ -47,7 +48,7 @@ export const ExerciseSelector = ({
             className={`transition-opacity duration-300 ${!showList ? "opacity-100" : "hidden opacity-0"}`}
           >
             {useTrainingPlanHook.selectedExercise ? (
-              <ExerciseCard exercise={useTrainingPlanHook.selectedExercise} />
+              <ExerciseCard useTrainingPlanHook={useTrainingPlanHook} />
             ) : (
               <p className="p-12 text-xl text-PinkyPurple">
                 Click on exercise to view its specificity
