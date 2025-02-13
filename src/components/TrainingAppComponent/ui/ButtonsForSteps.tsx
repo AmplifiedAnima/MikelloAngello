@@ -18,7 +18,7 @@ export const StepButtons = ({ useTrainingPlanHook }: StepButtonsProps) => {
   ];
 
   const handleStepClick = (
-    clickedStep: TrainingAppStep,
+
     currentIndex: number
   ) => {
     const currentStepIndex = steps.findIndex(
@@ -61,7 +61,7 @@ export const StepButtons = ({ useTrainingPlanHook }: StepButtonsProps) => {
               min-w-[120px] md:min-w-0
               transition-opacity duration-200
             `}
-            onClick={() => handleStepClick(stepItem.id, index)}
+            onClick={() => handleStepClick(index)}
           >
             <span className="relative z-10">{stepItem.label}</span>
             <span

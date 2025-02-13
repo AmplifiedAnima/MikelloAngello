@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import searchIcon from "../../assets/feather-icons/search.svg";
 
 interface SearchExerciseInputProps {
   placeholder?: string;
@@ -20,7 +20,7 @@ export const SearchExerciseInput = ({
   return (
     <div className="relative w-full max-w-2xl mx-auto">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-        <Search className="h-5 w-5 text-gray-400" />
+        <img src={searchIcon} />
       </div>
       <input
         type="search"

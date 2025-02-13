@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { SearchExerciseInput } from "../ui/search-bar";
 import { useTrainingPlanHook } from "./utils/TrainingAppLogicHook";
 import { StepButtons } from "./ui/ButtonsForSteps";
