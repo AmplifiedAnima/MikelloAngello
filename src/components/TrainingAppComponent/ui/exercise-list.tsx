@@ -4,13 +4,11 @@ import warningFeatherIcon from "../../../assets/feather-icons/alert-triangle.svg
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 // import { SearchExerciseInput } from "./ui/search-bar";
 import heartIcon from "../../../assets/feather-icons/heart.svg";
-import { UseTrainingPlanInterface } from "../utils/TraininAppLogic.interface";
+import { useTrainingLogic } from "../utils/TrainingAppContext";
 
-export const ExerciseList = ({
-  useTrainingPlanHook,
-}: {
-  useTrainingPlanHook: UseTrainingPlanInterface;
-}) => {
+export const ExerciseList = () => {
+  const useTrainingPlanHook = useTrainingLogic();
+
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const shouldShowToolWarning = (exercise: ExerciseBlueprintsInterface) => {
@@ -29,7 +27,7 @@ export const ExerciseList = ({
             {useTrainingPlanHook.exercisesBlueprints.map((exercise) => (
               <li
                 key={exercise._id}
-                className="group relative flex cursor-pointer items-center justify-between px-8 py-6 transition-all"
+                className="group relative flex cursor-pointer items-center justify-between px-8 py-[10px] transition-all"
                 onClick={() =>
                   useTrainingPlanHook.handleExerciseClick(exercise)
                 }

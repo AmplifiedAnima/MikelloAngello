@@ -19,6 +19,7 @@ export const useTrainingPlanHook = () => {
       { index: 2, MainExercises: [], AccessoryExercises: [] },
     ],
   });
+  const [showAllDaysLoad, setShowAllDaysLoad] = useState(false);
   // Exercise selection state
   const [exercisesBlueprints, setExercisesBluePrints] = useState(mockExercises);
   const [selectedExercise, setSelectedExercise] =
@@ -170,7 +171,6 @@ export const useTrainingPlanHook = () => {
       return { ...prev, trainingUnits: newUnits };
     });
   };
-  // Similar changes for addNewAccessoryExercise
   const addNewAccessoryExercise = (
     dayIndex: number,
     exercise: ExerciseBlueprintsInterface
@@ -182,14 +182,18 @@ export const useTrainingPlanHook = () => {
 
     setTrainingPlan((prev) => {
       const newUnits = [...prev.trainingUnits];
+      // Popraw indeksowanie
+      const actualIndex = dayIndex - 1; // Dodaj to
 
-      if (newUnits[dayIndex]) {
+      if (newUnits[actualIndex]) {
+        // Zmień na actualIndex
         if (
-          !newUnits[dayIndex].AccessoryExercises.some(
+          !newUnits[actualIndex].AccessoryExercises.some(
+            // Zmień na actualIndex
             (ex) => ex._id === exercise._id
           )
         ) {
-          newUnits[dayIndex].AccessoryExercises.push(exercise);
+          newUnits[actualIndex].AccessoryExercises.push(exercise); // Zmień na actualIndex
           console.log(`Added accessory exercise to day ${dayIndex}:`, exercise);
         } else {
           console.log(
@@ -204,11 +208,12 @@ export const useTrainingPlanHook = () => {
       return { ...prev, trainingUnits: newUnits };
     });
   };
-
   const removeMainExercise = (dayIndex: number, exerciseId: string) => {
     setTrainingPlan((prev) => {
       const newUnits = [...prev.trainingUnits];
-      const targetUnit = newUnits.find((unit) => unit.index === dayIndex);
+      // Zmień logikę wyszukiwania jednostki
+      const actualIndex = dayIndex - 1;
+      const targetUnit = newUnits[actualIndex]; // Zmień na bezpośredni dostęp przez indeks
 
       if (targetUnit) {
         targetUnit.MainExercises = targetUnit.MainExercises.filter(
@@ -223,7 +228,9 @@ export const useTrainingPlanHook = () => {
   const removeAccessoryExercise = (dayIndex: number, exerciseId: string) => {
     setTrainingPlan((prev) => {
       const newUnits = [...prev.trainingUnits];
-      const targetUnit = newUnits.find((unit) => unit.index === dayIndex);
+      // Zmień logikę wyszukiwania jednostki
+      const actualIndex = dayIndex - 1;
+      const targetUnit = newUnits[actualIndex]; // Zmień na bezpośredni dostęp przez indeks
 
       if (targetUnit) {
         targetUnit.AccessoryExercises = targetUnit.AccessoryExercises.filter(
@@ -234,6 +241,7 @@ export const useTrainingPlanHook = () => {
       return { ...prev, trainingUnits: newUnits };
     });
   };
+
   const logTrainingUnits = () => {
     console.log("Current Training Plan:", {
       trainingDaysPerWeek: trainingPlan.trainingDaysPerWeek,
@@ -310,7 +318,8 @@ export const useTrainingPlanHook = () => {
     setSelectedExercise,
     setTrainingFrequency,
     setCurrentDay,
-
+    showAllDaysLoad,
+    setShowAllDaysLoad,
     // New objectives-related returns
     objectives,
     setSelectedPath,

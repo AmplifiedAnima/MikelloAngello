@@ -4,7 +4,7 @@ import { VideoTemplate } from "./video-template-modal";
 import { useState } from "react";
 import closeIcon from "../../../assets/feather-icons/x-square.svg";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
-import { UseTrainingPlanInterface } from "../utils/TraininAppLogic.interface";
+import { useTrainingLogic } from "../utils/TrainingAppContext";
 
 const CardTextComponent = ({
   exerciseFeature,
@@ -20,15 +20,14 @@ const CardTextComponent = ({
     <p className="text-base text-zinc-200">{exerciseFeature}</p>
   </div>
 );
-export const ExerciseCard = ({
-  useTrainingPlanHook,
-}: {
-  useTrainingPlanHook: UseTrainingPlanInterface;
-}) => {
+export const ExerciseCard = () => {
+  const useTrainingPlanHook = useTrainingLogic();
   const [hasTemplateBecameOpened, setHasTemplateBecameOpened] = useState(false);
+
+  // Fix the indexing to match toolbar
   const currentUnit =
     useTrainingPlanHook.trainingPlan.trainingUnits[
-      useTrainingPlanHook.currentDayIndex
+      useTrainingPlanHook.currentDayIndex - 1
     ];
 
   const handleTemplateBecameOpened = () => {
@@ -68,15 +67,16 @@ export const ExerciseCard = ({
             <div className="p-4 border-b border-zinc-800">
               <div className="flex justify-between items-center">
                 <span className="text-zinc-400">
-                  Current Training Day:{" "}
-                  {useTrainingPlanHook.currentDayIndex + 1}
+                  Current Training Day: {useTrainingPlanHook.currentDayIndex}
                 </span>
-               
               </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:gap-x-48 gap-x-12 mx-6 gap-y-0 sm:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1">
-              <div className="xl:w-[28vw]">
+            <div
+              className="grid grid-cols-1 xl:gap-x-48 gap-x-12 mx-6 gap-y-0 
+            sm:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1"
+            >
+              <div className="xl:w-[20vw]">
                 <CardTextComponent
                   exerciseFeature={useTrainingPlanHook.selectedExercise.name}
                   text="Exercise"
@@ -87,21 +87,12 @@ export const ExerciseCard = ({
                   }
                   text="Pattern"
                 />
-                <CardTextComponent
-                  exerciseFeature={useTrainingPlanHook.selectedExercise.plane}
-                  text="Plane"
-                />
+
                 <CardTextComponent
                   exerciseFeature={
                     useTrainingPlanHook.selectedExercise.toolsUsedInExercise
                   }
                   text="Tools"
-                />
-                <CardTextComponent
-                  exerciseFeature={
-                    useTrainingPlanHook.selectedExercise.primaryMusclesWorked
-                  }
-                  text="Target"
                 />
                 <CardTextComponent
                   exerciseFeature={
@@ -114,45 +105,56 @@ export const ExerciseCard = ({
               <div className="flex flex-col xl:mt-[15vh] lg:mt-[25vh] sm:mt-24 md:mt-0 mt-6 gap-[22.5px] sm:gap-8 xl:gap-0 lg:gap-8">
                 {/* Exercise Management Buttons */}
                 <div className="space-y-4">
-                  <Button
-                    className={buttonStylesForTrainingModule}
-                    onClick={() =>
-                      useTrainingPlanHook.addNewMainExercise(
-                        useTrainingPlanHook.currentDayIndex,
-                        useTrainingPlanHook.selectedExercise!
-                      )
-                    }
-                    disabled={
-                      currentUnit?.MainExercises.length >=
-                      useTrainingPlanHook.objectives.mainExerciseCount
-                    }
-                  >
-                    Add as Main Exercise (
-                    {currentUnit?.MainExercises.length || 0}/
-                    {useTrainingPlanHook.objectives.mainExerciseCount})
-                  </Button>
+                  {/* Exercise count display outside button */}
+                  <div className="grid grid-cols-1 justify-between items-center">
+                    <span className="text-sm text-zinc-400">
+                      Main exercises: {currentUnit?.MainExercises.length || 0}/
+                      {useTrainingPlanHook.objectives.mainExerciseCount}
+                    </span>
+                    <Button
+                      className={`${buttonStylesForTrainingModule} xl:p-0  xl:w-[15vw]`}
+                      onClick={() =>
+                        useTrainingPlanHook.addNewMainExercise(
+                          useTrainingPlanHook.currentDayIndex,
+                          useTrainingPlanHook.selectedExercise!
+                        )
+                      }
+                      disabled={
+                        currentUnit?.MainExercises.length >=
+                        useTrainingPlanHook.objectives.mainExerciseCount
+                      }
+                    >
+                      Add as Main Exercise
+                    </Button>
+                  </div>
 
-                  <Button
-                    className={buttonStylesForTrainingModule}
-                    onClick={() =>
-                      useTrainingPlanHook.addNewAccessoryExercise(
-                        useTrainingPlanHook.currentDayIndex,
-                        useTrainingPlanHook.selectedExercise!
-                      )
-                    }
-                    disabled={
-                      currentUnit?.AccessoryExercises.length >=
-                      useTrainingPlanHook.objectives.accessoryExerciseCount
-                    }
-                  >
-                    Add as Accessory (
-                    {currentUnit?.AccessoryExercises.length || 0}/
-                    {useTrainingPlanHook.objectives.accessoryExerciseCount})
-                  </Button>
+                  {/* Exercise count display outside button */}
+                  <div className="grid grid-cols-1 justify-between items-center">
+                    <span className="text-sm text-zinc-400">
+                      Accessory exercises:{" "}
+                      {currentUnit?.AccessoryExercises.length || 0}/
+                      {useTrainingPlanHook.objectives.accessoryExerciseCount}
+                    </span>
+                    <Button
+                      className={`${buttonStylesForTrainingModule} xl:p-0  xl:w-[15vw]`}
+                      onClick={() =>
+                        useTrainingPlanHook.addNewAccessoryExercise(
+                          useTrainingPlanHook.currentDayIndex,
+                          useTrainingPlanHook.selectedExercise!
+                        )
+                      }
+                      disabled={
+                        currentUnit?.AccessoryExercises.length >=
+                        useTrainingPlanHook.objectives.accessoryExerciseCount
+                      }
+                    >
+                      Add as Accessory
+                    </Button>
+                  </div>
 
                   <Button
                     onClick={handleTemplateBecameOpened}
-                    className={buttonStylesForTrainingModule}
+                    className={`${buttonStylesForTrainingModule} xl:p-0  xl:w-[15vw]`}
                   >
                     Show video
                   </Button>

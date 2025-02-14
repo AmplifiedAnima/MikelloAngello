@@ -6,6 +6,7 @@ export interface TrainingPreference {
   intensityRange?: string;
   restPeriods?: string;
 }
+
 export const preferences: TrainingPreference[] = [
   {
     id: "maximal_strength",
@@ -61,6 +62,7 @@ export const preferences: TrainingPreference[] = [
     restPeriods: "45-90 seconds",
   },
 ];
+
 export const difficultyLevels = [
   {
     id: "beginner",

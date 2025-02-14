@@ -32,7 +32,8 @@ export interface UseTrainingPlanInterface {
   trainingPlan: TrainingPlanState;
   selectedExercise: ExerciseBlueprintsInterface | null;
   currentDayIndex: number;
-
+  showAllDaysLoad: boolean;
+  setShowAllDaysLoad: (boolean: boolean) => void;
   // Navigation
   goToNextStep: () => void;
   goToPreviousStep: () => void;

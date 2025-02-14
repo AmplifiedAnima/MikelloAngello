@@ -1,15 +1,10 @@
 import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
-import {
-  UseTrainingPlanInterface,
-  TrainingAppStep,
-} from "../utils/TraininAppLogic.interface";
+import { TrainingAppStep } from "../utils/TraininAppLogic.interface";
+import { useTrainingLogic } from "../utils/TrainingAppContext";
 
-interface StepButtonsProps {
-  useTrainingPlanHook: UseTrainingPlanInterface;
-}
-
-export const StepButtons = ({ useTrainingPlanHook }: StepButtonsProps) => {
+export const StepButtons = () => {
+  const useTrainingPlanHook = useTrainingLogic();
   const steps: { id: TrainingAppStep; label: string }[] = [
     { id: "FREQUENCY", label: "Objectives" },
     { id: "EXERCISES", label: "Exercises" },
@@ -17,10 +12,7 @@ export const StepButtons = ({ useTrainingPlanHook }: StepButtonsProps) => {
     { id: "SAVE", label: "Save Plan" },
   ];
 
-  const handleStepClick = (
-
-    currentIndex: number
-  ) => {
+  const handleStepClick = (currentIndex: number) => {
     const currentStepIndex = steps.findIndex(
       (s) => s.id === useTrainingPlanHook.step
     );
@@ -48,17 +40,21 @@ export const StepButtons = ({ useTrainingPlanHook }: StepButtonsProps) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0 xl:mt-0 mt-24">
+    <div className="flex flex-col md:flex-row xl:items-start md:items-center  md:gap-0 xl:mt-0 mt-24">
       {steps.map((stepItem, index) => (
-        <div key={stepItem.id} className="flex items-center w-full md:w-auto">
+        <div
+          key={stepItem.id}
+          className="flex items-center w-full md:w-auto mx-2 mt-2"
+        >
           <Button
             className={`
               ${buttonStylesForTrainingModule}
-              px-2 py-1 text-xs
+              xl:m-4 xl:py-1 text-xs
               ${getButtonStyles(index)}
               relative
               flex-1 md:flex-none
-              min-w-[120px] md:min-w-0
+              xl:min-w-[80px] xl:w-full md:min-w-0
+              
               transition-opacity duration-200
             `}
             onClick={() => handleStepClick(index)}

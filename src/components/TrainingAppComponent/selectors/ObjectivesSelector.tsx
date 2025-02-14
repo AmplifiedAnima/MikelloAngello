@@ -4,24 +4,22 @@ import {
   preferences,
   trainingPaths,
 } from "../utils/TrainingDaysSelectorUtils";
-import { UseTrainingPlanInterface } from "../utils/TraininAppLogic.interface";
 import { ExpandableCard } from "./Objective_selector_ui_components/expendable-card";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 import React from "react";
 import arrowLeft from "../../../assets/feather-icons/arrow-left.svg";
 import arrowRight from "../../../assets/feather-icons/arrow-right.svg";
+import { useTrainingLogic } from "../utils/TrainingAppContext";
 
 export const SectionHeader = ({ children }: { children: React.ReactNode }) => (
   <div className="relative py-4">
     <h2 className="text-2xl font-medium tracking-wide">{children}</h2>
   </div>
 );
-export const ObjectivesSelector = ({
-  useTrainingPlanHook,
-}: {
-  useTrainingPlanHook: UseTrainingPlanInterface;
-}) => {
+export const ObjectivesSelector = () => {
+  const useTrainingPlanHook = useTrainingLogic();
+
   const trainingDays = [2, 3];
 
   const PathSelection = (
@@ -45,7 +43,7 @@ export const ObjectivesSelector = ({
       </div>
     </section>
   );
-  
+
   const TrainingDays = (
     <section className="max-w-3xl mx-auto space-y-3">
       <SectionHeader>Training days per week</SectionHeader>
