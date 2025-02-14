@@ -5,7 +5,7 @@ import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import editIcon from "../../../assets/feather-icons/edit.svg";
 import trashIcon from "../../../assets/feather-icons/trash-2.svg";
-import layersIcon from "../../../assets/feather-icons/box.svg";
+
 import type { TrainingUnit as TrainingDay } from "../utils/TraininAppLogic.interface";
 
 const ExerciseItem = ({
@@ -143,8 +143,6 @@ export const LoadSelector = () => {
 
   return (
     <div className="flex flex-col place-items-center xl:h-[55vh]">
-    
-
       <ScrollBarComponent className="h-[xl:10vh]">
         {useTrainingPlanHook.showAllDaysLoad ? (
           <div className="flex gap-2">
