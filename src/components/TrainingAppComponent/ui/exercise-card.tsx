@@ -37,7 +37,7 @@ export const ExerciseCard = () => {
   if (!useTrainingPlanHook.selectedExercise) return null;
 
   return (
-    <ScrollBarComponent className="xl:mx-4">
+    <ScrollBarComponent className="mx-4">
       <div
         className=""
         style={{
@@ -46,16 +46,16 @@ export const ExerciseCard = () => {
       >
         {hasTemplateBecameOpened ? (
           <div className="xl:mt-4 grid grid-cols-2">
-            <span className="xl:text-2xl text-lg xl:mx-4 mx-2">
+            <span className="xl:text-2xl text-lg  mx-8">
               {useTrainingPlanHook.selectedExercise.name}
             </span>
             <Button
-              className={`${buttonStylesForTrainingModule} xl:mt-0 xl:p-0 xl:w-[3vw] xl:mx-[20vw] xl:rounded-lg w-[15vw] mx-[25vw] mt-32`}
+              className={`${buttonStylesForTrainingModule} xl:mt-0 xl:p-0 xl:border-none xl:w-[4vw] xl:mx-[10vw] xl:rounded-lg   mt-32`}
               onClick={handleTemplateBecameOpened}
             >
               <img src={closeIcon} width={25} alt="Close" />
             </Button>
-            <div className="xl:w-[40vw] w-[60vw] xl:mx-[1vw] xl:mt-2 mt-[20vh] md:w-[50vw]">
+            <div className="xl:w-[40vw] w-[60vw] xl:mx-[1vw]  md:w-[50vw]">
               <VideoTemplate
                 videoUrl={useTrainingPlanHook.selectedExercise.videoUrl}
               />
@@ -64,29 +64,22 @@ export const ExerciseCard = () => {
         ) : (
           <>
             {/* Training Day Selector */}
-            <div className="p-4 border-b border-zinc-800">
-              <div className="flex justify-between items-center">
-                <span className="text-zinc-400">
-                  Current Training Day: {useTrainingPlanHook.currentDayIndex}
-                </span>
-              </div>
-            </div>
 
             <div
               className="grid grid-cols-1 xl:gap-x-48 gap-x-12 mx-6 gap-y-0 
-            sm:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1"
+            sm:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-1 place-items-center xl:mt-0 mt-48"
             >
-              <div className="xl:w-[20vw]">
+              <div className="xl:w-[20vw] ">
                 <CardTextComponent
                   exerciseFeature={useTrainingPlanHook.selectedExercise.name}
                   text="Exercise"
                 />
-                <CardTextComponent
+                {/* <CardTextComponent
                   exerciseFeature={
                     useTrainingPlanHook.selectedExercise.movementPattern
                   }
                   text="Pattern"
-                />
+                /> */}
 
                 <CardTextComponent
                   exerciseFeature={
@@ -94,70 +87,58 @@ export const ExerciseCard = () => {
                   }
                   text="Tools"
                 />
-                <CardTextComponent
+                {/* <CardTextComponent
                   exerciseFeature={
                     useTrainingPlanHook.selectedExercise.primeMovers
                   }
                   text="Prime Movers"
-                />
-              </div>
+                /> */}
 
-              <div className="flex flex-col xl:mt-[15vh] lg:mt-[25vh] sm:mt-24 md:mt-0 mt-6 gap-[22.5px] sm:gap-8 xl:gap-0 lg:gap-8">
-                {/* Exercise Management Buttons */}
-                <div className="space-y-4">
+                <div className="grid  place-items-left xl:gap-2 gap-8 mt-8">
+                  <Button
+                    className={`${buttonStylesForTrainingModule} xl:p-6   xl:w-[15vw]`}
+                    onClick={() =>
+                      useTrainingPlanHook.addNewMainExercise(
+                        useTrainingPlanHook.currentDayIndex,
+                        useTrainingPlanHook.selectedExercise!
+                      )
+                    }
+                    disabled={
+                      currentUnit?.MainExercises.length >=
+                      useTrainingPlanHook.objectives.mainExerciseCount
+                    }
+                  >
+                    Add as Main Exercise
+                  </Button>
                   {/* Exercise count display outside button */}
-                  <div className="grid grid-cols-1 justify-between items-center">
-                    <span className="text-sm text-zinc-400">
-                      Main exercises: {currentUnit?.MainExercises.length || 0}/
-                      {useTrainingPlanHook.objectives.mainExerciseCount}
-                    </span>
-                    <Button
-                      className={`${buttonStylesForTrainingModule} xl:p-0  xl:w-[15vw]`}
-                      onClick={() =>
-                        useTrainingPlanHook.addNewMainExercise(
-                          useTrainingPlanHook.currentDayIndex,
-                          useTrainingPlanHook.selectedExercise!
-                        )
-                      }
-                      disabled={
-                        currentUnit?.MainExercises.length >=
-                        useTrainingPlanHook.objectives.mainExerciseCount
-                      }
-                    >
-                      Add as Main Exercise
-                    </Button>
-                  </div>
-
-                  {/* Exercise count display outside button */}
-                  <div className="grid grid-cols-1 justify-between items-center">
-                    <span className="text-sm text-zinc-400">
-                      Accessory exercises:{" "}
-                      {currentUnit?.AccessoryExercises.length || 0}/
-                      {useTrainingPlanHook.objectives.accessoryExerciseCount}
-                    </span>
-                    <Button
-                      className={`${buttonStylesForTrainingModule} xl:p-0  xl:w-[15vw]`}
-                      onClick={() =>
-                        useTrainingPlanHook.addNewAccessoryExercise(
-                          useTrainingPlanHook.currentDayIndex,
-                          useTrainingPlanHook.selectedExercise!
-                        )
-                      }
-                      disabled={
-                        currentUnit?.AccessoryExercises.length >=
-                        useTrainingPlanHook.objectives.accessoryExerciseCount
-                      }
-                    >
-                      Add as Accessory
-                    </Button>
-                  </div>
-
+                  <Button
+                    className={`${buttonStylesForTrainingModule}  xl:p-6   xl:w-[15vw]`}
+                    onClick={() =>
+                      useTrainingPlanHook.addNewAccessoryExercise(
+                        useTrainingPlanHook.currentDayIndex,
+                        useTrainingPlanHook.selectedExercise!
+                      )
+                    }
+                    disabled={
+                      currentUnit?.AccessoryExercises.length >=
+                      useTrainingPlanHook.objectives.accessoryExerciseCount
+                    }
+                  >
+                    Add as Accessory
+                  </Button>
                   <Button
                     onClick={handleTemplateBecameOpened}
-                    className={`${buttonStylesForTrainingModule} xl:p-0  xl:w-[15vw]`}
+                    className={`${buttonStylesForTrainingModule}   xl:p-6 xl:w-[15vw]   `}
                   >
                     Show video
-                  </Button>
+                  </Button>{" "}
+                </div>
+              </div>
+
+              <div className="">
+                {/* Exercise Management Buttons */}
+                <div className="space-y-2">
+                  {/* Exercise count display outside button */}
                 </div>
               </div>
             </div>

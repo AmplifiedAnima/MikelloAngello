@@ -24,7 +24,7 @@ export const Header = () => {
     <header className="fixed top-0 w-full bg-black text-white z-50">
       <div className="container mx-auto py-3 px-4 flex">
         <div className="flex flex-row items-start justify-between">
-          <div className="xl:py-3 w-[20vw] mx-16">
+          <div className="xl:py-3 xl:w-[20vw] xl:mx-16 mx-0">
             {shouldShowSearch && (
               <SearchExerciseInput
                 className="
@@ -42,18 +42,7 @@ export const Header = () => {
           <StepButtons />
         </div>
 
-        <ul className="flex items-center justify-end xl:gap-8 gap-4  mx-auto my-2 xl:w-[90vw] w-[55vw] ">
-          {/* Language Switcher */}
-          {/* <li className="">
-            <img
-              src={flag ? polishFlag : americanFlag}
-              alt="Language Flag"
-              width={flag ? 50 : 60}
-              height={flag ? 50 : 60}
-              onClick={handleLanguageSwitchMock}
-              className="my-2"
-            />
-          </li> */}
+        <ul className="flex items-center justify-end xl:gap-8 gap-2  mx-auto my-2 xl:w-[90vw] w-[55vw] ">
           {/* Menu Items */}
           <li className="">
             <Link to="/training-app">
@@ -65,13 +54,6 @@ export const Header = () => {
               <img src={homeIcon} width={35} />
             </Link>
           </li>
-
-          {/* <li className={textSize}>
-            <a href="/offer">Współpraca</a>
-          </li>
-          <li className={textSize}>
-            <a href="/about_me">O mnie</a>
-          </li> */}
         </ul>
       </div>
     </header>

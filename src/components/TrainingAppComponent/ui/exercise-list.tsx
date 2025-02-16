@@ -19,6 +19,12 @@ export const ExerciseList = () => {
     );
   };
 
+  // Fix the indexing to match toolbar
+  // const currentUnit =
+  //   useTrainingPlanHook.trainingPlan.trainingUnits[
+  //     useTrainingPlanHook.currentDayIndex - 1
+  //   ];
+
   return (
     <div className="xl:h-[60vh] w-full ">
       <ScrollBarComponent className="xl:h-full md:h-[80vh] xl:px-12 px-4">

@@ -51,10 +51,7 @@ export const TrainingDaysToolbar = () => {
               </Button>
             </>
           )}
-        </div>
-
-        <div className="mx-8">
-          {useTrainingPlanHook.step === "LOAD" && (
+          <div className="mx-8">
             <Button
               className={`${buttonStylesForTrainingModule} xl:h-8 xl:px-1 xl:py-2 xl:w-[12vw]`}
               onClick={() =>
@@ -78,7 +75,7 @@ export const TrainingDaysToolbar = () => {
                   : "Show all days"}
               </span>
             </Button>
-          )}
+          </div>
         </div>
 
         {/* Right: Exercise Progress */}

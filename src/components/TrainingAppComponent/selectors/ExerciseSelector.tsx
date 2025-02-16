@@ -4,6 +4,7 @@ import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import arrowIconBack from "../../../assets/feather-icons/arrow-left-circle.svg";
 import { useTrainingLogic } from "../utils/TrainingAppContext";
+// import SelectedExercisesList from "../ui/selected-exercise-list";
 
 interface ExerciseSelectorProps {
   isMobile: boolean;
@@ -16,7 +17,6 @@ export const ExerciseSelector = ({
   showList,
   toggleView,
 }: ExerciseSelectorProps) => {
-  
   const useTrainingPlanHook = useTrainingLogic();
   return (
     <>
@@ -55,10 +55,10 @@ export const ExerciseSelector = ({
               </p>
             )}
           </div>
-
+      
           <Button
             onClick={toggleView}
-            className={`${buttonStylesForTrainingModule} fixed top-[10vh] left-1/4 w-[30vw] -translate-x-1/2 transform rounded-full p-2`}
+            className={`${buttonStylesForTrainingModule} fixed top-[40vh] left-[80vw] w-[30vw] -translate-x-1/2 transform rounded-full p-2`}
           >
             {showList ? (
               <span> exercise details</span>
@@ -68,6 +68,7 @@ export const ExerciseSelector = ({
           </Button>
         </div>
       )}
+
     </>
   );
 };
