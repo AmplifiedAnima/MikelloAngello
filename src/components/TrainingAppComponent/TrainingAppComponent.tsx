@@ -6,7 +6,7 @@ import { ExerciseSelector } from "./selectors/ExerciseSelector";
 import { LoadSelector } from "./selectors/LoadSelector";
 import { ObjectivesSelector } from "./selectors/ObjectivesSelector";
 import { Spacer } from "../ui/Spacer";
-import TrainingDaysToolbar from "./ui/TrainingDaysToolbar";
+import TrainingDaysToolbar from "./ui/training-days-toolbar";
 import { useTrainingLogic } from "./utils/TrainingAppContext";
 
 const TrainingAppComponent = () => {
@@ -15,7 +15,7 @@ const TrainingAppComponent = () => {
 
   const { step } = trainingPlanHook;
   console.log(`units`, trainingPlanHook.trainingPlan);
-  const [showList, setShowList] = useState(true);
+  // const [showList, setShowList] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -28,15 +28,15 @@ const TrainingAppComponent = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleView = () => {
-    setShowList(!showList);
-  };
+  // const toggleView = () => {
+  //   setShowList(!showList);
+  // };
 
   // Function to determine if search bar should be visible
   // const shouldShowSearch = step === "EXERCISES" || step === "LOAD";
 
   return (
-    <div className="xl:pt-20 xl:mx-4 ">
+    <div className="xl:pt-24 xl:mx-4 ">
       {/* <div className="flex flex-row items-start justify-between">
         <div className="xl:py-4 w-[20vw] mx-16">
           {shouldShowSearch && (
@@ -66,16 +66,11 @@ const TrainingAppComponent = () => {
         {step === "EXERCISES" && (
           <>
             {" "}
-            <ExerciseSelector
-              isMobile={isMobile}
-              showList={showList}
-              toggleView={toggleView}
-            />
+            <ExerciseSelector isMobile={isMobile} />
           </>
         )}
         {step === "LOAD" && <LoadSelector />}
       </div>
-      <Spacer size="xl" />
     </div>
   );
 };

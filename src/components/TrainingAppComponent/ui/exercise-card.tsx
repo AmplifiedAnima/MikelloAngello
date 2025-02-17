@@ -37,7 +37,7 @@ export const ExerciseCard = () => {
   if (!useTrainingPlanHook.selectedExercise) return null;
 
   return (
-    <ScrollBarComponent className="mx-4">
+    <ScrollBarComponent className={`${hasTemplateBecameOpened ? "pl-0" : "pl-48"}`}>
       <div
         className=""
         style={{
@@ -55,7 +55,7 @@ export const ExerciseCard = () => {
             >
               <img src={closeIcon} width={25} alt="Close" />
             </Button>
-            <div className="xl:w-[40vw] w-[60vw] xl:mx-[1vw]  md:w-[50vw]">
+            <div className="w-[30vw]">
               <VideoTemplate
                 videoUrl={useTrainingPlanHook.selectedExercise.videoUrl}
               />

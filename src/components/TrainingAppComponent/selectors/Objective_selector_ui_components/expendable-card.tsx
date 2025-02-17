@@ -44,8 +44,8 @@ export const ExpandableCard = ({
         onClick={onClick}
         className={`
           relative
-          min-w-[240px] 
-          max-w-[300px]
+          min-w-[140px] 
+          max-w-[350px]
           h-14
           px-4
           rounded-lg 

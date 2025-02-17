@@ -1,5 +1,5 @@
 // ObjectivesSelector.tsx
-import React from "react";
+import React, { useState } from "react";
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 import { useTrainingLogic } from "../utils/TrainingAppContext";
 import {
@@ -10,6 +10,9 @@ import {
   Summary,
   TrainingDays,
 } from "./Objective_selector_ui_components/ObjectivesCards";
+import arrowLeft from "../../../assets/feather-icons/arrow-left.svg";
+import arrowRight from "../../../assets/feather-icons/arrow-right.svg";
+import { Button } from "../../ui/button";
 
 export const SectionHeader = ({ children }: { children: React.ReactNode }) => (
   <div className="relative py-4">
@@ -17,19 +20,53 @@ export const SectionHeader = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-// Wrapper component for sections to control responsive layout
-const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
+const NavigationArrow = ({
+  direction,
+  onClick,
+  disabled,
+}: {
+  direction: "left" | "right";
+  onClick: () => void;
+  disabled: boolean;
+}) => (
+  <Button
+    onClick={onClick}
+    disabled={disabled}
+    className={`
+xl:p-0 xl:w-[5vw]
+      absolute top-1/2 -translate-y-1/2
+      ${direction === "left" ? "left-4" : "right-4"}
+      h-12 w-12
+      flex items-center justify-center
+      rounded-full
+      bg-zinc-800/50
+      border border-zinc-700
+      transition-all
+      duration-200
+      ${
+        disabled
+          ? "opacity-30 cursor-not-allowed"
+          : "hover:bg-red-900/20 hover:border-red-600 cursor-pointer"
+      }
+    `}
+  >
+    <img
+      src={direction === "left" ? arrowLeft : arrowRight}
+      className="w-6 h-6"
+      alt={direction === "left" ? "Previous" : "Next"}
+    />
+  </Button>
+);
+
+const StepWrapper = ({ children }: { children: React.ReactNode }) => (
   <div
     className="
-    w-full
     flex 
     flex-col 
     xl:flex-row 
     xl:items-start 
-    xl:justify-between 
-    gap-8 
-
-    transition-all
+    gap-[4vw]
+    transition-all 
     duration-300
   "
   >
@@ -39,6 +76,8 @@ const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
 
 export const ObjectivesSelector = () => {
   const useTrainingPlanHook = useTrainingLogic();
+  const [currentStep, setCurrentStep] = useState(0);
+
   const showSummary =
     (useTrainingPlanHook.objectives.selectedPath === "longevity" &&
       useTrainingPlanHook.objectives.selectedDays > 0 &&
@@ -51,54 +90,98 @@ export const ObjectivesSelector = () => {
       useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
       useTrainingPlanHook.objectives.accessoryExerciseCount > 0);
 
-  return (
-    <ScrollBarComponent className="xl:h-[80vh] px-4 xl:px-8 py-6">
-      <div className="xl:max-w-[80vw] mx-auto space-y-12 xl:space-y-16">
-        {/* First Row */}
-        <SectionWrapper>
-          <div className="w-full xl:w-1/4">
-            <PathSelection />
-          </div>
+  const canShowStep2 =
+    useTrainingPlanHook.objectives.selectedPath === "custom" &&
+    useTrainingPlanHook.objectives.selectedDays > 0 &&
+    useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
+    useTrainingPlanHook.objectives.accessoryExerciseCount > 0;
 
-          {useTrainingPlanHook.objectives.selectedPath && (
-            <>
-              <div className="w-full xl:w-1/4">
-                <TrainingDays />
+  const canShowStep3 = showSummary;
+
+  const steps = [
+    // Step 1: Initial Setup
+    <div key="step1" className="flex-shrink-0 w-[80vw]">
+      <StepWrapper>
+        <div className="w-full xl:w-auto min-w-[240px]">
+          <PathSelection />
+        </div>
+        {useTrainingPlanHook.objectives.selectedPath && (
+          <>
+            <div className="w-full xl:w-auto min-w-[240px]">
+              <TrainingDays />
+            </div>
+            {useTrainingPlanHook.objectives.selectedDays > 0 && (
+              <div className="w-full xl:w-auto min-w-[240px]">
+                <ExerciseCount />
               </div>
-              {useTrainingPlanHook.objectives.selectedDays > 0 && (
-                <div className="w-full xl:w-1/3">
-                  <ExerciseCount />
-                </div>
-              )}
-            </>
-          )}
-        </SectionWrapper>
+            )}
+          </>
+        )}
+      </StepWrapper>
+    </div>,
 
-        {/* Second Row */}
-        {useTrainingPlanHook.objectives.selectedPath === "custom" &&
-          useTrainingPlanHook.objectives.selectedDays > 0 &&
-          useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
-          useTrainingPlanHook.objectives.accessoryExerciseCount > 0 && (
-            <SectionWrapper>
-              <div className="w-full xl:w-full">
-                <GoalsSelection />
-              </div>
-              {useTrainingPlanHook.objectives.primaryGoal && (
-                <div className="w-full xl:w-full">
-                  <DifficultyLevel />
-                </div>
-              )}
-            </SectionWrapper>
-          )}
-
-        {/* Summary */}
-        {showSummary && (
-          <div className="w-full">
-            <Summary />
+    // Step 2: Goals and Difficulty
+    <div key="step2" className="flex-shrink-0 xl:w-auto place-items-center mx-12">
+      <StepWrapper>
+        <div className="w-full xl:w-auto min-w-[420px]">
+          <GoalsSelection />
+        </div>
+        {useTrainingPlanHook.objectives.primaryGoal && (
+          <div className="w-full xl:w-auto min-w-[420px]">
+            <DifficultyLevel />
           </div>
         )}
-      </div>
-    </ScrollBarComponent>
+      </StepWrapper>
+    </div>,
+
+    // Step 3: Summary
+    <div key="step3" className="flex-shrink-0 xl:w-auto">
+      <Summary />
+    </div>,
+  ];
+
+  const canGoNext =
+    (currentStep === 0 && canShowStep2) || (currentStep === 1 && canShowStep3);
+
+  const canGoPrev = currentStep > 0;
+
+  return (
+    <div className="relative">
+      <ScrollBarComponent className="h-full min-h-[600px] px-16 xl:px-[1vw] py-6 overflow-x-hidden">
+        <div className="min-w-[800px] xl:min-w-0">
+          <div
+            className="
+            flex 
+            transition-transform 
+            duration-500 
+            ease-in-out
+            transform
+          "
+            style={{
+              transform: `translateX(-${currentStep * 100}%)`,
+            }}
+          >
+            {steps.map((step, index) => (
+              <div key={index} className="w-full flex-shrink-0 px-4">
+                {step}
+              </div>
+            ))}
+          </div>
+        </div>
+      </ScrollBarComponent>
+
+      <NavigationArrow
+        direction="left"
+        onClick={() => setCurrentStep((prev) => prev - 1)}
+        disabled={!canGoPrev}
+      />
+
+      <NavigationArrow
+        direction="right"
+        onClick={() => setCurrentStep((prev) => prev + 1)}
+        disabled={!canGoNext}
+      />
+    </div>
   );
 };
 

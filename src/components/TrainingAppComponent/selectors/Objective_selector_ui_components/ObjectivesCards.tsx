@@ -22,8 +22,8 @@ export const PathSelection = () => {
   const useTrainingPlanHook = useTrainingLogic();
 
   return (
-    <section className="max-w-3xl mx-auto space-y-2">
-      <SectionHeader>Choose your training path</SectionHeader>
+    <section className="max-w-4xl mx-auto space-y-2">
+      <SectionHeader >Choose your training path</SectionHeader>
       <div className="grid xl:grid-cols-1 sm:grid-cols-2 gap-2">
         {trainingPaths.map((path: TrainingPath) => (
           <ExpandableCard
@@ -46,11 +46,11 @@ export const PathSelection = () => {
 
 export const TrainingDays = () => {
   const useTrainingPlanHook = useTrainingLogic();
-  const trainingDays = [2, 3];
+  const trainingDays = [2, 3, 4];
 
   return (
-    <section className="max-w-3xl mx-auto space-y-3">
-      <SectionHeader>Training days per week</SectionHeader>
+    <section className="max-w-3xl  space-y-3 ">
+      <SectionHeader>How many times per week ?</SectionHeader>
       <div className="flex gap-3 flex-wrap">
         {trainingDays.map((days) => (
           <Button
@@ -61,7 +61,7 @@ export const TrainingDays = () => {
             }}
             className={buttonStylesForTrainingModule}
           >
-            {days} days
+            {days} {" "}Per times per week
           </Button>
         ))}
       </div>
@@ -73,8 +73,8 @@ export const GoalsSelection = () => {
   const useTrainingPlanHook = useTrainingLogic();
 
   return (
-    <section className="max-w-5xl mx-auto space-y-6">
-      <div className="space-y-3">
+    <section className="p-2 grid grid-cols-1 xl:grid-cols-2 space-x-6">
+      <div className="space-x-3">
         <SectionHeader>Select your goals</SectionHeader>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-3">
           {preferences.map((pref) => (
@@ -97,9 +97,9 @@ export const GoalsSelection = () => {
       </div>
 
       {useTrainingPlanHook.objectives.primaryGoal && (
-        <div className="space-y-3 pl-4 border-l border-zinc-800">
+        <div className="space-y-3 pl-4 border-l border-zinc-800 ">
           <SectionHeader>Optional secondary focus</SectionHeader>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-6 ">
             {useTrainingPlanHook.getAvailableSecondaryGoals().map((pref) => (
               <ExpandableCard
                 key={pref.id}
@@ -131,7 +131,7 @@ export const DifficultyLevel = () => {
   return (
     <section className="max-w-5xl mx-auto space-y-3">
       <SectionHeader>Difficulty level</SectionHeader>
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8">
         {difficultyLevels.map((level) => (
           <ExpandableCard
             key={level.id}
