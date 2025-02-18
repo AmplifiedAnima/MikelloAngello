@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 import { useTrainingLogic } from "../utils/TrainingAppContext";
 import {
-  DifficultyLevel,
+  // DifficultyLevel,
   ExerciseCount,
   GoalsSelection,
   PathSelection,
   Summary,
   TrainingDays,
-} from "./Objective_selector_ui_components/ObjectivesCards";
+} from "./Objective_selector_ui_components/objectives-cards";
 import arrowLeft from "../../../assets/feather-icons/arrow-left.svg";
 import arrowRight from "../../../assets/feather-icons/arrow-right.svg";
 import { Button } from "../../ui/button";
@@ -33,7 +33,7 @@ const NavigationArrow = ({
     onClick={onClick}
     disabled={disabled}
     className={`
-xl:p-0 xl:w-[5vw]
+      xl:p-0 xl:w-[5vw] md:p-0 md:w-[6vw] p-0 w-[5vw]
       absolute top-1/2 -translate-y-1/2
       ${direction === "left" ? "left-4" : "right-4"}
       h-12 w-12
@@ -73,100 +73,103 @@ const StepWrapper = ({ children }: { children: React.ReactNode }) => (
     {children}
   </div>
 );
-
 export const ObjectivesSelector = () => {
   const useTrainingPlanHook = useTrainingLogic();
   const [currentStep, setCurrentStep] = useState(0);
 
   const showSummary =
-    (useTrainingPlanHook.objectives.selectedPath === "longevity" &&
-      useTrainingPlanHook.objectives.selectedDays > 0 &&
-      useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
-      useTrainingPlanHook.objectives.accessoryExerciseCount > 0) ||
+    useTrainingPlanHook.objectives.selectedPath === "templates" ||
     (useTrainingPlanHook.objectives.selectedPath === "custom" &&
       useTrainingPlanHook.objectives.selectedDays > 0 &&
       useTrainingPlanHook.objectives.primaryGoal &&
-      useTrainingPlanHook.objectives.difficultyLevel &&
       useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
       useTrainingPlanHook.objectives.accessoryExerciseCount > 0);
 
   const canShowStep2 =
-    useTrainingPlanHook.objectives.selectedPath === "custom" &&
-    useTrainingPlanHook.objectives.selectedDays > 0 &&
-    useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
-    useTrainingPlanHook.objectives.accessoryExerciseCount > 0;
+    (useTrainingPlanHook.objectives.selectedPath === "templates" &&
+      showSummary) ||
+    (useTrainingPlanHook.objectives.selectedPath === "custom" &&
+      useTrainingPlanHook.objectives.selectedDays > 0 &&
+      useTrainingPlanHook.objectives.mainExerciseCount > 0 &&
+      useTrainingPlanHook.objectives.accessoryExerciseCount > 0);
 
   const canShowStep3 = showSummary;
 
   const steps = [
     // Step 1: Initial Setup
-    <div key="step1" className="flex-shrink-0 w-[80vw]">
+    <div key="step1" className="   ">
       <StepWrapper>
-        <div className="w-full xl:w-auto min-w-[240px]">
-          <PathSelection />
-        </div>
-        {useTrainingPlanHook.objectives.selectedPath && (
+        <PathSelection />
+
+        {useTrainingPlanHook.objectives.selectedPath === "custom" ? (
           <>
-            <div className="w-full xl:w-auto min-w-[240px]">
-              <TrainingDays />
-            </div>
+            <TrainingDays />
+
             {useTrainingPlanHook.objectives.selectedDays > 0 && (
-              <div className="w-full xl:w-auto min-w-[240px]">
-                <ExerciseCount />
-              </div>
+              <ExerciseCount />
             )}
           </>
+        ) : (
+          useTrainingPlanHook.objectives.selectedPath === "templates" && (
+            <ExerciseCount />
+          )
         )}
       </StepWrapper>
     </div>,
 
-    // Step 2: Goals and Difficulty
-    <div key="step2" className="flex-shrink-0 xl:w-auto place-items-center mx-12">
+    // Step 2: Goals dla custom, Summary dla templates
+    <div key="step2" className="">
       <StepWrapper>
-        <div className="w-full xl:w-auto min-w-[420px]">
+        {useTrainingPlanHook.objectives.selectedPath === "templates" ? (
+          <Summary />
+        ) : (
           <GoalsSelection />
-        </div>
-        {useTrainingPlanHook.objectives.primaryGoal && (
-          <div className="w-full xl:w-auto min-w-[420px]">
-            <DifficultyLevel />
-          </div>
         )}
       </StepWrapper>
     </div>,
 
-    // Step 3: Summary
-    <div key="step3" className="flex-shrink-0 xl:w-auto">
-      <Summary />
-    </div>,
+    // Step 3: Summary (tylko dla custom)
+    useTrainingPlanHook.objectives.selectedPath === "custom" && (
+      <div key="step3" className="flex-shrink-0 xl:w-auto">
+        <Summary />
+      </div>
+    ),
   ];
-
   const canGoNext =
-    (currentStep === 0 && canShowStep2) || (currentStep === 1 && canShowStep3);
+    (currentStep === 0 &&
+      (useTrainingPlanHook.objectives.selectedPath === "templates"
+        ? showSummary
+        : canShowStep2)) ||
+    (currentStep === 1 &&
+      useTrainingPlanHook.objectives.selectedPath === "custom" &&
+      canShowStep3);
 
   const canGoPrev = currentStep > 0;
 
   return (
-    <div className="relative">
-      <ScrollBarComponent className="h-full min-h-[600px] px-16 xl:px-[1vw] py-6 overflow-x-hidden">
-        <div className="min-w-[800px] xl:min-w-0">
-          <div
-            className="
+    <div className="">
+      <ScrollBarComponent className="h-full  px-16 xl:px-[1vw]  overflow-x-hidden ">
+        <div
+          className="
             flex 
             transition-transform 
             duration-500 
             ease-in-out
             transform
+
           "
-            style={{
-              transform: `translateX(-${currentStep * 100}%)`,
-            }}
-          >
-            {steps.map((step, index) => (
-              <div key={index} className="w-full flex-shrink-0 px-4">
-                {step}
-              </div>
-            ))}
-          </div>
+          style={{
+            transform: `translateX(-${currentStep * 100}%)`,
+          }}
+        >
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="w-full flex-shrink-0 place-items-center grid"
+            >
+              {step}
+            </div>
+          ))}
         </div>
       </ScrollBarComponent>
 
@@ -184,5 +187,3 @@ export const ObjectivesSelector = () => {
     </div>
   );
 };
-
-export default ObjectivesSelector;

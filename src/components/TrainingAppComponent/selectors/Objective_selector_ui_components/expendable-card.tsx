@@ -44,10 +44,11 @@ export const ExpandableCard = ({
         onClick={onClick}
         className={`
           relative
-          min-w-[140px] 
-          max-w-[350px]
-          h-14
-          px-4
+          min-w-[260px]
+          max-w-full
+          h-[6vh]
+          px-12
+          mx-4
           rounded-lg 
           transition-all 
           duration-200
@@ -132,5 +133,3 @@ export const ExpandableCard = ({
     </div>
   );
 };
-
-// Containe

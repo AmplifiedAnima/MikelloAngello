@@ -5,6 +5,7 @@ import { useTrainingLogic } from "../utils/TrainingAppContext";
 
 export const StepButtons = () => {
   const useTrainingPlanHook = useTrainingLogic();
+
   const steps: { id: TrainingAppStep; label: string }[] = [
     { id: "FREQUENCY", label: "Objectives" },
     { id: "EXERCISES", label: "Exercises" },
@@ -40,56 +41,50 @@ export const StepButtons = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row xl:items-start md:items-center  md:gap-0 xl:mt-0 mt-24">
+    <div className="flex  flex-row md:flex-row xl:items-start md:items-center md:gap-0 xl:mt-0 mt-0">
       {steps.map((stepItem, index) => (
         <div
           key={stepItem.id}
-          className="flex items-center w-full md:w-auto mx-2 mt-2"
+          className="grid items-center w-full md:w-auto mx-2 mt-2"
         >
           <Button
             className={`
               ${buttonStylesForTrainingModule}
-              xl:m-4 xl:py-1 text-xs
+              xl:m-4 xl:py-1 text-xs md:p-1 xl:p-2 
+              w-1/4 
               ${getButtonStyles(index)}
               relative
               flex-1 md:flex-none
-              xl:min-w-[80px] xl:w-full md:min-w-0
-              
+              xl:min-w-[80px] xl:w-full md:min-w-0 
               transition-opacity duration-200
             `}
             onClick={() => handleStepClick(index)}
           >
-            <span className="relative z-10">{stepItem.label}</span>
+            {/* Mobile: Only Number */}
+            <span className="md:hidden relative z-10">{index + 1}</span>
+
+            {/* Desktop: Label with Number */}
+            <span className="hidden md:block relative z-10">
+              {stepItem.label}
+            </span>
             <span
               className={`
                 absolute -left-1.5 -top-1.5 h-4 w-4 rounded-full
                 flex items-center justify-center text-[10px]
                 ${useTrainingPlanHook.step === stepItem.id ? "bg-red-600" : "bg-zinc-700"}
                 transition-colors duration-200
+                hidden md:flex
               `}
             >
               {index + 1}
             </span>
           </Button>
+
+          {/* Desktop connector */}
           {index < steps.length - 1 && (
             <div
               className={`
                 hidden md:block h-[1px] w-3
-                ${
-                  useTrainingPlanHook.step === stepItem.id ||
-                  useTrainingPlanHook.step === steps[index + 1].id
-                    ? "bg-red-700"
-                    : "bg-zinc-800"
-                }
-                ${Math.abs(index - currentStepIndex) > 1 ? "opacity-30" : "opacity-60"}
-                transition-opacity duration-200
-              `}
-            />
-          )}
-          {index < steps.length - 1 && (
-            <div
-              className={`
-                md:hidden w-[1px] h-3 mx-auto
                 ${
                   useTrainingPlanHook.step === stepItem.id ||
                   useTrainingPlanHook.step === steps[index + 1].id
@@ -106,3 +101,5 @@ export const StepButtons = () => {
     </div>
   );
 };
+
+export default StepButtons;

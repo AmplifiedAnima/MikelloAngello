@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
 import { mockExercises } from "../mock_data/exercises.mock_data";
-import { preferences } from "./TrainingDaysSelectorUtils";
+import { objectivesPreferencesForTraining } from "./TrainingDaysSelectorUtils";
 import {
   ObjectivesState,
   TrainingAppStep,
@@ -63,7 +63,7 @@ export const useTrainingPlanHook = () => {
     selectedDays: 0,
     primaryGoal: "",
     secondaryGoal: "",
-    difficultyLevel: "",
+    templateName: "",
     expandedCard: "",
     mainExerciseCount: 0,
     accessoryExerciseCount: 0,
@@ -75,9 +75,12 @@ export const useTrainingPlanHook = () => {
       ...prev,
       selectedPath: path,
       selectedDays: 0,
-      primaryGoal: "",
-      secondaryGoal: "",
-      difficultyLevel: "",
+    }));
+  };
+  const setTemplateName = (name: string) => {
+    setObjectives((prev) => ({
+      ...prev,
+      templateName: name,
     }));
   };
 
@@ -120,10 +123,10 @@ export const useTrainingPlanHook = () => {
   };
 
   const getAvailableSecondaryGoals = () => {
-    const primaryIndex = preferences.findIndex(
+    const primaryIndex = objectivesPreferencesForTraining.findIndex(
       (p) => p.id === objectives.primaryGoal
     );
-    return preferences.slice(primaryIndex + 1);
+    return objectivesPreferencesForTraining.slice(primaryIndex + 1);
   };
 
   // Exercise management functions
@@ -171,6 +174,7 @@ export const useTrainingPlanHook = () => {
       return { ...prev, trainingUnits: newUnits };
     });
   };
+
   const addNewAccessoryExercise = (
     dayIndex: number,
     exercise: ExerciseBlueprintsInterface
@@ -323,6 +327,7 @@ export const useTrainingPlanHook = () => {
     // New objectives-related returns
     objectives,
     setSelectedPath,
+    setTemplateName,
     setSelectedDays,
     setPrimaryGoal,
     setSecondaryGoal,

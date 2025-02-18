@@ -7,7 +7,7 @@ export interface TrainingPreference {
   restPeriods?: string;
 }
 
-export const preferences: TrainingPreference[] = [
+export const objectivesPreferencesForTraining: TrainingPreference[] = [
   {
     id: "maximal_strength",
     label: "Maximal Strength (90-100%)",
@@ -63,7 +63,7 @@ export const preferences: TrainingPreference[] = [
   },
 ];
 
-export const difficultyLevels = [
+export const objectivesDifficultyLevels = [
   {
     id: "beginner",
     label: "Beginner",
@@ -91,12 +91,11 @@ export interface TrainingPath {
   icon: string;
 }
 
-export const trainingPaths: TrainingPath[] = [
+export const objectivesTrainingPaths: TrainingPath[] = [
   {
-    id: "longevity",
-    label: "Longevity Template",
-    description:
-      "Foundation training for health, strength, and movement quality across your lifespan",
+    id: "templates",
+    label: "Templates",
+    description: "Ready to go templates, ready programs to be followed",
     icon: "🌟",
   },
   {
@@ -104,5 +103,59 @@ export const trainingPaths: TrainingPath[] = [
     label: "Custom Training",
     description: "Select specific training goals and build your own program",
     icon: "🎯",
+  },
+];
+export interface Template {
+  id: string;
+  label: string;
+  description: string;
+  exercises: {
+    main: number;
+    accessory: number;
+  };
+  daysPerWeek: number;
+  primaryGoal: string; // Added this
+  secondaryGoal?: string; // Added this as optional
+}
+
+export const objectivesTemplates: Template[] = [
+  {
+    id: "basic",
+    label: "Basic Template",
+    description:
+      "Fundamental movements focusing on overall fitness and health. Three training days per week for optimal recovery.",
+    exercises: {
+      main: 2,
+      accessory: 2,
+    },
+    daysPerWeek: 3,
+    primaryGoal: "strength_hypertrophy", // Added goal
+    secondaryGoal: "pure_hypertrophy", // Added optional secondary goal
+  },
+  {
+    id: "mobility",
+    label: "Mobility Template",
+    description:
+      "Focus on flexibility, joint health and movement quality. Trained 2 times per week to maintain fresh movement patterns.",
+    exercises: {
+      main: 2,
+      accessory: 3,
+    },
+    daysPerWeek: 2,
+    primaryGoal: "pure_hypertrophy",
+    secondaryGoal: "volume_hypertrophy",
+  },
+  {
+    id: "health",
+    label: "Health Template",
+    description:
+      "Balanced approach to strength and cardiovascular health. Four sessions per week for consistent progress.",
+    exercises: {
+      main: 3,
+      accessory: 2,
+    },
+    daysPerWeek: 3,
+    primaryGoal: "strength_power",
+    secondaryGoal: "strength_hypertrophy",
   },
 ];

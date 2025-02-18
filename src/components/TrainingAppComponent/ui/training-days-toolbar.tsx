@@ -79,7 +79,7 @@ export const TrainingDaysToolbar = () => {
                 className="xl:w-4 xl:h-4"
                 alt="Toggle view"
               />
-              <span className="text-sm">
+              <span className="ml-2 text-sm">
                 {useTrainingPlanHook.step === "EXERCISES"
                   ? "Auto-assign Exercises"
                   : "Auto-assign Load"}

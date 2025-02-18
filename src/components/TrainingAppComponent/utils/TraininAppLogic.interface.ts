@@ -1,5 +1,5 @@
 import { ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
-import { preferences } from "./TrainingDaysSelectorUtils";
+import { objectivesPreferencesForTraining } from "./TrainingDaysSelectorUtils";
 
 export type TrainingAppStep = "FREQUENCY" | "EXERCISES" | "LOAD" | "SAVE";
 
@@ -72,7 +72,7 @@ export interface UseTrainingPlanInterface {
   setExpandedCard: (cardId: string) => void;
   handleSecondaryGoalClick: (prefId: string) => void;
   handleCardClick: (id: string) => void;
-  getAvailableSecondaryGoals: () => typeof preferences;
+  getAvailableSecondaryGoals: () => typeof objectivesPreferencesForTraining;
   setMainExerciseCount: (count: number) => void;
   setAccessoryExerciseCount: (count: number) => void;
 }
