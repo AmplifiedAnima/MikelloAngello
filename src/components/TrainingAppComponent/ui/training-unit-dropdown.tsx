@@ -2,7 +2,6 @@ import { Button } from "../../ui/button";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import arrowDown from "../../../assets/feather-icons/arrow-down-circle.svg";
 import { useState, useRef, useEffect } from "react";
-
 const TrainingUnitDropdown = ({
   currentDayIndex,
   totalDays,
@@ -33,9 +32,9 @@ const TrainingUnitDropdown = ({
     <div className="relative" ref={dropdownRef}>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${buttonStylesForTrainingModule} xl:h-8 xl:px-1 xl:py-2 xl:w-[12vw]`}
+        className={`${buttonStylesForTrainingModule} xl:h-8 xl:px-1 xl:py-2 xl:w-[12vw] bg-black hover:bg-zinc-900/50`}
       >
-        <span className="text-white text-sm whitespace-nowrap">
+        <span className="text-zinc-300 text-sm whitespace-nowrap">
           Training unit {currentDayIndex}/{totalDays}
         </span>
         <img
@@ -46,7 +45,7 @@ const TrainingUnitDropdown = ({
       </Button>
 
       {isOpen && (
-        <div className="absolute top-full mt-1 w-full min-w-[160px] bg-zinc-900 border border-zinc-800 rounded-md shadow-lg z-50">
+        <div className="absolute top-full mt-1 w-full min-w-[160px] bg-black border border-zinc-900 rounded-md shadow-lg z-50">
           <ul className="py-1">
             {Array.from({ length: totalDays }, (_, i) => i + 1).map((day) => (
               <li key={day}>
@@ -55,8 +54,12 @@ const TrainingUnitDropdown = ({
                     onSelect(day);
                     setIsOpen(false);
                   }}
-                  className={`w-full px-4 py-2 text-sm text-left hover:bg-zinc-800 transition-colors
-                    ${currentDayIndex === day ? "bg-zinc-800 text-white" : "text-zinc-300"}`}
+                  className={`w-full px-4 py-2 text-sm text-left transition-colors bg-zinc-900
+                    ${
+                      currentDayIndex === day
+                        ? "bg-zinc-900/50 text-zinc-300"
+                        : "text-zinc-300 hover:bg-zinc-900/50 hover:text-zinc-300"
+                    }`}
                 >
                   Training unit {day}/{totalDays}
                 </button>

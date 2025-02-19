@@ -33,9 +33,10 @@ const NavigationArrow = ({
     onClick={onClick}
     disabled={disabled}
     className={`
-      xl:p-0 xl:w-[5vw] md:p-0 md:w-[6vw] p-0 w-[5vw]
+      xl:p-6 xl:w-[5vw] md:p-0 md:w-[6vw] p-0 w-[5vw]
       absolute top-1/2 -translate-y-1/2
-      ${direction === "left" ? "left-4" : "right-4"}
+      ${direction === "left" ? "xl:left-4 left-0" : "xl:right-4 right-9"}
+      xl:h-[5vw] 
       h-12 w-12
       flex items-center justify-center
       rounded-full
@@ -65,7 +66,9 @@ const StepWrapper = ({ children }: { children: React.ReactNode }) => (
     flex-col 
     xl:flex-row 
     xl:items-start 
-    gap-[4vw]
+    xl:gap-[8vw]
+    gap-[12vw]
+  
     transition-all 
     duration-300
   "
@@ -97,7 +100,7 @@ export const ObjectivesSelector = () => {
 
   const steps = [
     // Step 1: Initial Setup
-    <div key="step1" className="   ">
+    <div key="step1" className=" xl:mt-0  xl:pt-12  h-[100vh]">
       <StepWrapper>
         <PathSelection />
 
@@ -148,7 +151,7 @@ export const ObjectivesSelector = () => {
 
   return (
     <div className="">
-      <ScrollBarComponent className="h-full  px-16 xl:px-[1vw]  overflow-x-hidden ">
+      <ScrollBarComponent className=" xl:w-[95vw] w-[85vw] px-0 xl:px-[0vw] overflow-x-hidden  xl:h-[120vh] h-[160vh] ">
         <div
           className="
             flex 
@@ -165,25 +168,25 @@ export const ObjectivesSelector = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="w-full flex-shrink-0 place-items-center grid"
+              className="w-full flex-shrink-0 place-items-center grid place-items-center"
             >
               {step}
             </div>
           ))}
         </div>
+
+        <NavigationArrow
+          direction="left"
+          onClick={() => setCurrentStep((prev) => prev - 1)}
+          disabled={!canGoPrev}
+        />
+
+        <NavigationArrow
+          direction="right"
+          onClick={() => setCurrentStep((prev) => prev + 1)}
+          disabled={!canGoNext}
+        />
       </ScrollBarComponent>
-
-      <NavigationArrow
-        direction="left"
-        onClick={() => setCurrentStep((prev) => prev - 1)}
-        disabled={!canGoPrev}
-      />
-
-      <NavigationArrow
-        direction="right"
-        onClick={() => setCurrentStep((prev) => prev + 1)}
-        disabled={!canGoNext}
-      />
     </div>
   );
 };

@@ -23,9 +23,9 @@ export const PathSelection = () => {
   const useTrainingPlanHook = useTrainingLogic();
 
   return (
-    <section className="">
+    <section className={``}>
       <SectionHeader>Choose your training path</SectionHeader>
-      <div className="grid xl:grid-cols-1 sm:grid-cols-2 gap-8 xl:pt-0 ">
+      <div className="grid xl:grid-cols-1 sm:grid-cols-1 gap-4 sm:gap-8 xl:pt-0 max-w-md sm:max-w-lg mx-auto ">
         {objectivesTrainingPaths.map((path: TrainingPath) => (
           <ExpandableCard
             key={path.id}
@@ -52,7 +52,7 @@ export const TrainingDays = () => {
   return (
     <section className="   ">
       <SectionHeader>Times per week </SectionHeader>
-      <div className="grid xl:grid-cols-1 md:grid-cols-3 grid-cols-3 gap-2   ">
+      <div className="grid xl:grid-cols-1 md:grid-cols-3 grid-cols-3 gap-2 px-6 xl:px-0 place-items-center  ">
         {trainingDays.map((days) => (
           <Button
             key={days}
@@ -60,7 +60,7 @@ export const TrainingDays = () => {
               useTrainingPlanHook.setSelectedDays(days);
               useTrainingPlanHook.setTrainingFrequency(days);
             }}
-            className={`${buttonStylesForTrainingModule}  md:py-6 md:px-0 md:w-[12vw] px-2 w-[20vw] place-items-center`}
+            className={`${buttonStylesForTrainingModule}  md:py-6 md:px-0 md:w-[12vw] px-2 xl:w-[4vw] xl:p-[4vh] w-[12vw]`}
           >
             {days}
           </Button>
@@ -73,20 +73,20 @@ export const GoalsSelection = () => {
   const useTrainingPlanHook = useTrainingLogic();
 
   return (
-    <section className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 w-full">
-      {/* Primary Goals */}
-      <div className="w-full">
-        <SectionHeader>Select your goals</SectionHeader>
+    <ScrollBarComponent
+      className="
+        overflow-y-auto 
+        space-y-4
+        h-[80vh] 
+        pr-4
+        xl:pr-8
+      "
+    >
+      <section className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-0 mx-8 ">
+        {/* Primary Goals */}
+        <div className="w-full">
+          <SectionHeader>Select your goals</SectionHeader>
 
-        <ScrollBarComponent
-          className="
-            overflow-y-auto 
-            space-y-4
-            h-[50vh] 
-            pr-4
-            xl:pr-8
-          "
-        >
           <div className="grid grid-cols-1 gap-4">
             {objectivesPreferencesForTraining.map((pref) => (
               <ExpandableCard
@@ -105,52 +105,52 @@ export const GoalsSelection = () => {
               />
             ))}
           </div>
-        </ScrollBarComponent>
-      </div>
+        </div>
 
-      {/* Secondary Goals */}
-      {useTrainingPlanHook.objectives.primaryGoal && (
-        <div
-          className="
+        {/* Secondary Goals */}
+        {useTrainingPlanHook.objectives.primaryGoal && (
+          <div
+            className="
           w-full
           xl:border-l 
           xl:border-zinc-800
           xl:pl-8
               h-[50vh] 
         "
-        >
-          <SectionHeader>Optional secondary focus</SectionHeader>
+          >
+            <SectionHeader>Optional secondary focus</SectionHeader>
 
-          <div
-            className="
+            <div
+              className="
             grid 
             grid-cols-1 
             gap-4
             pr-4
           "
-          >
-            {useTrainingPlanHook.getAvailableSecondaryGoals().map((pref) => (
-              <ExpandableCard
-                key={pref.id}
-                id={pref.id}
-                title={pref.label}
-                description={pref.description}
-                isSelected={
-                  useTrainingPlanHook.objectives.secondaryGoal === pref.id
-                }
-                expandedCard={useTrainingPlanHook.objectives.expandedCard}
-                customPrefix="secondary"
-                priority={1}
-                onClick={() => {
-                  useTrainingPlanHook.handleSecondaryGoalClick(pref.id);
-                  useTrainingPlanHook.handleCardClick(`secondary-${pref.id}`);
-                }}
-              />
-            ))}
+            >
+              {useTrainingPlanHook.getAvailableSecondaryGoals().map((pref) => (
+                <ExpandableCard
+                  key={pref.id}
+                  id={pref.id}
+                  title={pref.label}
+                  description={pref.description}
+                  isSelected={
+                    useTrainingPlanHook.objectives.secondaryGoal === pref.id
+                  }
+                  expandedCard={useTrainingPlanHook.objectives.expandedCard}
+                  customPrefix="secondary"
+                  priority={1}
+                  onClick={() => {
+                    useTrainingPlanHook.handleSecondaryGoalClick(pref.id);
+                    useTrainingPlanHook.handleCardClick(`secondary-${pref.id}`);
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </section>
+        )}
+      </section>
+    </ScrollBarComponent>
   );
 };
 
@@ -174,13 +174,13 @@ export const ExerciseCountSelector = ({
   recommendation,
 }: ExerciseCountSelectorProps) => {
   return (
-    <div className="xl:space-y-8 ">
+    <div className="xl:space-y-8">
       <div className="flex items-center justify-between">
-        <div>
+        <div className="pt-4">
           <h3 className="text-lg font-medium whitespace-nowrap">{title}</h3>
           <p className="text-sm text-zinc-400">{description}</p>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center xl:gap-1 gap-2 ">
           <Button
             onClick={() => count > minCount && setCount(count - 1)}
             className={`${buttonStylesForTrainingModule} xl:p-1 xl:w-8 xl:h-8 p-1 w-8 h-8  md:py-6 md:px-0 md:w-[12vw]`}
@@ -198,7 +198,7 @@ export const ExerciseCountSelector = ({
           </Button>
         </div>
       </div>
-      <div className="text-xs text-zinc-500">{recommendation}</div>
+      <div className="text-xs text-zinc-500 pt-4">{recommendation}</div>
     </div>
   );
 };
@@ -207,8 +207,8 @@ export const ExerciseCount = () => {
   const useTrainingPlanHook = useTrainingLogic();
   console.log(useTrainingPlanHook.objectives);
   return (
-    <div className="xl:max-w-5xl">
-      <section className=" mx-auto space-y-3">
+    <div className="xl:max-w-6xl h-[100vh]">
+      <section className="  space-y-3">
         <SectionHeader>
           {useTrainingPlanHook.objectives.selectedPath === "templates"
             ? "Choose a Template"
@@ -285,16 +285,16 @@ export const Summary = () => {
   const useTrainingPlanHook = useTrainingLogic();
 
   return (
-    <section className="max-w-5xl mx-auto pt-4 border-t border-zinc-800">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="space-y-1">
+    <section className="max-w-6xl mx-auto pt-4 border-t border-zinc-800 h-[50vh] ">
+      <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-4 p-4">
+        <div className="space-y-1 text-center sm:text-left w-full sm:w-auto">
           <p className="text-sm text-zinc-400">Your Plan</p>
           <p className="text-base">
             {useTrainingPlanHook.objectives.selectedDays} days per week
             {useTrainingPlanHook.objectives.selectedPath === "custom" ? (
-              <span className="space-x-2">
-                {" - "}
-                <span>
+              <span className="block sm:inline space-x-2">
+                <span className="inline-block sm:inline">
+                  {" - "}
                   {
                     objectivesPreferencesForTraining.find(
                       (p) => p.id === useTrainingPlanHook.objectives.primaryGoal
@@ -302,7 +302,7 @@ export const Summary = () => {
                   }
                 </span>
                 {useTrainingPlanHook.objectives.secondaryGoal && (
-                  <span className="text-zinc-400">
+                  <span className="inline-block sm:inline text-zinc-400">
                     {" & "}
                     {
                       objectivesPreferencesForTraining.find(
@@ -314,12 +314,12 @@ export const Summary = () => {
                 )}
               </span>
             ) : (
-              <span className="space-x-2">
-                <span className="font-medium">
+              <span className="block sm:inline space-x-2">
+                <span className="inline-block sm:inline font-medium">
                   {" - "}
                   {useTrainingPlanHook.objectives.templateName}
                 </span>
-                <span className="text-zinc-400">
+                <span className="inline-block sm:inline text-zinc-400">
                   {" with "}
                   {
                     objectivesPreferencesForTraining.find(
@@ -343,8 +343,9 @@ export const Summary = () => {
             )}
           </p>
         </div>
+
         <Button
-          className={buttonStylesForTrainingModule}
+          className={`${buttonStylesForTrainingModule} w-full sm:w-auto`}
           onClick={useTrainingPlanHook.goToNextStep}
         >
           Continue

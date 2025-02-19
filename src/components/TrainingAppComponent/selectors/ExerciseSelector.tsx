@@ -5,6 +5,7 @@ import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-tra
 import { useTrainingLogic } from "../utils/TrainingAppContext";
 import { ExerciseContainer, TrainingDay } from "../ui/selected-exercise-list";
 import { useState } from "react";
+import { ScrollBarComponent } from "../../ui/scrollbar-component";
 
 interface ExerciseSelectorProps {
   isMobile: boolean;
@@ -29,7 +30,7 @@ export const ExerciseSelector = ({ isMobile }: ExerciseSelectorProps) => {
         <div className="bg-zinc-900/40 rounded-lg p-4 overflow-hidden">
           <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900/50">
             {useTrainingPlanHook.selectedExercise ? (
-              <ExerciseCard />
+              <ExerciseCard isMobile={isMobile} />
             ) : (
               <div className="flex items-center justify-center h-full">
                 <p className="text-xl text-PinkyPurple">
@@ -97,7 +98,7 @@ export const ExerciseSelector = ({ isMobile }: ExerciseSelectorProps) => {
         return (
           <div className="bg-zinc-900/40 rounded-lg p-4">
             {useTrainingPlanHook.selectedExercise ? (
-              <ExerciseCard />
+              <ExerciseCard isMobile={isMobile} />
             ) : (
               <div className="flex items-center justify-center h-full min-h-[50vh]">
                 <p className="text-lg text-PinkyPurple text-center">
@@ -152,33 +153,35 @@ export const ExerciseSelector = ({ isMobile }: ExerciseSelectorProps) => {
   };
 
   return (
-    <div className="relative min-h-[calc(100vh-200px)]">
-      <div className="pb-24">{renderMobileContent()}</div>
+    <ScrollBarComponent className="h-[70vh]">
+      <div className="relative min-h-[calc(100vh-200px)] place-items-center">
+        <div className="">{renderMobileContent()}</div>
 
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-4 bg-zinc-900/90 px-4 py-2 rounded-full shadow-lg">
-        <Button
-          onClick={() => setCurrentView("list")}
-          className={`${buttonStylesForTrainingModule} py-2 px-4 rounded-full whitespace-nowrap w-1/4
+        <div className="fixed bottom-[8vh] left-[22vh] -translate-x-1/2 flex gap-4 px-4 py-2  shadow-lg">
+          <Button
+            onClick={() => setCurrentView("list")}
+            className={`${buttonStylesForTrainingModule} py-2 px-4 rounded-full whitespace-nowrap w-1/4
             ${currentView === "list" ? "bg-red-500/20" : ""}`}
-        >
-          <span>Exercises</span>
-        </Button>
-        <Button
-          onClick={() => setCurrentView("details")}
-          className={`${buttonStylesForTrainingModule} py-2 px-4 rounded-full whitespace-nowrap p w-1/4
+          >
+            <span>Exercises</span>
+          </Button>
+          <Button
+            onClick={() => setCurrentView("details")}
+            className={`${buttonStylesForTrainingModule} py-2 px-4 rounded-full whitespace-nowrap p w-1/4
             ${currentView === "details" ? "bg-red-500/20" : ""}`}
-          disabled={!useTrainingPlanHook.selectedExercise}
-        >
-          <span>Details</span>
-        </Button>
-        <Button
-          onClick={() => setCurrentView("selected")}
-          className={`${buttonStylesForTrainingModule} py-2 px-4 rounded-full whitespace-nowrap p w-1/4
+            disabled={!useTrainingPlanHook.selectedExercise}
+          >
+            <span>Details</span>
+          </Button>
+          <Button
+            onClick={() => setCurrentView("selected")}
+            className={`${buttonStylesForTrainingModule} py-2 px-4 rounded-full whitespace-nowrap p w-1/4
             ${currentView === "selected" ? "bg-red-500/20" : ""}`}
-        >
-          <span>Selected</span>
-        </Button>
+          >
+            <span>Selected</span>
+          </Button>
+        </div>
       </div>
-    </div>
+    </ScrollBarComponent>
   );
 };

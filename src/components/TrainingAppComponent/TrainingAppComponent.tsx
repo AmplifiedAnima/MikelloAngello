@@ -6,7 +6,7 @@ import { ExerciseSelector } from "./selectors/ExerciseSelector";
 import { LoadSelector } from "./selectors/LoadSelector";
 import { ObjectivesSelector } from "./selectors/ObjectivesSelector";
 import { Spacer } from "../ui/Spacer";
-import TrainingDaysToolbar from "./ui/training-days-toolbar";
+import { TrainingDaysToolbar } from "./ui/training-days-toolbar";
 import { useTrainingLogic } from "./utils/TrainingAppContext";
 
 const TrainingAppComponent = () => {
@@ -36,7 +36,7 @@ const TrainingAppComponent = () => {
   // const shouldShowSearch = step === "EXERCISES" || step === "LOAD";
 
   return (
-    <div className="xl:pt-24 xl:mx-4 ">
+    <div className="xl:pt-24 xl:mx-4 pt-12 h-[calc(100vh-64px)] overflow-hidden">
       {/* <div className="flex flex-row items-start justify-between">
         <div className="xl:py-4 w-[20vw] mx-16">
           {shouldShowSearch && (
@@ -56,7 +56,11 @@ const TrainingAppComponent = () => {
         <StepButtons />
       </div> */}
       <Spacer size="4xs" />
-      {step === "EXERCISES" || step === "LOAD" ? <TrainingDaysToolbar /> : ""}
+      {step === "EXERCISES" || step === "LOAD" ? (
+        <TrainingDaysToolbar isMobile={isMobile} />
+      ) : (
+        ""
+      )}
 
       <Spacer size="3xs" />
 

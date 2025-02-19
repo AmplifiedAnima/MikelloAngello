@@ -27,7 +27,7 @@ export const ExerciseList = () => {
 
   return (
     <div className="xl:h-[60vh] w-full ">
-      <ScrollBarComponent className="xl:h-full md:h-[80vh] xl:px-12 px-4">
+      <ScrollBarComponent className="xl:h-full md:h-[80vh] xl:px-12 px-4 w-full">
         <div className="rounded-lg bg-black">
           <ul className="divide-y divide-zinc-900">
             {useTrainingPlanHook.exercisesBlueprints.map((exercise) => (
