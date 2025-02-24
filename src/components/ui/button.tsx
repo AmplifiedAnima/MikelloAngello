@@ -1,24 +1,22 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 w-[80vw] xl:w-[50vw] md:w-[90vw]  bg-transparent rounded-full border-2 border-solid border-indigo-500 px-12 py-10 sm:px-8 sm:py-6 lg:p-18 md:p-14  md:my-24  xl:p-14 xl:mt-10 xl:text-3xl sm:text-2xl md:text-4xl lg:text-4xl mt-8 sm:mt-12 lg:mt-16",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-800/50 focus-visible:border-red-800/70 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 w-[80vw] xl:w-[50vw] md:w-[90vw] bg-transparent rounded-full border-2 border-solid border-red-800/50 hover:border-red-800/70",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        default: "bg-transparent text-zinc-300 shadow-sm hover:bg-zinc-800/40",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-red-950/10 text-zinc-300 shadow-sm hover:bg-red-950/20 border-red-800/50",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-red-800/50 bg-transparent text-zinc-300 shadow-sm hover:bg-zinc-800/40",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-zinc-900/10 text-zinc-300 shadow-sm hover:bg-zinc-800/40",
+        ghost: "hover:bg-zinc-800/40 text-zinc-300 border-transparent",
+        link: "text-zinc-300 underline-offset-4 hover:underline hover:bg-zinc-800/40",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -45,13 +43,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className, }))}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       />
     );
   }
 );
+
 Button.displayName = "Button";
 
 export { Button, buttonVariants };

@@ -25,7 +25,7 @@ export const PathSelection = () => {
   return (
     <section className={``}>
       <SectionHeader>Choose your training path</SectionHeader>
-      <div className="grid xl:grid-cols-1 sm:grid-cols-1 gap-4 sm:gap-8 xl:pt-0 max-w-md sm:max-w-lg mx-auto ">
+      <div className="grid xl:grid-cols-1 sm:grid-cols-1 xl:gap-12 sm:gap-8  xl:pt-0 max-w-md sm:max-w-lg mx-auto ">
         {objectivesTrainingPaths.map((path: TrainingPath) => (
           <ExpandableCard
             key={path.id}
@@ -44,31 +44,55 @@ export const PathSelection = () => {
     </section>
   );
 };
-
 export const TrainingDays = () => {
   const useTrainingPlanHook = useTrainingLogic();
-  const trainingDays = [2, 3, 4];
+  const trainingFrequencies = [
+    {
+      id: 2,
+      title: "Twice a Week",
+      description:
+        "A moderate training frequency, ideal for beginners or those with limited time. Allows for sufficient recovery and gradual progression.",
+    },
+    {
+      id: 3,
+      title: "Three Times a Week",
+      description:
+        "A balanced approach that provides consistent training stimulus while allowing adequate rest. Suitable for most fitness levels and goals.",
+    },
+    {
+      id: 4,
+      title: "Four Times a Week",
+      description:
+        "An intensive training schedule for dedicated individuals. Requires careful recovery management and is best for those with significant fitness experience.",
+    },
+  ];
 
   return (
-    <section className="   ">
-      <SectionHeader>Times per week </SectionHeader>
-      <div className="grid xl:grid-cols-1 md:grid-cols-3 grid-cols-3 gap-2 px-6 xl:px-0 place-items-center  ">
-        {trainingDays.map((days) => (
-          <Button
-            key={days}
+    <section>
+      <SectionHeader>Times per week</SectionHeader>
+      <div className="grid xl:grid-cols-1 xl:gap-8 gap-4 px-6 xl:px-0">
+        {trainingFrequencies.map((frequency) => (
+          <ExpandableCard
+            key={frequency.id}
+            id={frequency.id.toString()}
+            title={frequency.title}
+            description={frequency.description}
+            isSelected={
+              useTrainingPlanHook.objectives.selectedDays === frequency.id
+            }
+            expandedCard={useTrainingPlanHook.objectives.expandedCard}
             onClick={() => {
-              useTrainingPlanHook.setSelectedDays(days);
-              useTrainingPlanHook.setTrainingFrequency(days);
+              useTrainingPlanHook.setSelectedDays(frequency.id);
+              useTrainingPlanHook.setTrainingFrequency(frequency.id);
+              useTrainingPlanHook.handleCardClick(frequency.id.toString());
             }}
-            className={`${buttonStylesForTrainingModule}  md:py-6 md:px-0 md:w-[12vw] px-2 xl:w-[4vw] xl:p-[4vh] w-[12vw]`}
-          >
-            {days}
-          </Button>
+          />
         ))}
       </div>
     </section>
   );
 };
+
 export const GoalsSelection = () => {
   const useTrainingPlanHook = useTrainingLogic();
 
@@ -77,7 +101,7 @@ export const GoalsSelection = () => {
       className="
         overflow-y-auto 
         space-y-4
-        h-[80vh] 
+        xl:h-[100vh] 
         pr-4
         xl:pr-8
       "
@@ -111,11 +135,7 @@ export const GoalsSelection = () => {
         {useTrainingPlanHook.objectives.primaryGoal && (
           <div
             className="
-          w-full
-          xl:border-l 
-          xl:border-zinc-800
-          xl:pl-8
-              h-[50vh] 
+   
         "
           >
             <SectionHeader>Optional secondary focus</SectionHeader>
@@ -125,7 +145,8 @@ export const GoalsSelection = () => {
             grid 
             grid-cols-1 
             gap-4
-            pr-4
+          
+            
           "
             >
               {useTrainingPlanHook.getAvailableSecondaryGoals().map((pref) => (
@@ -207,7 +228,7 @@ export const ExerciseCount = () => {
   const useTrainingPlanHook = useTrainingLogic();
   console.log(useTrainingPlanHook.objectives);
   return (
-    <div className="xl:max-w-6xl h-[100vh]">
+    <ScrollBarComponent className="xl:max-w-6xl h-[100vh]">
       <section className="  space-y-3">
         <SectionHeader>
           {useTrainingPlanHook.objectives.selectedPath === "templates"
@@ -216,7 +237,7 @@ export const ExerciseCount = () => {
         </SectionHeader>
 
         {useTrainingPlanHook.objectives.selectedPath === "templates" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8 ">
             {objectivesTemplates.map((template) => (
               <ExpandableCard
                 key={template.id}
@@ -278,7 +299,7 @@ export const ExerciseCount = () => {
           </div>
         )}
       </section>
-    </div>
+    </ScrollBarComponent>
   );
 };
 export const Summary = () => {
@@ -345,7 +366,7 @@ export const Summary = () => {
         </div>
 
         <Button
-          className={`${buttonStylesForTrainingModule} w-full sm:w-auto`}
+          className={`${buttonStylesForTrainingModule} w-full sm:w-auto xl:mt-8`}
           onClick={useTrainingPlanHook.goToNextStep}
         >
           Continue

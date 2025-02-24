@@ -41,22 +41,22 @@ export const StepButtons = () => {
   };
 
   return (
-    <div className="flex  flex-row md:flex-row xl:items-start md:items-center md:gap-0 xl:mt-0 mt-0">
+    <div className="flex  flex-row md:flex-row xl:items-start md:items-center md:gap-0 xl:mt-0 mt-0 ">
       {steps.map((stepItem, index) => (
         <div
           key={stepItem.id}
-          className="grid items-center w-full md:w-auto mx-2 mt-2"
+          className="grid items-center w-full md:w-auto  mt-2 mx-3"
         >
           <Button
             className={`
               ${buttonStylesForTrainingModule}
-              xl:m-4 xl:py-1 text-xs md:p-1 xl:p-2 
-              w-1/4 
+              xl:m-2 xl:py-1 text-xs  xl:p-2 md:p-8 md:mt-4
+              w-1/4
               ${getButtonStyles(index)}
               relative
-              flex-1 md:flex-none
-              xl:min-w-[80px] xl:w-full md:min-w-0 
-              transition-opacity duration-200
+
+              xl:min-w-[110px] xl:w-full md:min-w-0
+           
             `}
             onClick={() => handleStepClick(index)}
           >
@@ -83,17 +83,17 @@ export const StepButtons = () => {
           {/* Desktop connector */}
           {index < steps.length - 1 && (
             <div
-              className={`
-                hidden md:block h-[1px] w-3
-                ${
-                  useTrainingPlanHook.step === stepItem.id ||
-                  useTrainingPlanHook.step === steps[index + 1].id
-                    ? "bg-red-700"
-                    : "bg-zinc-800"
-                }
-                ${Math.abs(index - currentStepIndex) > 1 ? "opacity-30" : "opacity-60"}
-                transition-opacity duration-200
-              `}
+            // className={`
+            //   hidden md:block h-[1px] w-24
+            //   ${
+            //     useTrainingPlanHook.step === stepItem.id ||
+            //     useTrainingPlanHook.step === steps[index + 1].id
+            //       ? "bg-red-700"
+            //       : "bg-zinc-800"
+            //   }
+            //   ${Math.abs(index - currentStepIndex) > 1 ? "opacity-30" : "opacity-60"}
+            //   transition-opacity duration-200
+            // `}
             />
           )}
         </div>

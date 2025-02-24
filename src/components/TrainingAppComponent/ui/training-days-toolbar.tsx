@@ -8,6 +8,7 @@ import arrowDown from "../../../assets/feather-icons/arrow-down-circle.svg";
 import { useState, useRef } from "react";
 import AutoAssignModal from "./auto-assign-modal";
 import TrainingUnitDropdown from "./training-unit-dropdown";
+// import TotalExercisesDisplay from "./total-exercises-shown";
 
 interface TrainingDaysToolbarProps {
   isMobile: boolean;
@@ -39,7 +40,7 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
   };
 
   const content = isMobile ? (
-    <div className=" flex justify-center">
+    <div className=" flex justify-center ">
       <div className="relative top-6 w-[50vw]  " ref={dropdownRef}>
         <Button
           onClick={() => setIsOpen(!isOpen)}
@@ -56,7 +57,7 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
         </Button>
 
         {isOpen && (
-          <div className="absolute top-full mt-1  bg-zinc-900 border border-zinc-800 rounded-lg shadow-lg z-50  ">
+          <div className="absolute top-full mt-0  bg-zinc-900 border border-zinc-800 rounded-lg shadow-lg z-50  ">
             <div className="p-2 border-b border-zinc-800">
               <div className="w-[40vw]  grid-cols-3 gap-1">
                 {Array.from({ length: totalDays }, (_, i) => i + 1).map(
@@ -128,8 +129,8 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
       </div>
     </div>
   ) : (
-    <div className="flex items-center justify-between h-11 bg-zinc-900/90 rounded-2xl w-[70vw] px-8 py-1">
-      <div className="flex items-center gap-2">
+    <div className="fixed xl:top-[11vh] md:top-[8vh] md:left-[2vw] xl:left-[9vw]">
+      <div className="flex  ">
         {((useTrainingPlanHook.step === "LOAD" &&
           !useTrainingPlanHook.showAllDaysLoad) ||
           useTrainingPlanHook.step === "EXERCISES") && (
@@ -139,9 +140,9 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
             onSelect={useTrainingPlanHook.setCurrentDay}
           />
         )}
-        <div className="mx-2 flex gap-2">
+        <div className="mx-2 flex gap-4">
           <Button
-            className={`${buttonStylesForTrainingModule} xl:h-8 xl:px-1 xl:py-2 xl:w-[12vw]`}
+            className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw] md:p-8 w-48 rounded-lg font-medium text-base`}
             onClick={toggleView}
           >
             <img
@@ -158,7 +159,7 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
             </span>
           </Button>
           <Button
-            className={`${buttonStylesForTrainingModule} xl:h-8 xl:px-1 xl:py-2 xl:w-[12vw]`}
+            className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw]  md:p-8 w-48 rounded-lg font-medium text-base`}
             onClick={() => setIsModalOpen(true)}
           >
             <img src={autoAssign} className="xl:w-4 xl:h-4" alt="Auto assign" />
@@ -170,23 +171,7 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-red-500 rounded-full" />
-          <span className="text-sm text-zinc-400">
-            {currentUnit?.MainExercises.length || 0}/
-            {useTrainingPlanHook.objectives.mainExerciseCount} Main exercises
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-blue-500 rounded-full" />
-          <span className="text-sm text-zinc-400">
-            {currentUnit?.AccessoryExercises.length || 0}/
-            {useTrainingPlanHook.objectives.accessoryExerciseCount} Accessory
-            exercises
-          </span>
-        </div>
-      </div>
+      {/* <TotalExercisesDisplay /> */}
     </div>
   );
 

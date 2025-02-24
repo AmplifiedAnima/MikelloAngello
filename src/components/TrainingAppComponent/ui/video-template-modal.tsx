@@ -24,17 +24,17 @@ export const VideoTemplate = ({ videoUrl }: { videoUrl: string }) => {
 
   // YouTube player options
   const opts = {
-    width: "100%",
-    height: "100%",
+    width: "120%",
+    height: "120%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      modestbranding: 1,
+      modestbranding: 0,
       rel: 0,
     },
   };
 
   return (
-    <div className="mt-4 rounded-lg border border-red-800/30 bg-zinc-900/50">
+    <div className="rounded-lg">
       <div className="aspect-video w-full">
         <YouTube
           videoId={videoId}

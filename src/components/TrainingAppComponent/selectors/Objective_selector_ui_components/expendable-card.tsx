@@ -38,16 +38,20 @@ export const ExpandableCard = ({
     expandedCard === (customPrefix ? `${customPrefix}-${id}` : id);
 
   return (
-    <div className="relative group">
+    <div className="relative group ">
       {/* Main Card Button */}
       <div
         onClick={onClick}
         className={`
           relative
-          min-w-[260px]
-          max-w-full
-          h-[6vh]
-          px-12
+              
+          xl:min-w-[20vw]
+          min-w-[10vw]
+          xl:max-w-full
+          xl:h-[8vh]
+          h-[5vh]
+          xl:px-12
+          px-4
           mx-4
           rounded-lg 
           transition-all 
@@ -66,25 +70,15 @@ export const ExpandableCard = ({
           ${priority > 0 ? "ml-4" : ""}
         `}
       >
-        {/* Connector Line for Secondary Goals */}
-        {priority > 0 && (
-          <div className="absolute -left-4 top-1/2 transform -translate-y-1/2">
-            <div className="w-4 h-px bg-zinc-600" />
-          </div>
-        )}
-
-        {/* Card Content */}
         <div className="flex items-center justify-between w-full gap-3">
           <h3 className="text-sm font-medium truncate flex-1">{title}</h3>
           <div className="flex items-center gap-2 shrink-0">
             {priority > 0 && (
-              <span className="text-xs text-zinc-400 font-medium">
-                Secondary
-              </span>
+              <span className=" text-zinc-400 font-medium">Secondary</span>
             )}
             <div
               className={`
-              w-6 h-6 
+              w-10 h-10 
               rounded-full 
               flex 
               items-center 
@@ -97,7 +91,7 @@ export const ExpandableCard = ({
               <img
                 src={arrowRight}
                 className={`
-                  w-4 h-4 
+                  w-4 h-4
                   transition-transform duration-200
                   ${isExpanded ? "rotate-90" : ""}
                 `}
@@ -112,19 +106,21 @@ export const ExpandableCard = ({
         <div
           className="
           absolute 
-          left-0 
-          right-0 
-          mt-2 
-          p-4 
-          bg-zinc-900/95
+          left-0
+    
+          right-0
+          mx-8
+          mt-2
+          p-4
+          bg-zinc-800
+   
           backdrop-blur-sm
           rounded-lg 
           border 
-          border-zinc-800
+          border-zinc-900
           shadow-lg
-          z-10
-          min-w-[280px]
-          max-w-[320px]
+          z-[999]
+     
         "
         >
           <p className="text-sm text-zinc-300 leading-relaxed">{description}</p>

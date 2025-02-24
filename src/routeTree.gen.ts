@@ -12,7 +12,6 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as PortfolioImport } from './routes/portfolio'
-import { Route as OfferImport } from './routes/offer'
 import { Route as AboutmeImport } from './routes/about_me'
 import { Route as IndexImport } from './routes/index'
 import { Route as TrainingAppIndexImport } from './routes/training-app/index'
@@ -25,12 +24,6 @@ import { Route as ContactAthletePlanImport } from './routes/contact/athlete-plan
 const PortfolioRoute = PortfolioImport.update({
   id: '/portfolio',
   path: '/portfolio',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const OfferRoute = OfferImport.update({
-  id: '/offer',
-  path: '/offer',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,13 +81,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutmeImport
       parentRoute: typeof rootRoute
     }
-    '/offer': {
-      id: '/offer'
-      path: '/offer'
-      fullPath: '/offer'
-      preLoaderRoute: typeof OfferImport
-      parentRoute: typeof rootRoute
-    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
@@ -138,7 +124,6 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about_me': typeof AboutmeRoute
-  '/offer': typeof OfferRoute
   '/portfolio': typeof PortfolioRoute
   '/contact/athlete-plan': typeof ContactAthletePlanRoute
   '/contact/basic-plan': typeof ContactBasicPlanRoute
@@ -149,7 +134,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about_me': typeof AboutmeRoute
-  '/offer': typeof OfferRoute
   '/portfolio': typeof PortfolioRoute
   '/contact/athlete-plan': typeof ContactAthletePlanRoute
   '/contact/basic-plan': typeof ContactBasicPlanRoute
@@ -161,7 +145,6 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about_me': typeof AboutmeRoute
-  '/offer': typeof OfferRoute
   '/portfolio': typeof PortfolioRoute
   '/contact/athlete-plan': typeof ContactAthletePlanRoute
   '/contact/basic-plan': typeof ContactBasicPlanRoute
@@ -174,7 +157,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about_me'
-    | '/offer'
     | '/portfolio'
     | '/contact/athlete-plan'
     | '/contact/basic-plan'
@@ -184,7 +166,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about_me'
-    | '/offer'
     | '/portfolio'
     | '/contact/athlete-plan'
     | '/contact/basic-plan'
@@ -194,7 +175,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about_me'
-    | '/offer'
     | '/portfolio'
     | '/contact/athlete-plan'
     | '/contact/basic-plan'
@@ -206,7 +186,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutmeRoute: typeof AboutmeRoute
-  OfferRoute: typeof OfferRoute
   PortfolioRoute: typeof PortfolioRoute
   ContactAthletePlanRoute: typeof ContactAthletePlanRoute
   ContactBasicPlanRoute: typeof ContactBasicPlanRoute
@@ -217,7 +196,6 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutmeRoute: AboutmeRoute,
-  OfferRoute: OfferRoute,
   PortfolioRoute: PortfolioRoute,
   ContactAthletePlanRoute: ContactAthletePlanRoute,
   ContactBasicPlanRoute: ContactBasicPlanRoute,
@@ -237,7 +215,6 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about_me",
-        "/offer",
         "/portfolio",
         "/contact/athlete-plan",
         "/contact/basic-plan",
@@ -250,9 +227,6 @@ export const routeTree = rootRoute
     },
     "/about_me": {
       "filePath": "about_me.tsx"
-    },
-    "/offer": {
-      "filePath": "offer.tsx"
     },
     "/portfolio": {
       "filePath": "portfolio.tsx"

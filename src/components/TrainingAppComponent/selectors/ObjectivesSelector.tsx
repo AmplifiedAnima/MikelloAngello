@@ -100,7 +100,7 @@ export const ObjectivesSelector = () => {
 
   const steps = [
     // Step 1: Initial Setup
-    <div key="step1" className=" xl:mt-0  xl:pt-12  h-[100vh]">
+    <div key="step1" className=" xl:mt-0  xl:pt-12  h-[100vh] ">
       <StepWrapper>
         <PathSelection />
 
@@ -151,7 +151,7 @@ export const ObjectivesSelector = () => {
 
   return (
     <div className="">
-      <ScrollBarComponent className=" xl:w-[95vw] w-[85vw] px-0 xl:px-[0vw] overflow-x-hidden  xl:h-[120vh] h-[160vh] ">
+      <ScrollBarComponent className=" xl:w-[95vw] w-[100vw] px-0 xl:px-[0vw] overflow-x-hidden  xl:h-[120vh] h-[160vh] ">
         <div
           className="
             flex 
@@ -159,7 +159,7 @@ export const ObjectivesSelector = () => {
             duration-500 
             ease-in-out
             transform
-
+          
           "
           style={{
             transform: `translateX(-${currentStep * 100}%)`,
@@ -168,7 +168,7 @@ export const ObjectivesSelector = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="w-full flex-shrink-0 place-items-center grid place-items-center"
+              className="w-full flex-shrink-0 place-items-center grid "
             >
               {step}
             </div>

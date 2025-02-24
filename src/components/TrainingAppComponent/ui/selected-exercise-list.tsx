@@ -56,20 +56,13 @@ const ExerciseItem = ({
     return (
       <li
         onClick={onClick}
-        className=" px-4 py-0.5 rounded bg-zinc-800/40 hover:bg-zinc-700/40 cursor-pointer grid grid-cols-3
+        className=" px-4 py-0 rounded bg-zinc-800/40 hover:bg-zinc-700/40 cursor-pointer grid grid-cols-2
          items-center"
       >
         <span className="text-sm font-medium text-white/90 whitespace-nowrap">
           {exercise.name}
         </span>
-        <div className="mx-2">
-          <Button
-            className={`${buttonStylesForTrainingModule} xl:h-6 xl:w-6 md:w-5 md:h-5 lg:w-5 lg:h-5 !p-0.5 w-5 h-5 xl:ml-12`}
-            onClick={() => console.log("Edit exercise:", exercise)}
-          >
-            <img src={editIcon} className="w-6 h-6" alt="Edit" />
-          </Button>
-
+        <div className=" flex justify-end">
           <Button
             className={`${buttonStylesForTrainingModule} xl:h-6 xl:w-6 md:w-5 md:h-5 lg:w-5 lg:h-5 !p-0.5 w-5 h-5 `}
             onClick={handleRemove}
@@ -118,6 +111,7 @@ const ExerciseItem = ({
     </li>
   );
 };
+
 const ExerciseSection = ({
   title,
   exercises,
@@ -128,10 +122,10 @@ const ExerciseSection = ({
 }: ExerciseSectionProps) => {
   if (view === "minimal") {
     return (
-      <div className="space-y-1">
+      <div className="space-y-0">
         <div className="flex items-center gap-2 border-b border-zinc-800/50 py-1">
           <div
-            className={`w-1.5 h-1.5 rounded-full ${
+            className={`w-2.5 h-2.5 rounded-full ${
               type === "main" ? "bg-red-500" : "bg-blue-500"
             }`}
           />
@@ -142,7 +136,7 @@ const ExerciseSection = ({
         </div>
         <div>
           {exercises.length > 0 ? (
-            <ul className="space-y-0.5">
+            <ul className="space-y-2 ">
               {exercises.map((exercise) => (
                 <ExerciseItem
                   key={exercise._id}
@@ -209,11 +203,11 @@ const TrainingDay = ({
 }: TrainingDayProps) => {
   if (view === "minimal") {
     return (
-      <div className="space-y-4">
+      <div className="space-y-8  ">
         <h2 className="text-sm font-medium text-zinc-300 py-1">
           Training day {dayIndex + 1}
         </h2>
-        <div className="space-y-3">
+        <div className="space-y-8">
           <ExerciseSection
             title="Main Exercises"
             exercises={unit.MainExercises}
@@ -237,7 +231,7 @@ const TrainingDay = ({
 
   // Full view remains the same
   return (
-    <div className="bg-zinc-900/40 rounded-lg p-4 min-w-[400px] max-w-[500px]">
+    <div className="bg-zinc-900/40 rounded-lg p-4 min-w-[400px] max-w-[600px]">
       <div className="mb-4 pb-2 border-b border-zinc-800/50">
         <h3 className="text-lg font-medium text-zinc-200">
           Day {["I", "II", "III"][dayIndex]}

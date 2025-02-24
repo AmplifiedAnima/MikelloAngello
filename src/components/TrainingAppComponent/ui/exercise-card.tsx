@@ -1,11 +1,15 @@
-import { ScrollBarComponent } from "../../ui/scrollbar-component";
 import { Button } from "../../ui/button";
 import { VideoTemplate } from "./video-template-modal";
 import { useState } from "react";
 import closeIcon from "../../../assets/feather-icons/x-square.svg";
 import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import { useTrainingLogic } from "../utils/TrainingAppContext";
+import ExerciseAddDropdown from "./exercise-card-dropdown";
 
+interface ExerciseCardProps {
+  isMobile: boolean;
+  onVideoOpen?: (isOpen: boolean) => void;
+}
 const CardTextComponent = ({
   exerciseFeature,
   text,
@@ -13,135 +17,96 @@ const CardTextComponent = ({
   exerciseFeature: string;
   text: string;
 }) => (
-  <div className="border-b border-red-700 py-[0.8rem]">
-    <span className="text-sm font-bold uppercase tracking-wide text-red-500">
+  <div className="py-[1rem] grid grid-cols-1 text-left px-4 font-medium">
+    <span className="text-base font-bold uppercase tracking-wider text-indigo-300 mb-1 w-[100vw]">
       {text}
     </span>
-    <p className="text-base text-zinc-200">{exerciseFeature}</p>
+    <p className="text-2xl tracking-wide font-normal text-zinc-50 mt-1">
+      {exerciseFeature}
+    </p>
   </div>
 );
-export const ExerciseCard = ({ isMobile }: { isMobile: boolean }) => {
+
+export const ExerciseCard = ({ isMobile, onVideoOpen }: ExerciseCardProps) => {
   const useTrainingPlanHook = useTrainingLogic();
   const [hasTemplateBecameOpened, setHasTemplateBecameOpened] = useState(false);
 
-  // Fix the indexing to match toolbar
-  const currentUnit =
-    useTrainingPlanHook.trainingPlan.trainingUnits[
-      useTrainingPlanHook.currentDayIndex - 1
-    ];
-
   const handleTemplateBecameOpened = () => {
-    setHasTemplateBecameOpened((prev) => !prev);
+    const newState = !hasTemplateBecameOpened;
+    setHasTemplateBecameOpened(newState);
+    onVideoOpen?.(newState);
   };
 
   if (!useTrainingPlanHook.selectedExercise) return null;
 
   return (
-    <ScrollBarComponent
-      className={`${hasTemplateBecameOpened ? "pl-0" : ""} h-full`}
-    >
+    <div className="bg-zinc-900/20 rounded-lg">
       {hasTemplateBecameOpened ? (
-        <div className="xl:mt-4 grid grid-cols-2">
-          <span className="xl:text-2xl text-lg  mx-8">
-            {useTrainingPlanHook.selectedExercise.name}
-          </span>
-          <Button
-            className={`${buttonStylesForTrainingModule} xl:mt-0 xl:p-0 xl:border-none xl:w-[4vw] xl:mx-[10vw] xl:rounded-lg   mt-32`}
-            onClick={handleTemplateBecameOpened}
+        <div className={`${isMobile ? "" : "w-full"}`}>
+          <div className="flex items-center justify-between p-4">
+            <span className="text-2xl font-medium text-zinc-50 whitespace-nowrap px-8">
+              {useTrainingPlanHook.selectedExercise.name}
+            </span>
+            <Button
+              className={`${buttonStylesForTrainingModule} xl:mt-0 xl:p-0 xl:border-none xl:w-[4vw] xl:mr-[8vw] xl:rounded-xl`}
+              onClick={handleTemplateBecameOpened}
+            >
+              <img
+                src={closeIcon}
+                width={30}
+                alt="Close"
+                className="opacity-80 hover:opacity-100"
+              />
+            </Button>
+          </div>
+          <div
+            className={`${isMobile ? "w-[100vw]" : "w-[40vw] h-full mx-12"}`}
           >
-            <img src={closeIcon} width={25} alt="Close" />
-          </Button>
-          <div className="w-[30vw]">
             <VideoTemplate
               videoUrl={useTrainingPlanHook.selectedExercise.videoUrl}
             />
           </div>
         </div>
       ) : (
-        <>
-          {/* Training Day Selector */}
-
-          <div className=" my-2">
-            <div className="xl:w-[20vw] w-full ">
-              <CardTextComponent
-                exerciseFeature={useTrainingPlanHook.selectedExercise.name}
-                text="Exercise"
-              />
-              {isMobile && (
-                <>
-                  {" "}
-                  <CardTextComponent
-                    exerciseFeature={
-                      useTrainingPlanHook.selectedExercise.primeMovers
-                    }
-                    text="Prime Movers"
-                  />
-                  <CardTextComponent
-                    exerciseFeature={
-                      useTrainingPlanHook.selectedExercise.movementPattern
-                    }
-                    text="Pattern"
-                  />
-                </>
-              )}
-
-              <CardTextComponent
-                exerciseFeature={
-                  useTrainingPlanHook.selectedExercise.toolsUsedInExercise
-                }
-                text="Tools"
-              />
-
-              <div className="grid  place-items-left xl:gap-2 gap-8 mt-8">
-                <Button
-                  className={`${buttonStylesForTrainingModule} xl:p-6   xl:w-[15vw] md:p-6 md:w-full`}
-                  onClick={() =>
-                    useTrainingPlanHook.addNewMainExercise(
-                      useTrainingPlanHook.currentDayIndex,
-                      useTrainingPlanHook.selectedExercise!
-                    )
-                  }
-                  disabled={
-                    currentUnit?.MainExercises.length >=
-                    useTrainingPlanHook.objectives.mainExerciseCount
-                  }
-                >
-                  Add as Main Exercise
-                </Button>
-                {/* Exercise count display outside button */}
-                <Button
-                  className={`${buttonStylesForTrainingModule}  xl:p-6   xl:w-[15vw] md:p-6 md:w-full`}
-                  onClick={() =>
-                    useTrainingPlanHook.addNewAccessoryExercise(
-                      useTrainingPlanHook.currentDayIndex,
-                      useTrainingPlanHook.selectedExercise!
-                    )
-                  }
-                  disabled={
-                    currentUnit?.AccessoryExercises.length >=
-                    useTrainingPlanHook.objectives.accessoryExerciseCount
-                  }
-                >
-                  Add as Accessory
-                </Button>
-                <Button
-                  onClick={handleTemplateBecameOpened}
-                  className={`${buttonStylesForTrainingModule}   xl:p-6 xl:w-[15vw] md:p-6 md:w-full  `}
-                >
-                  Show video
-                </Button>{" "}
-              </div>
-            </div>
-
-            <div className="">
-              {/* Exercise Management Buttons */}
-              <div className="space-y-2">
-                {/* Exercise count display outside button */}
-              </div>
-            </div>
+        <div className="grid xl:grid-cols-2 xl:px-8   gap-8 whitespace-nowrap ">
+          <div className="space-y-8  place-items-center ">
+            <ExerciseAddDropdown
+              buttonStylesForTrainingModule={buttonStylesForTrainingModule}
+            />
+            <Button
+              onClick={handleTemplateBecameOpened}
+              className={`${buttonStylesForTrainingModule} xl:p-6 xl:w-[15vw] md:p-6 md:w-full w-48 rounded-lg font-medium text-base`}
+            >
+              Show video
+            </Button>
           </div>
-        </>
+
+          <div className="flex-1 space-y-2 place-items-center ">
+            <CardTextComponent
+              exerciseFeature={useTrainingPlanHook.selectedExercise.name}
+              text="Exercise"
+            />
+
+            <CardTextComponent
+              exerciseFeature={
+                useTrainingPlanHook.selectedExercise.toolsUsedInExercise
+              }
+              text="Tools"
+            />
+            <CardTextComponent
+              exerciseFeature={
+                useTrainingPlanHook.selectedExercise.movementPattern
+              }
+              text="Pattern"
+            />
+
+            <CardTextComponent
+              exerciseFeature={useTrainingPlanHook.selectedExercise.primeMovers}
+              text="Prime Movers"
+            />
+          </div>
+        </div>
       )}
-    </ScrollBarComponent>
+    </div>
   );
 };

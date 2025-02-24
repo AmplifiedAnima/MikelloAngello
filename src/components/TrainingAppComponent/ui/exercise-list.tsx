@@ -1,86 +1,73 @@
-import { useState } from "react";
-import { type ExerciseBlueprintsInterface } from "../interfaces/exercise.interface";
-import warningFeatherIcon from "../../../assets/feather-icons/alert-triangle.svg";
+import React from "react";
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
-// import { SearchExerciseInput } from "./ui/search-bar";
-import heartIcon from "../../../assets/feather-icons/heart.svg";
 import { useTrainingLogic } from "../utils/TrainingAppContext";
+import arrowRight from "../../../assets/feather-icons/arrow-right.svg";
 
 export const ExerciseList = () => {
-  const useTrainingPlanHook = useTrainingLogic();
+  const { selectedExercise, exercisesBlueprints, handleExerciseClick } =
+    useTrainingLogic();
 
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
-  const shouldShowToolWarning = (exercise: ExerciseBlueprintsInterface) => {
-    return (
-      exercise.toolsUsedInExercise &&
-      exercise.toolsUsedInExercise.toLowerCase() !== "bodyweight" &&
-      exercise.toolsUsedInExercise !== ""
-    );
-  };
-
-  // Fix the indexing to match toolbar
-  // const currentUnit =
-  //   useTrainingPlanHook.trainingPlan.trainingUnits[
-  //     useTrainingPlanHook.currentDayIndex - 1
-  //   ];
+  const isSelected = selectedExercise?.name;
 
   return (
-    <div className="xl:h-[60vh] w-full ">
-      <ScrollBarComponent className="xl:h-full md:h-[80vh] xl:px-12 px-4 w-full">
-        <div className="rounded-lg bg-black">
-          <ul className="divide-y divide-zinc-900">
-            {useTrainingPlanHook.exercisesBlueprints.map((exercise) => (
-              <li
-                key={exercise._id}
-                className="group relative flex cursor-pointer items-center justify-between px-8 py-[10px] transition-all"
-                onClick={() =>
-                  useTrainingPlanHook.handleExerciseClick(exercise)
-                }
-                onMouseEnter={() => setHoveredId(exercise._id)}
-                onMouseLeave={() => setHoveredId(null)}
+    <div className="relative z-10">
+      <ScrollBarComponent className="h-[65vh] xl:w-[25vw] mx-4 ">
+        <ul className="space-y-[3px] relative z-0">
+          {exercisesBlueprints.map((exercise) => (
+            <li
+              key={exercise._id}
+              className="group relative overflow-hidden"
+              onClick={() => handleExerciseClick(exercise)}
+            >
+              {/* Background glow effect */}
+              <div
+                className={`absolute inset-0 transition-all duration-300
+                ${isSelected === exercise.name ? "bg-red-600/5" : "bg-red-600/0 group-hover:bg-red-600/5"}`}
+              />
+
+              {/* Main content container */}
+              <div
+                className={`relative flex items-center px-4 py-2 cursor-pointer transition-all duration-300
+                ${isSelected === exercise.name ? "bg-zinc-800/50" : "bg-zinc-900/50 hover:bg-zinc-800/50"}`}
               >
-                <div className="relative">
-                  <p className="text-base font-medium text-white/90 transition-colors group-hover:text-white whitespace-nowrap">
+                {/* Red accent line */}
+                <div
+                  className={`absolute left-0 top-0 h-full w-1 transition-all duration-300
+                  ${isSelected === exercise.name ? "bg-red-600" : "bg-red-600/0 group-hover:bg-red-600"}`}
+                />
+
+                {/* Exercise name */}
+                <div>
+                  <p
+                    className={`text-lg font-medium transition-all duration-300 tracking-wider
+                    ${
+                      isSelected === exercise.name
+                        ? "text-red-100"
+                        : "text-zinc-400 group-hover:text-red-500"
+                    }`}
+                  >
                     {exercise.name}
                   </p>
-                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full" />
                 </div>
 
-                {hoveredId === exercise._id &&
-                  shouldShowToolWarning(exercise) && (
-                    <div
-                      className="flex items-center space-x-3 rounded-full bg-zinc-900/80 px-6  text-white/80"
-                      style={{
-                        animation: "fadeIn 0.2s ease-in",
-                      }}
-                    >
-                      <img
-                        src={warningFeatherIcon}
-                        width="20"
-                        height="20"
-                        className="opacity-80"
-                      />
-                      <span className="text-sm font-medium">
-                        {exercise.toolsUsedInExercise}
-                      </span>
-                    </div>
-                  )}
-                {useTrainingPlanHook.selectedExercise?._id === exercise._id && (
-                  <img src={heartIcon} width={20} />
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <style>{`
-            @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(5px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-          `}</style>
-        </div>
+                {/* Arrow indicator */}
+                <div
+                  className={`absolute right-4 transition-all duration-300 transform
+                  ${
+                    isSelected === exercise.name
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 translate-x-2 group-hover:opacity-0 group-hover:translate-x-0"
+                  }`}
+                >
+                  <img src={arrowRight} width={18} alt="arrow" />
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </ScrollBarComponent>
     </div>
   );
 };
+
+export default ExerciseList;
