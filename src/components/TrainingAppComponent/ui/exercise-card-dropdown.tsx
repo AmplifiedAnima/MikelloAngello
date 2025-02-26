@@ -67,7 +67,7 @@ const ExerciseAddDropdown: React.FC<ExerciseAddDropdownProps> = ({
           ${buttonStylesForTrainingModule} 
      
           rounded-lg
-          w-48 md:w-48 xl:w-[15vw]
+          w-48 md:w-48 xl:w-[15vw] md:p-6
           xl:px-10 py-3
           flex items-center justify-end
           transition-all duration-200 ease-in-out

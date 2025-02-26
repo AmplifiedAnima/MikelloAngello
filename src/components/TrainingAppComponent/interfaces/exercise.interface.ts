@@ -5,11 +5,11 @@ export interface ExerciseBlueprintsInterface {
     reps: string;
     intensity: string;
     movementPattern: string;
-    plane: string;
-    type: string;
+    plane?: string;
+    type?: string;
     toolsUsedInExercise: string;
-    tempo: string;
-    videoStatus: string;
+    tempo?: string;
+    videoStatus?: string;
     primaryMusclesWorked: string;
     primeMovers:string;
     videoUrl:string

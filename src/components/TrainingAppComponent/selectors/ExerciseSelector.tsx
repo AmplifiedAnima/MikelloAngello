@@ -22,9 +22,9 @@ export const ExerciseSelector = ({ isMobile }: ExerciseSelectorProps) => {
   if (!isMobile) {
     return (
       <div
-        className={`grid xl:h-[calc(100vh-200px)]  w-[100vw] ${isVideoOpen ? "grid-cols-[1fr_2fr]" : "grid-cols-[1fr_1.5fr_1fr]"} gap-6 px-4`}
+        className={`grid xl:h-[calc(100vh-200px)]  w-[100vw] ${isVideoOpen ? "grid-cols-[1fr_2fr]" : "grid-cols-[1fr_1.5fr_1fr]"} gap-2 `}
       >
-        <div className=" rounded-lg p-2 overflow-hidden relative z-0">
+        <div className=" rounded-lg xl:px-8 overflow-hidden relative z-[1]">
           <ExerciseList />
         </div>
 
@@ -59,7 +59,7 @@ export const ExerciseSelector = ({ isMobile }: ExerciseSelectorProps) => {
                             useTrainingPlanHook.objectives
                               .accessoryExerciseCount
                           }
-                          view="full"
+                          view="minimal"
                         />
                       )
                     )}

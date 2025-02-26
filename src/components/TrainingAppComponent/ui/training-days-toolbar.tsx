@@ -129,7 +129,7 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
       </div>
     </div>
   ) : (
-    <div className="fixed xl:top-[11vh] md:top-[8vh] md:left-[2vw] xl:left-[9vw]">
+    <div className="fixed xl:top-[5vh] md:top-[8vh] md:left-[2vw] xl:left-[6vw] lg:top-[10vh] lg:px-4 lg:left-[3vw] md:mt-8  z-[2]">
       <div className="flex  ">
         {((useTrainingPlanHook.step === "LOAD" &&
           !useTrainingPlanHook.showAllDaysLoad) ||
@@ -142,31 +142,35 @@ export const TrainingDaysToolbar = ({ isMobile }: TrainingDaysToolbarProps) => {
         )}
         <div className="mx-2 flex gap-4">
           <Button
-            className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw] md:p-8 w-48 rounded-lg font-medium text-base`}
+            className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw] md:p-4 w-48 rounded-lg font-medium text-base`}
             onClick={toggleView}
           >
-            <img
-              src={
-                useTrainingPlanHook.showAllDaysLoad ? layersIcon : clipboardIcon
-              }
-              className="xl:w-4 xl:h-4"
-              alt="Toggle view"
-            />
             <span className="ml-2 text-sm">
               {useTrainingPlanHook.showAllDaysLoad
                 ? "Show single day"
                 : "Show all days"}
             </span>
+            <img
+              src={
+                useTrainingPlanHook.showAllDaysLoad ? layersIcon : clipboardIcon
+              }
+              className="xl:w-4 xl:h-4 w-5 h-5"
+              alt="Toggle view"
+            />
           </Button>
           <Button
-            className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw]  md:p-8 w-48 rounded-lg font-medium text-base`}
+            className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw]  md:p-4 w-48 rounded-lg font-medium text-base`}
             onClick={() => setIsModalOpen(true)}
           >
-            <img src={autoAssign} className="xl:w-4 xl:h-4" alt="Auto assign" />
             <span className="ml-2 text-sm">
               Auto-assign{" "}
               {useTrainingPlanHook.step === "EXERCISES" ? "" : "Load"}
             </span>
+            <img
+              src={autoAssign}
+              className="xl:w-4 xl:h-4 w-5 h-5"
+              alt="Auto assign"
+            />
           </Button>
         </div>
       </div>

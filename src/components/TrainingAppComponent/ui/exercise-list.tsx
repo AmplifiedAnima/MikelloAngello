@@ -1,19 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollBarComponent } from "../../ui/scrollbar-component";
 import { useTrainingLogic } from "../utils/TrainingAppContext";
+import { Button } from "../../ui/button";
+import { buttonStylesForTrainingModule } from "../../ui/styles/button-styles-training-module";
 import arrowRight from "../../../assets/feather-icons/arrow-right.svg";
+import filterIcon from "../../../assets/feather-icons/sliders.svg";
+import ExerciseFilterModal from "./exercise-filter-modal";
 
 export const ExerciseList = () => {
   const { selectedExercise, exercisesBlueprints, handleExerciseClick } =
     useTrainingLogic();
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [filters, setFilters] = useState({
+    movementPatterns: [] as string[],
+    primeMovers: [] as string[],
+    tools: [] as string[],
+  });
+
+  // Filter exercises based on selected filters
+  const filteredExercises = exercisesBlueprints.filter((exercise) => {
+    return (
+      (filters.movementPatterns.length === 0 ||
+        filters.movementPatterns.includes(exercise.movementPattern)) &&
+      (filters.primeMovers.length === 0 ||
+        filters.primeMovers.includes(exercise.primeMovers)) &&
+      (filters.tools.length === 0 ||
+        filters.tools.includes(exercise.toolsUsedInExercise))
+    );
+  });
+
+  // Reset all filters
+  const resetFilters = () => {
+    setFilters({
+      movementPatterns: [],
+      primeMovers: [],
+      tools: [],
+    });
+  };
 
   const isSelected = selectedExercise?.name;
 
   return (
-    <div className="relative z-10">
-      <ScrollBarComponent className="h-[65vh] xl:w-[25vw] mx-4 ">
-        <ul className="space-y-[3px] relative z-0">
-          {exercisesBlueprints.map((exercise) => (
+    <div className="z-10 grid xl:grid-cols-2 ">
+      {/* Filter Button */}
+
+      {/* Filter Modal */}
+      <ExerciseFilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        onApply={(newFilters) => {
+          setFilters(newFilters);
+          setIsFilterModalOpen(false);
+        }}
+        onReset={resetFilters}
+      />
+
+      {/* Exercise List */}
+      <ScrollBarComponent className="h-[60vh] xl:w-[25vw] my-4 px-2 ">
+        <ul className="space-y-[3px] relative z-[10]">
+          {filteredExercises.map((exercise) => (
             <li
               key={exercise._id}
               className="group relative overflow-hidden"
@@ -56,7 +101,7 @@ export const ExerciseList = () => {
                   ${
                     isSelected === exercise.name
                       ? "opacity-100 translate-x-0"
-                      : "opacity-0 translate-x-2 group-hover:opacity-0 group-hover:translate-x-0"
+                      : "opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
                   }`}
                 >
                   <img src={arrowRight} width={18} alt="arrow" />
@@ -66,6 +111,14 @@ export const ExerciseList = () => {
           ))}
         </ul>
       </ScrollBarComponent>
+      <div className=" fixed xl:left-[27.7vw] xl:top-[26.5vh] ">
+        <Button
+          onClick={() => setIsFilterModalOpen(true)}
+          className={`${buttonStylesForTrainingModule} xl:px-1 xl:py-6 flex xl:mx-1 items-center xl:w-[4vw]`}
+        >
+          <img src={filterIcon} alt="Filter" className="w-5 h-5 " />
+        </Button>
+      </div>
     </div>
   );
 };

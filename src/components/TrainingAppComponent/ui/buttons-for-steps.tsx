@@ -41,7 +41,7 @@ export const StepButtons = () => {
   };
 
   return (
-    <div className="flex  flex-row md:flex-row xl:items-start md:items-center md:gap-0 xl:mt-0 mt-0 ">
+    <div className="flex  flex-row md:flex-row xl:items-start md:items-center md:gap-2 md:p-0 xl:mt-0 mt-0  lg:mx-8">
       {steps.map((stepItem, index) => (
         <div
           key={stepItem.id}
@@ -50,7 +50,7 @@ export const StepButtons = () => {
           <Button
             className={`
               ${buttonStylesForTrainingModule}
-              xl:m-2 xl:py-1 text-xs  xl:p-2 md:p-8 md:mt-4
+              xl:m-2 xl:py-1 text-xs  xl:p-2 md:p-4 md:mt-4 lg:w-[14vw] 
               w-1/4
               ${getButtonStyles(index)}
               relative

@@ -36,7 +36,7 @@ const TrainingAppComponent = () => {
   // const shouldShowSearch = step === "EXERCISES" || step === "LOAD";
 
   return (
-    <div className="xl:mx-4 pt-12 h-[calc(100vh-64px)] overflow-hidden">
+    <div className="h-[calc(100vh-64px)] overflow-hidden">
       {/* <div className="flex flex-row items-start justify-between">
         <div className="xl:py-4 w-[20vw] mx-16">
           {shouldShowSearch && (
@@ -55,15 +55,15 @@ const TrainingAppComponent = () => {
         </div>
         <StepButtons />
       </div> */}
-      <Spacer size={`${isMobile ? "3xs" : "md"}`} />
-      <div className="relative z-30">
+      <Spacer size={`${isMobile ? "3xs" : "xs"}`} />
+      <div className="relative ">
         {step === "EXERCISES" || step === "LOAD" ? (
           <TrainingDaysToolbar isMobile={isMobile} />
         ) : (
           ""
         )}
       </div>
-      <Spacer size="3xs" />
+      <Spacer size="xl" />
 
       {/* Main Content Area */}
       <div className="">

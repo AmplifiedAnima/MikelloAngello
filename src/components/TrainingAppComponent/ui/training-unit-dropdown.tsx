@@ -36,20 +36,20 @@ const TrainingUnitDropdown = ({
     >
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw] md:p-6 md:w-full  rounded-lg font-medium text-base`}
+        className={`${buttonStylesForTrainingModule} xl:mx-2 xl:px-8 xl:w-[12vw] md:p-4 md:w-full  rounded-lg font-medium text-base`}
       >
         <span className="text-zinc-300 text-sm whitespace-nowrap">
-          Training unit {currentDayIndex}/{totalDays}
+          Assigning to {currentDayIndex}/{totalDays}
         </span>
         <img
           src={arrowDown}
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`w-5 h-5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           alt="Toggle dropdown"
         />
       </Button>
 
       {isOpen && (
-        <div className="absolute top-full mt-1 w-full min-w-[160px] bg-black border border-zinc-900 rounded-md shadow-lg z-[100]">
+        <div className="absolute top-full mt-1 w-full min-w-[220px] bg-black border border-zinc-900 shadow-lg z-[100]">
           <ul className="py-1">
             {Array.from({ length: totalDays }, (_, i) => i + 1).map((day) => (
               <li key={day}>
@@ -58,14 +58,14 @@ const TrainingUnitDropdown = ({
                     onSelect(day);
                     setIsOpen(false);
                   }}
-                  className={`w-full px-4 py-2 text-sm text-left transition-colors bg-zinc-900
+                  className={`w-full px-4 py-2 text-sm text-left transition-colors bg-zinc-900 whitespace-nowrap
                     ${
                       currentDayIndex === day
                         ? "bg-zinc-900/50 text-zinc-300"
                         : "text-zinc-300 hover:bg-zinc-900/50 hover:text-zinc-300"
                     }`}
                 >
-                  Training unit {day}/{totalDays}
+                  Assign to {day}/{totalDays} training session
                 </button>
               </li>
             ))}

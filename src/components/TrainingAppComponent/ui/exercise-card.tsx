@@ -40,7 +40,7 @@ export const ExerciseCard = ({ isMobile, onVideoOpen }: ExerciseCardProps) => {
   if (!useTrainingPlanHook.selectedExercise) return null;
 
   return (
-    <div className="bg-zinc-900/20 rounded-lg">
+    <div className="bg-zinc-900/20 rounded-lg mx-6">
       {hasTemplateBecameOpened ? (
         <div className={`${isMobile ? "" : "w-full"}`}>
           <div className="flex items-center justify-between p-4">
@@ -80,7 +80,6 @@ export const ExerciseCard = ({ isMobile, onVideoOpen }: ExerciseCardProps) => {
               Show video
             </Button>
           </div>
-
           <div className="flex-1 space-y-2 place-items-center ">
             <CardTextComponent
               exerciseFeature={useTrainingPlanHook.selectedExercise.name}
